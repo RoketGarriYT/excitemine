@@ -1,61 +1,498 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExciteMine</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="header">
-        <div class="logo">ExciteMine</div>
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">Правила</a></li>
-                <li><a href="#">Дискорд сервер</a></li>
-                <li>
-                    <div class="ip-address-nav">
-                        <span>IP:</span> <span id="ipAddressNav">mc.excitemine.pro</span>
-                        <button class="copy-button-nav" id="copyButtonNav">Копировать</button>
+    <head>
+        <base href="https://client.skydonate.ru/templates/skymagic/">
+        <meta name="public-key" content="443beb032332493f019363da074f95ba">
+        <title>ExciteMine - Магазин</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-language" content="ru">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="index,follow">
+        <meta name="title" content="ExciteMine - Магазин">
+        <meta name="description" content="ExciteMine">
+        <meta name="keywords" content="сервер, проект, майнкрафт, minecraft, автодонат, донат, ExciteMine, магазин, сайт">
+        <meta property="og:title" content="ExciteMine - Магазин">
+        <meta property="og:image" content="https://storage.skydonate.ru/uploads/6802cd0d28c4a.png">
+        <meta property="og:image:width" content="450">
+        <meta property="og:image:height" content="450">
+        <meta property="og:description" content="ExciteMine">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://excitemine.pro/">
+        <meta property="og:site_name" content="ExciteMine - Магазин">
+        <link rel="canonical" href="https://excitemine.pro/">
+        <link rel="icon" type="image/svg+xml" href="https://storage.skydonate.ru/uploads/6802cd0d28c4a.png">
+        <style type="text/css">
+            :root {
+                --body-bg-color: #0f0f11;
+                --container-bg-color: #141414;
+                --main-text-color: #ffffff;
+                --secondary-gradient-color-one: #18a4fb;
+                --secondary-gradient-color-two: #50bafb;
+                --navigation-color-one: #9b9b9b;
+                --navigation-color-two: #c3c3c3;
+                --navigation-color-three: #dcdcdc;
+                --mobile-navigation-menu-btn-color: #ffffff;
+                --mobile-navigation-menu-bg-color: #0e0e0e;
+                --scroll-bg: #141414;
+                --scroll-slider: #12baf3;
+                --inactive-icons-color: #858585;
+                --copy-ip-background-color: #858585;
+                --copy-ip-color: #50bafb;
+                --rules-block-bg-color-one: #36bcff;
+                --rules-block-bg-color-two: #1064ff;
+                --inactive-select-btn-bg-color: #09090a;
+                --select-btn-border-color: #39393c;
+                --select-btn-color: #79797b;
+                --active-btns-color: #000000;
+                --rules-color: #000000;
+                --rules-border-color: #79797b;
+                --rules-bg-color: #d6edf5;
+                --price-bg-color: #09090a;
+                --point-last-products-border-color: #181818;
+                --point-last-products-fill-color: #0686c6;
+                --last-product-bg: #171719;
+                --footer-line-color: #383838;
+                --copyright-color: #d0d0d0;
+                --area-made-by-bg-color-one: #161616;
+                --area-made-by-bg-color-two: #1e1e1e;
+                --area-made-by-bg-color-three: #292929;
+                --area-made-by-color: #2e2e2e;
+                --loading-one-color: #171717;
+                --loading-two-color: #1f1f1f;
+                --exit-btn-color-one: #9b9b9b;
+                --exit-btn-color-two: #c3c3c3;
+                --exit-btn-color-three: #dcdcdc;
+                --one-part-pop-up-buy-product-bg-color: #141414;
+                --two-part-pop-up-buy-product-bg-color: #0e0e0e;
+                --pop-up-buy-product-containers-bg-color: #09090a;
+                --pop-up-buy-product-placeholder-color: #b9b9b9;
+                --pop-up-buy-product-status-method-color: #a5a5a5;
+                --scroll-gluing-color-one: #9b9b9b;
+                --scroll-gluing-color-two: #c3c3c3;
+                --scroll-gluing-color-three: #dcdcdc;
+                --text-policy-color: #dcdcdc;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css?v=8">
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <a href="https://excitemine.pro/">
+                    <div class="logo-and-title-server-container">
+                        <img src="https://storage.skydonate.ru/uploads/6802cd0d28c4a.png" class="logo-server">
+                        <div class="title-and-description-server">
+                            <h1 class="title-server">ExciteMine</h1>
+                            <p class="description-server">mc.excitemine.com</p>
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="main-content">
-        <div class="hero-section">
-            <button class="start-button">Начать игру</button>
+                </a>
+                <div class="navigation ">
+                    <button class="close-navigation-btn">
+                        <svg class="close-svg" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.606 1.68972C13.7729 1.51683 13.8653 1.28528 13.8632 1.04493C13.8612 0.804585 13.7648 0.574674 13.5948 0.404716C13.4248 0.234759 13.1949 0.138354 12.9546 0.136265C12.7142 0.134177 12.4827 0.226572 12.3098 0.39355L6.99955 5.7038L1.6893 0.39355C1.51641 0.226572 1.28486 0.134177 1.04451 0.136265C0.804164 0.138354 0.574253 0.234759 0.404295 0.404716C0.234338 0.574674 0.137933 0.804585 0.135844 1.04493C0.133755 1.28528 0.226151 1.51683 0.393129 1.68972L5.70338 6.99997L0.393129 12.3102C0.305578 12.3948 0.235744 12.4959 0.187703 12.6078C0.139661 12.7196 0.114374 12.8399 0.113316 12.9616C0.112258 13.0833 0.135451 13.204 0.181542 13.3167C0.227633 13.4293 0.295698 13.5317 0.381766 13.6177C0.467835 13.7038 0.570183 13.7719 0.682838 13.818C0.795492 13.8641 0.916199 13.8873 1.03791 13.8862C1.15963 13.8851 1.27991 13.8598 1.39175 13.8118C1.50359 13.7638 1.60474 13.6939 1.6893 13.6064L6.99955 8.29613L12.3098 13.6064C12.4827 13.7734 12.7142 13.8658 12.9546 13.8637C13.1949 13.8616 13.4248 13.7652 13.5948 13.5952C13.7648 13.4253 13.8612 13.1953 13.8632 12.955C13.8653 12.7147 13.7729 12.4831 13.606 12.3102L8.29571 6.99997L13.606 1.68972Z" fill="url(#paint0_linear_217_855)"/>
+                            <defs>
+                                <linearGradient id="paint0_linear_217_855" x1="5.80971" y1="-1.87596" x2="20.5709" y2="6.8952" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="var(--navigation-color-one)"/>
+                                    <stop offset="0.325" stop-color="var(--navigation-color-two)"/>
+                                    <stop offset="1" stop-color="var(--navigation-color-three)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </button>
+                    <ul class="navigation-hrefs">
+                        <li>
+                            <a class="selected-href" href="https://fullrise.xyz/">
+                                <svg viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.625 9.625C9.625 8.86561 10.2406 8.25 11 8.25H22C22.7594 8.25 23.375 8.86561 23.375 9.625C23.375 10.3844 22.7594 11 22 11H11C10.2406 11 9.625 10.3844 9.625 9.625Z" fill="url(#paint0_linear_217_379)"/>
+                                    <path d="M11 12.375C10.2406 12.375 9.625 12.9906 9.625 13.75C9.625 14.5094 10.2406 15.125 11 15.125H17.875C18.6344 15.125 19.25 14.5094 19.25 13.75C19.25 12.9906 18.6344 12.375 17.875 12.375H11Z" fill="url(#paint1_linear_217_379)"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.625 31.625H26.125C28.4032 31.625 30.25 29.7782 30.25 27.5V5.5C30.25 3.22183 28.4032 1.375 26.125 1.375H9.625C5.82805 1.375 2.75 4.45305 2.75 8.25V24.75C2.75 28.4701 5.87818 31.625 9.625 31.625ZM5.5 8.25C5.5 5.97183 7.34683 4.125 9.625 4.125H26.125C26.8844 4.125 27.5 4.74061 27.5 5.5V19.4847C27.0699 19.3328 26.6071 19.25 26.125 19.25H9.625C8.07729 19.25 6.64903 19.7614 5.5 20.6245V8.25ZM27.5 23.375C27.5 22.6156 26.8844 22 26.125 22H9.625C7.58106 22 5.55703 23.4482 5.55703 25.4375C5.55703 27.3848 7.58106 28.875 9.625 28.875H26.125C26.8844 28.875 27.5 28.2594 27.5 27.5V23.375Z" fill="url(#paint2_linear_217_379)"/>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_217_379" x1="23.375" y1="9.40789" x2="9.62547" y2="9.30739" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="var(--secondary-gradient-color-one)"/>
+                                            <stop offset="0.955" stop-color="var(--secondary-gradient-color-two)"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_217_379" x1="19.25" y1="13.5329" x2="9.62507" y2="13.4836" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="var(--secondary-gradient-color-one)"/>
+                                            <stop offset="0.955" stop-color="var(--secondary-gradient-color-two)"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear_217_379" x1="30.25" y1="14.1118" x2="2.74952" y2="14.0753" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="var(--secondary-gradient-color-one)"/>
+                                            <stop offset="0.955" stop-color="var(--secondary-gradient-color-two)"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="name-href" data-t="main-navigaton">Главная</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="scrollToClass('main-block-container')">
+                                <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6167 18.4166C13.1 18.4166 12.6243 18.6978 12.3754 19.1506C11.8561 20.0946 12.5392 21.2499 13.6167 21.2499H26.804C27.5864 21.2499 28.2206 21.8842 28.2206 22.6666C28.2206 23.449 27.5864 24.0833 26.804 24.0833H25.4015H11.2348H11.2207C9.06737 24.0833 7.70737 21.7741 8.74154 19.8758L9.95015 17.6913C10.392 16.8927 10.4221 15.9301 10.031 15.1054L6.02447 6.65841C5.73717 6.05268 5.12671 5.66659 4.45632 5.66659H4.13737C3.35497 5.66659 2.7207 5.03232 2.7207 4.24992C2.7207 3.46752 3.35497 2.83325 4.13737 2.83325H5.55962C6.65484 2.83325 7.65199 3.46448 8.12055 4.45441L8.36221 4.96492C8.40776 4.96052 8.45394 4.95825 8.50065 4.95825H29.7506C30.5331 4.95825 31.1673 5.59252 31.1673 6.37492C31.1673 6.76197 31.012 7.11275 30.7606 7.36844C30.8058 7.66444 30.7573 7.97713 30.6018 8.25967L25.8123 16.9574C25.3306 17.8358 24.3956 18.4166 23.3331 18.4166H13.6167ZM11.2348 24.0833C12.7996 24.0833 14.0681 25.3517 14.0681 26.9166C14.0681 28.4814 12.7996 29.7499 11.2348 29.7499C9.66999 29.7499 8.40147 28.4814 8.40147 26.9166C8.40147 25.3517 9.66999 24.0833 11.2348 24.0833ZM25.4015 24.0833C23.8366 24.0833 22.5681 25.3517 22.5681 26.9166C22.5681 28.4814 23.8366 29.7499 25.4015 29.7499C26.9663 29.7499 28.2348 28.4814 28.2348 26.9166C28.2348 25.3517 26.9663 24.0833 25.4015 24.0833Z" fill="var(--inactive-icons-color)"/>
+                                    <path d="M11.235 28.3333C12.0174 28.3333 12.6517 27.6991 12.6517 26.9167C12.6517 26.1342 12.0174 25.5 11.235 25.5C10.4526 25.5 9.81836 26.1342 9.81836 26.9167C9.81836 27.6991 10.4526 28.3333 11.235 28.3333Z" fill="var(--inactive-icons-color)"/>
+                                    <path d="M26.8177 26.9167C26.8177 27.6991 26.1835 28.3333 25.401 28.3333C24.6186 28.3333 23.9844 27.6991 23.9844 26.9167C23.9844 26.1342 24.6186 25.5 25.401 25.5C26.1835 25.5 26.8177 26.1342 26.8177 26.9167Z" fill="var(--inactive-icons-color)"/>
+                                </svg>
+                                <div class="name-href" data-t="shop-navigation">Магазин</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="online-container">
+                        <svg viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.15784 1.46568C9.90634 2.21418 9.90634 3.42775 9.15784 4.17625C3.16787 10.1662 3.16787 19.8779 9.15784 25.8678C9.90634 26.6163 9.90634 27.8299 9.15784 28.5784C8.40933 29.3269 7.19577 29.3269 6.44726 28.5784C-1.03971 21.0914 -1.03971 8.95265 6.44726 1.46568C7.19577 0.717171 8.40933 0.717171 9.15784 1.46568ZM33.56 1.46568C41.047 8.95265 41.047 21.0914 33.56 28.5784C32.8115 29.3269 31.5979 29.3269 30.8494 28.5784C30.1009 27.8299 30.1009 26.6163 30.8494 25.8678C36.8394 19.8779 36.8394 10.1662 30.8494 4.17625C30.1009 3.42775 30.1009 2.21418 30.8494 1.46568C31.5979 0.717171 32.8115 0.717171 33.56 1.46568ZM14.8439 6.97298C15.5924 7.72148 15.5924 8.93505 14.8439 9.68355C11.9096 12.6179 11.9096 17.3754 14.8439 20.3098C15.5924 21.0583 15.5924 22.2718 14.8439 23.0203C14.0954 23.7688 12.8818 23.7688 12.1333 23.0203C7.70199 18.589 7.70199 11.4043 12.1333 6.97298C12.8818 6.22447 14.0954 6.22447 14.8439 6.97298ZM28.1807 6.97298C32.6121 11.4043 32.6121 18.589 28.1807 23.0203C27.4322 23.7688 26.2186 23.7688 25.4701 23.0203C24.7216 22.2718 24.7216 21.0583 25.4701 20.3098C28.4045 17.3754 28.4045 12.6179 25.4701 9.68355C24.7216 8.93505 24.7216 7.72148 25.4701 6.97298C26.2186 6.22447 27.4322 6.22447 28.1807 6.97298ZM20.157 12.281C21.7448 12.281 23.032 13.5682 23.032 15.156C23.032 16.7439 21.7448 18.031 20.157 18.031C18.5692 18.031 17.282 16.7439 17.282 15.156C17.282 13.5682 18.5692 12.281 20.157 12.281Z" fill="url(#paint0_linear_217_422)"/>
+                            <defs>
+                                <linearGradient id="paint0_linear_217_422" x1="39.1752" y1="12.7929" x2="0.831443" y2="12.7168" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="var(--secondary-gradient-color-one)"/>
+                                    <stop offset="0.955" stop-color="var(--secondary-gradient-color-two)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div ip-server="mc.FullRise.xyz" class="count-players-and-description-online loading-online"></div>
+                    </div>
+                </div>
+                <button class="navigation-mobile-btn">
+                    <svg class="menu-svg" viewBox="0 0 20 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1H19M1 4.56609H19M1 8.13219H19" stroke="var(--mobile-navigation-menu-btn-color)" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        <main>
+            <section class="slogan-container">
+                <div class="slogan-bg">
+                    <img src="assets/img/dragon.png" alt="Картинка баннера">
+                </div>
+                <div class="slogan-info ">
+                    <h2 class="slogan-title">Лучший сервер 1.16.5!</h2>
+                    <p class="slogan-description">Играя здесь, твоя жизь станет намного ярче и интернеснее</p>
+                    <button class="slogan-play-now-btn" ip-server="mc.FullRise.xyz">
+                        <svg viewBox="0 0 42 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M41.1569 17.8937L38.7574 7.68914C37.542 3.15353 33.432 0 28.7362 0H12.5464C7.85054 0 3.74057 3.15345 2.52523 7.68914L0.125678 17.8937C-0.488563 20.8208 1.20128 23.7413 4.0464 24.6667L4.1867 24.7117C6.81992 25.569 9.69278 24.4642 11.0749 22.0645L13.1627 18.9773C13.687 18.0671 14.6574 17.5058 15.7066 17.5058H25.5762C26.6254 17.5058 27.5958 18.0671 28.12 18.9773L30.2078 22.0645C31.59 24.4642 34.4634 25.569 37.0967 24.7117L37.2364 24.6667C40.0813 23.7413 41.7713 20.8208 41.1569 17.8937ZM15.4041 11.0552H12.0427V14.4172H9.11619V11.0552H5.7548V8.13002H9.11619V4.76936H12.0427V8.13002H15.4041V11.0552ZM30.2144 4.069C31.2324 4.069 32.0565 4.89312 32.0565 5.91124C32.0565 6.92799 31.2324 7.75211 30.2144 7.75211C29.1976 7.75211 28.3735 6.92799 28.3735 5.91124C28.3735 4.89304 29.1976 4.069 30.2144 4.069ZM26.5313 11.4358C25.5145 11.4358 24.6898 10.6109 24.6898 9.5929C24.6898 8.5768 25.5145 7.75203 26.5313 7.75203C27.5487 7.75203 28.3728 8.5768 28.3728 9.5929C28.3729 10.611 27.5487 11.4358 26.5313 11.4358ZM30.2144 15.1182C29.1976 15.1182 28.3735 14.294 28.3735 13.2773C28.3735 12.2592 29.1976 11.4351 30.2144 11.4351C31.2324 11.4351 32.0565 12.2592 32.0565 13.2773C32.0565 14.294 31.2324 15.1182 30.2144 15.1182ZM33.8974 11.4358C32.8807 11.4358 32.0565 10.6109 32.0565 9.5929C32.0565 8.5768 32.8807 7.75203 33.8974 7.75203C34.9148 7.75203 35.7396 8.5768 35.7396 9.5929C35.7396 10.611 34.9148 11.4358 33.8974 11.4358Z" fill="url(#paint0_linear_235_362)"/>
+                            <defs>
+                                <linearGradient id="paint0_linear_235_362" x1="41.2826" y1="10.5263" x2="-0.000555194" y2="10.4266" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="var(--secondary-gradient-color-one)"/>
+                                    <stop offset="0.955" stop-color="var(--secondary-gradient-color-two)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div data-t="btn-play-now">Играть сейчас</div>
+                    </button>
+                </div>
+            </section>
+            <section class="main-block-container">
+                <div class="categories-and-servers-container">
+                    <div class="categories-container loading-block">
+                        <h2 class="categories-title loading-line" data-t="available-products-title">Доступные товары</h2>
+                        <p class="categories-description loading-line" data-t="available-products-description">После покупки выдача услуг происходит моментально на ваш игровой аккаунт</p>
+                        <div class="categories-list">
+                            <div class="two-btns">
+                                <button class="one-category loading-line block-animation"></button>
+                                <button class="one-category loading-line block-animation"></button>
+                            </div>
+                            <button class="one-category loading-line block-animation"></button>
+                        </div>
+                    </div>
+                    <div class="servers-container loading-block">
+                        <h2 class="servers-title loading-line" data-t="select-mode-title">Выберите режим</h2>
+                        <div class="servers-list">
+                            <div class="two-btns">
+                                <button class="one-server loading-line block-animation"></button>
+                                <button class="one-server loading-line block-animation"></button>
+                            </div>
+                            <button class="one-server loading-line block-animation"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-container">
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                    <div class="one-product loading-block block-animation">
+                        <div class="title-product loading-line"></div>
+                        <div class="btns-product">
+                            <div class="price-product loading-line"></div>
+                            <button class="buy-product-btn loading-line"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="last-products-container loading-block">
+                <h2 class="last-products-title loading-line" data-t="recent-purchases-title">Последние покупки</h2>
+                <div class="list-products">
+                    <div class="list-products-slide">
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                        <div class="last-product loading-line"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-navigation">
+                    <a href="https://fullrise.xyz/">
+                        <div class="footer-logo-and-title-server">
+                            <img src="https://storage.skydonate.ru/uploads/6802cd0d28c4a.png" class="footer-logo-server">
+                            <div class="footer-title-server">ExciteMine</div>
+                        </div>
+                    </a>
+                    <ul class="footer-navigation-hrefs">
+                        <li>
+                            <a href="https://fullrise.xyz/" data-t="main-navigaton">Главная</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="scrollToClass('main-block-container')" data-t="shop-navigation">Магазин</a>
+                        </li>
+                    </ul>
+                    <ul class="social-networks">
+                        <li>
+                            <a href="https://vk.com/fullrise">
+                                <div class="vk-icon-container">
+                                    <img src="assets/img/vk.svg" alt="ВКонтакте">
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://t.me/fullrise">
+                                <div class="telegram-icon-container">
+                                    <img src="assets/img/telegram.svg" alt="Telegram">
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://discord.gg/fullrise">
+                                <div class="discord-icon-container">
+                                    <img src="assets/img/discord.svg" alt="Discord">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copyright-container">
+                    <p class="copyright" data-t="copyright">
+                        © 2024-2025, <a class="skydonate-a" href="https://skydonate.ru/" target="_blank">ExciteMine</a>
+                        , официальный сайт, все права защищены
+                    </p>
+                    <div class="made-by">
+                        created with <a href="https://skydonate.store/" class="skydonate-a" target="_blank">ExciteMine</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="lang-select">
+            <button class="lang-option" data-lang="ru">Русский</button>
+            <button class="lang-option" data-lang="en">English</button>
         </div>
-        <div class="bottom-sections">
-            <div class="section-card">
-                <h3>Привилегии</h3>
-                <p>Узнайте о VIP-статусах и эксклюзивных возможностях.</p>
-                <a href="#">Подробнее</a>
-            </div>
-            <div class="section-card">
-                <h3>Кейсы</h3>
-                <p>Посмотрите лучшие моменты и достижения наших игроков.</p>
-                <a href="#">Смотреть</a>
-            </div>
-            <div class="section-card">
-                <h3>Оплата сервера</h3>
-                <p>Поддержите развитие сервера и получите бонусы.</p>
-                <a href="#">Поддержать</a>
-            </div>
-            <div class="section-card">
-                <h3>Другое</h3>
-                <p>Правила, команда, FAQ и полезная информация.</p>
-                <a href="#">Читать</a>
+        <div class="pop-up-buy-product-area">
+            <div class="pop-up-buy-product">
+                <button class="pop-up-buy-product-exit-btn">
+                    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.606 1.68978C13.7729 1.51689 13.8653 1.28534 13.8632 1.04499C13.8612 0.804646 13.7648 0.574735 13.5948 0.404777C13.4248 0.23482 13.1949 0.138415 12.9546 0.136326C12.7142 0.134238 12.4827 0.226633 12.3098 0.393611L6.99955 5.70386L1.6893 0.393611C1.51641 0.226633 1.28486 0.134238 1.04451 0.136326C0.804164 0.138415 0.574253 0.23482 0.404295 0.404777C0.234338 0.574735 0.137933 0.804646 0.135844 1.04499C0.133755 1.28534 0.226151 1.51689 0.393129 1.68978L5.70338 7.00003L0.393129 12.3103C0.305578 12.3948 0.235744 12.496 0.187703 12.6078C0.139661 12.7197 0.114374 12.8399 0.113316 12.9617C0.112258 13.0834 0.135451 13.2041 0.181542 13.3167C0.227633 13.4294 0.295698 13.5317 0.381767 13.6178C0.467835 13.7039 0.570183 13.7719 0.682838 13.818C0.795492 13.8641 0.916199 13.8873 1.03791 13.8863C1.15963 13.8852 1.27991 13.8599 1.39175 13.8119C1.50359 13.7638 1.60474 13.694 1.6893 13.6064L6.99955 8.29619L12.3098 13.6064C12.4827 13.7734 12.7142 13.8658 12.9546 13.8637C13.1949 13.8616 13.4248 13.7652 13.5948 13.5953C13.7648 13.4253 13.8612 13.1954 13.8632 12.9551C13.8653 12.7147 13.7729 12.4832 13.606 12.3103L8.29571 7.00003L13.606 1.68978Z" fill="url(#paint0_linear_356_1779)"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_356_1779" x1="5.80971" y1="-1.8759" x2="20.5709" y2="6.89526" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="var(--exit-btn-color-one)"/>
+                                <stop offset="0.325" stop-color="var(--exit-btn-color-two)"/>
+                                <stop offset="1" stop-color="var(--exit-btn-color-three)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </button>
+                <button class="pop-up-buy-back-btn">
+                    <svg viewBox="0 0 29 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.8488 14.2704C20.3349 14.0575 20 13.5562 20 13V9.5625H2.125C1.36562 9.5625 0.75 8.94691 0.75 8.1875V6.8125C0.75 6.05308 1.36562 5.4375 2.125 5.4375H20V2C20 1.44386 20.3349 0.942483 20.8488 0.729661C21.3626 0.516838 21.954 0.63447 22.3473 1.02772L27.8473 6.52773C28.3842 7.06467 28.3842 7.93532 27.8473 8.47226L22.3473 13.9723C21.954 14.3655 21.3626 14.4832 20.8488 14.2704Z" fill="url(#paint0_linear)"/>
+                        <defs>
+                            <linearGradient id="paint0_linear" x1="5.80971" y1="-1.8759" x2="20.5709" y2="6.89526" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="var(--exit-btn-color-one)"/>
+                                <stop offset="0.325" stop-color="var(--exit-btn-color-two)"/>
+                                <stop offset="1" stop-color="var(--exit-btn-color-three)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </button>
+                <div class="pop-up-parts">
+                    <div class="values-part">
+                        <h2 class="values-part-title" data-t="product-payment-header-title">Оплата товара</h2>
+                        <div class="values-part-product-container">
+                            <img class="values-part-product-img" alt="Выбранный товар">
+                            <div class="values-part-product-title"></div>
+                        </div>
+                        <label class="input-container">
+                            <input type="text" class="nick" maxlength="16" placeholder="Введите никнейм" data-p="nickname-input">
+                            <div class="input-placeholder-container">
+                                <img class="input-icon" src="assets/img/crown.png" alt="Никнейм">
+                                <div class="input-placeholder" data-t="nickname-placeholder">Ваш никнейм</div>
+                            </div>
+                        </label>
+                        <label class="input-container">
+                            <input type="email" class="email" placeholder="Введите почту" data-p="email-input">
+                            <div class="input-placeholder-container">
+                                <img class="input-icon" src="assets/img/user.png" alt="Почта">
+                                <div class="input-placeholder" data-t="email-placeholder">Ваша почта</div>
+                            </div>
+                        </label>
+                        <label class="input-container">
+                            <input type="text" class="promo" placeholder="Введите промокод" data-p="promo-input">
+                            <div class="input-placeholder-container">
+                                <img class="input-icon" src="assets/img/star.png" alt="Промокод">
+                                <div class="input-placeholder" data-t="promo-placeholder">Промокод</div>
+                            </div>
+                        </label>
+                        <label class="input-container amount-container">
+                            <input type="number" class="amount" placeholder="Введите количество" data-p="amount-input">
+                            <div class="input-placeholder-container">
+                                <img class="input-icon" src="assets/img/potion.png" alt="Количество">
+                                <div class="input-placeholder">Количество</div>
+                            </div>
+                        </label>
+                        <div class="buy-product-price-and-buy-btn"></div>
+                        <div class="values-part-next-btn-container"></div>
+                    </div>
+                    <div class="payment-part">
+                        <div class="payment-methods">
+                            <h2 class="payment-methods-title" data-t="choose-payment-method">Выберите способ оплаты</h2>
+                            <div class="payment-methods-list">
+                                <button class="payment-method selected-payment-method" data-payment-method="1">
+                                    <img class="payment-method-img" src="assets/img/russian_card.png" alt="Российские карты" data-s="russians-cards-method-src">
+                                    <h3 class="payment-method-title" data-t="russian-card">Российские карты</h3>
+                                    <p class="payment-method-status" data-t="available-card">Доступно</p>
+                                </button>
+                                <button class="payment-method" data-payment-method="2">
+                                    <img class="payment-method-img" src="assets/img/international_card.png?v=2" alt="Международные карты">
+                                    <h3 class="payment-method-title" data-t="international-cards">Международные карты</h3>
+                                    <p class="payment-method-status" data-t="available-card">Доступно</p>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gluing-container">
+                            <h2 class="gluing-container-title">Выберите позицию</h2>
+                            <div class="gluing-list-container">
+                                <div class="gluing-list"></div>
+                            </div>
+                        </div>
+                        <label class="agreement-and-privacy-policy-container">
+                            <input type="checkbox" class="agreement-and-privacy-policy-checkbox">
+                            <div class="agreement-and-privacy-policy-checkbox-custom"></div>
+                            <div class="agreement-and-privacy-policy-text">
+                                <p class="agreement-and-privacy-policy-warning" data-t="agreement-and-privacy-policy-warning">Внимание!</p>
+                                <p class="agreement-and-privacy-policy-info" data-t="agreement-and-privacy-policy-info">
+                                    Я принимаю <a href="https://skydonate.ru/documents/polzovatelskoe_soglashenie_skydonate.pdf" target="_blank">Соглашение</a>
+                                    и <a href="https://skydonate.ru/documents/policy.pdf" target="_blank">Политику конфиденциальности</a>
+                                </p>
+                            </div>
+                        </label>
+                        <div class="buy-product-price-and-buy-btn"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer">
-        &copy; 2025 ExciteMine
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <div class="pop-up-title-area">
+            <div class="pop-up-title">
+                <button class="pop-up-title-exit-btn">
+                    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.606 1.68978C13.7729 1.51689 13.8653 1.28534 13.8632 1.04499C13.8612 0.804646 13.7648 0.574735 13.5948 0.404777C13.4248 0.23482 13.1949 0.138415 12.9546 0.136326C12.7142 0.134238 12.4827 0.226633 12.3098 0.393611L6.99955 5.70386L1.6893 0.393611C1.51641 0.226633 1.28486 0.134238 1.04451 0.136326C0.804164 0.138415 0.574253 0.23482 0.404295 0.404777C0.234338 0.574735 0.137933 0.804646 0.135844 1.04499C0.133755 1.28534 0.226151 1.51689 0.393129 1.68978L5.70338 7.00003L0.393129 12.3103C0.305578 12.3948 0.235744 12.496 0.187703 12.6078C0.139661 12.7197 0.114374 12.8399 0.113316 12.9617C0.112258 13.0834 0.135451 13.2041 0.181542 13.3167C0.227633 13.4294 0.295698 13.5317 0.381767 13.6178C0.467835 13.7039 0.570183 13.7719 0.682838 13.818C0.795492 13.8641 0.916199 13.8873 1.03791 13.8863C1.15963 13.8852 1.27991 13.8599 1.39175 13.8119C1.50359 13.7638 1.60474 13.694 1.6893 13.6064L6.99955 8.29619L12.3098 13.6064C12.4827 13.7734 12.7142 13.8658 12.9546 13.8637C13.1949 13.8616 13.4248 13.7652 13.5948 13.5953C13.7648 13.4253 13.8612 13.1954 13.8632 12.9551C13.8653 12.7147 13.7729 12.4832 13.606 12.3103L8.29571 7.00003L13.606 1.68978Z" fill="url(#paint0_linear_356_1780)"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_356_1780" x1="5.80971" y1="-1.8759" x2="20.5709" y2="6.89526" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="var(--exit-btn-color-one)"/>
+                                <stop offset="0.325" stop-color="var(--exit-btn-color-two)"/>
+                                <stop offset="1" stop-color="var(--exit-btn-color-three)"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </button>
+                <h2 class="pop-up-title-title" data-t="enter-title">Ввод титула</h2>
+                <div class="pop-up-title-demo"></div>
+                <label class="input-container">
+                    <input type="text" class="title" data-max-length="12" data-p="title-placeholder" placeholder="Введите титул">
+                    <div class="input-placeholder-container">
+                        <img class="input-icon" src="assets/img/star.png" alt="Титул">
+                        <div class="input-placeholder" data-t="title-input">Введите титул</div>
+                    </div>
+                </label>
+                <div class="title-confirm-btn-container">
+                    <div class="error">
+                        <div data-t="title-input">Введите титул</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="assets/js/translation.js?v=2"></script>
+        <script type="text/javascript" src="assets/js/mobileNavigation.js"></script>
+        <script type="text/javascript" src="assets/js/products.js?v=2"></script>
+        <script type="text/javascript" src="assets/js/popUpBuy.js?v=6"></script>
+        <script type="text/javascript" src="assets/js/smoothScroll.js"></script>
+        <script type="text/javascript" src="assets/js/copyIp.js?v=2"></script>
+        <script type="text/javascript" src="assets/js/online.js?v=1"></script>
+        <script>
+            (function() {
+                function c() {
+                    var b = a.contentDocument || a.contentWindow.document;
+                    if (b) {
+                        var d = b.createElement('script');
+                        d.innerHTML = "window.__CF$cv$params={r:'9358edf87c1ce62f',t:'MTc0NTUzMjYxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                        b.getElementsByTagName('head')[0].appendChild(d)
+                    }
+                }
+                if (document.body) {
+                    var a = document.createElement('iframe');
+                    a.height = 1;
+                    a.width = 1;
+                    a.style.position = 'absolute';
+                    a.style.top = 0;
+                    a.style.left = 0;
+                    a.style.border = 'none';
+                    a.style.visibility = 'hidden';
+                    document.body.appendChild(a);
+                    if ('loading' !== document.readyState)
+                        c();
+                    else if (window.addEventListener)
+                        document.addEventListener('DOMContentLoaded', c);
+                    else {
+                        var e = document.onreadystatechange || function() {}
+                        ;
+                        document.onreadystatechange = function(b) {
+                            e(b);
+                            'loading' !== document.readyState && (document.onreadystatechange = e,
+                            c())
+                        }
+                    }
+                }
+            }
+            )();
+        </script>
+    </body>
