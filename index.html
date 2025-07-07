@@ -1,114 +1,461 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ExciteMine — Хостинг & VDS</title>
-  <link rel="stylesheet" href="excitemine/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ExciteMine — Хостинг & VDS</title>
+<style>
+  /* ======= Стили ======= */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top, #0f0f0f, #000);
+    color: #fff;
+    overflow-x: hidden;
+  }
+  header {
+    background: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 20px #0ff2;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  nav button {
+    background: transparent;
+    color: #ccc;
+    border: none;
+    margin-left: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  nav button:hover {
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .section {
+    padding: 4rem 2rem;
+    text-align: center;
+    animation: fadeIn 1s ease;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #aaa;
+  }
+  .cta-buttons button {
+    background: #fff;
+    color: #111;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .cta-buttons button:hover {
+    background: #f00;
+    color: white;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #0ff;
+    flex-wrap: wrap;
+  }
+  #why-us {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+  }
+  #why-us .card {
+    background: #111;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 300px;
+    box-shadow: 0 0 15px #0ff3;
+    transition: transform 0.3s ease;
+  }
+  #why-us .card:hover {
+    transform: translateY(-10px);
+  }
+  #tariff-buttons {
+    margin-top: 2rem;
+  }
+  #tariff-buttons button {
+    background: #333;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    margin: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  #tariff-buttons button:hover {
+    background: #0ff2;
+    color: #000;
+  }
+  #tariffs {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+  .tariff-card {
+    background: #111;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #0ff3;
+    width: 260px;
+    padding: 1.5rem;
+    text-align: left;
+    color: #0ff;
+    cursor: default;
+    transition: box-shadow 0.3s ease;
+  }
+  .tariff-card:hover {
+    box-shadow: 0 0 24px #0ff;
+  }
+  .tariff-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .tariff-price {
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .tariff-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: #aaa;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: #111;
+    border-top: 1px solid #222;
+    color: #999;
+    margin-top: 3rem;
+  }
+  .hidden {
+    display: none;
+  }
+  form input,
+  form textarea {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.5rem auto;
+    padding: 0.8rem;
+    border: 1px solid #444;
+    background: #111;
+    color: white;
+    border-radius: 5px;
+  }
+  form button {
+    background: #0ff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  form button:hover {
+    background: #00f0ff;
+    color: black;
+  }
+  #messageBox {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #222;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    display: none;
+    animation: slideIn 0.5s ease forwards;
+    z-index: 2000;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">ExciteMine</div>
-    <nav>
-      <button id="nav-home">Главная</button>
-      <button id="nav-status">Статус сервера</button>
-      <button id="nav-support">Техподдержка</button>
-      <button id="nav-login">Вход</button>
-      <button id="nav-register">Регистрация</button>
-    </nav>
-    <div id="profile" class="hidden">
-      <div class="avatar" id="avatarCircle">U</div>
-      <div id="profileMenu" class="hidden">
-        <p id="profileName">👤 Никнейм</p>
-        <button onclick="viewProfile()">Профиль</button>
-        <button onclick="viewBalance()">Баланс аккаунта</button>
-        <button onclick="changePassword()">Изменить пароль</button>
-        <button onclick="logout()">Выйти</button>
+<header>
+  <div class="logo">ExciteMine</div>
+  <nav>
+    <button id="nav-home">Главная</button>
+    <button id="nav-status">Статус сервера</button>
+    <button id="nav-support">Техподдержка</button>
+    <button id="nav-login">Вход</button>
+    <button id="nav-register">Регистрация</button>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="section">
+    <h1>ExciteMine</h1>
+    <p class="subtitle">Открой для себя новую эру хостинга и VDS — мощная инфраструктура Ryzen, защита DDoS и поддержка 24/7.</p>
+    <div class="cta-buttons">
+      <button onclick="showLogin()">Начать</button>
+      <button onclick="scrollToTariffs()">Посмотреть тарифы</button>
+    </div>
+
+    <div id="stats" class="stats">
+      <div><h2 id="usersCount">20321</h2><p>Пользователей</p></div>
+      <div><h2 id="serversCount">14861</h2><p>Серверов создано</p></div>
+      <div><h2 id="daysCount">597</h2><p>Дней успешной работы</p></div>
+    </div>
+
+    <div id="why-us">
+      <div class="card">
+        <h3>Современные сервера</h3>
+        <p>Только мощные Ryzen и NVMe</p>
+      </div>
+      <div class="card">
+        <h3>Безопасность</h3>
+        <p>DDoS-защита на всех узлах</p>
+      </div>
+      <div class="card">
+        <h3>Техподдержка 24/7</h3>
+        <p>Всегда готовы помочь</p>
       </div>
     </div>
-  </header>
 
-  <main>
-    <section id="home" class="section">
-      <h1>ExciteMine</h1>
-      <p class="subtitle">Открой для себя новую эру хостинга и VDS — мощная инфраструктура Ryzen, защита DDoS и поддержка 24/7.</p>
-      <div class="cta-buttons">
-        <button onclick="showLogin()">Начать</button>
-        <button onclick="scrollToTariffs()">Посмотреть тарифы</button>
-      </div>
+    <div id="tariff-buttons">
+      <button onclick="showTariffs('hosting')">Хостинг</button>
+      <button onclick="showTariffs('vds')">VDS</button>
+      <button onclick="showTariffs('web')">Web Hosting</button>
+    </div>
+    <div id="tariffs"></div>
+  </section>
 
-      <div id="stats" class="stats">
-        <div><h2 id="usersCount">0</h2><p>Пользователей</p></div>
-        <div><h2 id="serversCount">0</h2><p>Серверов создано</p></div>
-        <div><h2 id="daysCount">0</h2><p>Дней успешной работы</p></div>
-      </div>
+  <section id="status" class="section hidden">
+    <h2>Статус серверов</h2>
+    <div id="statusTable"></div>
+  </section>
 
-      <div id="why-us">
-        <div class="card">
-          <h3>Современные сервера</h3>
-          <p>Только мощные Ryzen и NVMe</p>
+  <section id="support" class="section hidden">
+    <h2>Техподдержка</h2>
+    <form id="supportForm">
+      <input type="text" placeholder="Ваш никнейм" id="supportName" required />
+      <input type="email" placeholder="Email" id="supportEmail" required />
+      <textarea placeholder="Сообщение" id="supportMessage" required></textarea>
+      <button type="submit">Отправить тикет</button>
+    </form>
+    <div id="ticketStatus"></div>
+  </section>
+
+  <section id="login" class="section hidden">
+    <h2>Вход</h2>
+    <form id="loginForm">
+      <input type="text" placeholder="Никнейм" id="loginNick" required />
+      <input type="password" placeholder="Пароль" id="loginPass" required />
+      <button type="submit">Войти</button>
+    </form>
+  </section>
+
+  <section id="register" class="section hidden">
+    <h2>Регистрация</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Никнейм" id="regNick" required />
+      <input type="email" placeholder="Email" id="regEmail" required />
+      <input type="password" placeholder="Пароль" id="regPass" required />
+      <input type="password" placeholder="Повторите пароль" id="regPassConfirm" required />
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 ExciteMine LTD — Все права защищены.</p>
+</footer>
+
+<div id="messageBox"></div>
+
+<script>
+  // ====== Логика переключения секций ======
+  const sections = {
+    home: document.getElementById('home'),
+    status: document.getElementById('status'),
+    support: document.getElementById('support'),
+    login: document.getElementById('login'),
+    register: document.getElementById('register'),
+  };
+  function hideAllSections() {
+    Object.values(sections).forEach(sec => sec.classList.add('hidden'));
+  }
+  function showSection(name) {
+    hideAllSections();
+    sections[name].classList.remove('hidden');
+  }
+  document.getElementById('nav-home').onclick = () => showSection('home');
+  document.getElementById('nav-status').onclick = () => showSection('status');
+  document.getElementById('nav-support').onclick = () => showSection('support');
+  document.getElementById('nav-login').onclick = () => showSection('login');
+  document.getElementById('nav-register').onclick = () => showSection('register');
+
+  // ====== Статус серверов с прогрессом ======
+  const statusData = [
+    { name: 'Falkenstein-1', cpu: 'Ryzen 7 9700X', uptime: 99.9781 },
+    { name: 'Berlin-2', cpu: 'Ryzen 9 5900X', uptime: 99.9320 },
+    { name: 'Paris-3', cpu: 'Ryzen 5 5600X', uptime: 99.9100 },
+  ];
+  function renderStatus() {
+    const container = document.getElementById('statusTable');
+    container.innerHTML = '';
+    statusData.forEach(node => {
+      const div = document.createElement('div');
+      div.style.marginBottom = '1rem';
+      div.innerHTML = `
+        <strong>${node.name} — ${node.cpu}</strong><br/>
+        Uptime: ${node.uptime.toFixed(4)}%
+        <div style="background:#222; border-radius: 10px; overflow: hidden; height: 15px; margin-top:5px;">
+          <div style="width: ${node.uptime}%; background: #0ff; height: 100%;"></div>
         </div>
-        <div class="card">
-          <h3>Безопасность</h3>
-          <p>DDoS-защита на всех узлах</p>
-        </div>
-        <div class="card">
-          <h3>Техподдержка 24/7</h3>
-          <p>Всегда готовы помочь</p>
-        </div>
-      </div>
+      `;
+      container.appendChild(div);
+    });
+  }
+  renderStatus();
 
-      <div id="tariff-buttons">
-        <button onclick="showTariffs('hosting')">Хостинг</button>
-        <button onclick="showTariffs('vds')">VDS</button>
-        <button onclick="showTariffs('web')">Web Hosting</button>
-      </div>
-      <div id="tariffs"></div>
-    </section>
+  // ====== Тарифы ======
+  const tariffs = {
+    hosting: [
+      { title: 'Базовый', price: '100 ₽/мес', desc: '1 сайт, 1 ГБ SSD, 10 ГБ трафика' },
+      { title: 'Продвинутый', price: '300 ₽/мес', desc: '5 сайтов, 10 ГБ SSD, 100 ГБ трафика' },
+      { title: 'Премиум', price: '700 ₽/мес', desc: 'Неограниченно сайтов, 50 ГБ SSD, безлимитный трафик' },
+    ],
+    vds: [
+      { title: 'VDS-1', price: '400 ₽/мес', desc: '2 ядра, 4 ГБ RAM, 100 ГБ SSD' },
+      { title: 'VDS-2', price: '800 ₽/мес', desc: '4 ядра, 8 ГБ RAM, 200 ГБ SSD' },
+      { title: 'VDS-3', price: '1500 ₽/мес', desc: '8 ядер, 16 ГБ RAM, 500 ГБ SSD' },
+    ],
+    web: [
+      { title: 'Web Start', price: '50 ₽/мес', desc: '1 сайт, 500 МБ SSD, 5 ГБ трафика' },
+      { title: 'Web Pro', price: '200 ₽/мес', desc: '10 сайтов, 20 ГБ SSD, 200 ГБ трафика' },
+    ],
+  };
+  function showTariffs(type) {
+    const container = document.getElementById('tariffs');
+    container.innerHTML = '';
+    if (!tariffs[type]) return;
+    tariffs[type].forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'tariff-card';
+      card.innerHTML = `
+        <div class="tariff-title">${t.title}</div>
+        <div class="tariff-price">${t.price}</div>
+        <div class="tariff-desc">${t.desc}</div>
+      `;
+      container.appendChild(card);
+    });
+    // Прокрутить к тарифам
+    container.scrollIntoView({behavior: 'smooth'});
+  }
 
-    <section id="status" class="section hidden">
-      <h2>Статус серверов</h2>
-      <div id="statusTable"></div>
-    </section>
+  // ====== Вход и регистрация ======
+  function showLogin() { showSection('login'); }
+  function scrollToTariffs() {
+    document.getElementById('tariffs').scrollIntoView({behavior: 'smooth'});
+  }
 
-    <section id="support" class="section hidden">
-      <h2>Техподдержка</h2>
-      <form id="supportForm">
-        <input type="text" placeholder="Ваш никнейм" id="supportName" required />
-        <input type="email" placeholder="Email" id="supportEmail" required />
-        <textarea placeholder="Сообщение" id="supportMessage" required></textarea>
-        <button type="submit">Отправить тикет</button>
-      </form>
-      <div id="ticketStatus"></div>
-    </section>
+  // ====== Техподдержка (отправка тикета) ======
+  document.getElementById('supportForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const name = e.target.supportName.value.trim();
+    const email = e.target.supportEmail.value.trim();
+    const message = e.target.supportMessage.value.trim();
+    if (!name || !email || !message) return alert('Пожалуйста, заполните все поля');
+    // Здесь обычно отправка на сервер — пока просто имитация
+    showMessage('Тикет успешно отправлен! Ожидайте ответа.');
+    e.target.reset();
+  });
 
-    <section id="login" class="section hidden">
-      <h2>Вход</h2>
-      <form id="loginForm">
-        <input type="text" placeholder="Никнейм" id="loginNick" required />
-        <input type="password" placeholder="Пароль" id="loginPass" required />
-        <button type="submit">Войти</button>
-      </form>
-    </section>
+  // ====== Показ сообщений ======
+  function showMessage(text) {
+    const box = document.getElementById('messageBox');
+    box.textContent = text;
+    box.style.display = 'block';
+    setTimeout(() => { box.style.display = 'none'; }, 4000);
+  }
 
-    <section id="register" class="section hidden">
-      <h2>Регистрация</h2>
-      <form id="registerForm">
-        <input type="text" placeholder="Никнейм" id="regNick" required />
-        <input type="email" placeholder="Email" id="regEmail" required />
-        <input type="password" placeholder="Пароль" id="regPass" required />
-        <input type="password" placeholder="Повторите пароль" id="regPassConfirm" required />
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </section>
-  </main>
+  // ====== Пример простого логина (только фронт) ======
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const nick = e.target.loginNick.value.trim();
+    const pass = e.target.loginPass.value;
+    if(nick === '' || pass === '') {
+      showMessage('Заполните все поля');
+      return;
+    }
+    // Имитация успешного входа
+    showMessage(`Добро пожаловать, ${nick}!`);
+    showSection('home');
+  });
 
-  <footer>
-    <p>© 2025 ExciteMine LTD — Все права защищены.</p>
-  </footer>
-
-  <div id="messageBox"></div>
-
-  <script src="excitemine/script.js"></script>
+  // ====== Пример простой регистрации (фронт) ======
+  document.getElementById('registerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const nick = e.target.regNick.value.trim();
+    const email = e.target.regEmail.value.trim();
+    const pass = e.target.regPass.value;
+    const passConf = e.target.regPassConfirm.value;
+    if(!nick || !email || !pass || !passConf) {
+      showMessage('Заполните все поля');
+      return;
+    }
+    if(pass !== passConf) {
+      showMessage('Пароли не совпадают');
+      return;
+    }
+    showMessage(`Пользователь ${nick} успешно зарегистрирован!`);
+    showSection('login');
+  });
+</script>
 </body>
 </html>
