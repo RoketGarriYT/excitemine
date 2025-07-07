@@ -3,815 +3,645 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ExciteMine — Хостинг Minecraft и VDS</title>
+<title>ExciteMine — Хостинг & VDS</title>
 <style>
-  /* Сброс */
-  * {
-    box-sizing: border-box;
-  }
   body {
-    margin:0;
-    background: radial-gradient(circle at top, #0a0a0a, #000);
-    color: #ddd;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at top, #0f0f0f, #000);
+    color: #eee; overflow-x: hidden;
   }
   header {
-    background: #111;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top:0;
-    z-index: 1000;
-    box-shadow: 0 0 10px #0ff8;
+    background: #111; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem; box-shadow: 0 0 20px #0ff2;
+    position: sticky; top: 0; z-index: 1000;
   }
   .logo {
-    font-weight: 900;
-    font-size: 1.6rem;
+    font-size: 1.6rem; font-weight: bold; color: #0ff; text-transform: uppercase; letter-spacing: 3px;
+    cursor: default;
+  }
+  nav button {
+    background: transparent; color: #ccc; border: none; margin-left: 1rem;
+    font-size: 1rem; cursor: pointer; transition: color 0.3s ease;
+  }
+  nav button:hover {
     color: #0ff;
-    cursor: pointer;
+  }
+  #profile {
+    position: relative;
     user-select: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
   }
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  nav button, nav a {
-    background: transparent;
-    border: none;
-    color: #aaa;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.4rem 0.9rem;
-    border-radius: 8px;
+  #avatarCircle {
+    width: 40px; height: 40px; background: #0ff; border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    color: black; font-weight: bold; font-size: 1.2rem;
     cursor: pointer;
-    user-select: none;
-    transition: background 0.25s, color 0.25s;
-    text-decoration: none;
   }
-  nav button:hover, nav a:hover {
-    color: #000;
-    background: #0ff;
+  #profileMenu {
+    position: absolute; top: 50px; right: 0;
+    background: #222; padding: 1rem;
+    border-radius: 10px; box-shadow: 0 0 15px #0ff;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    z-index: 1001;
   }
-  nav button:disabled {
-    color: #555;
-    cursor: not-allowed;
+  #profileMenu button {
+    background: #0ff; border: none; color: black; padding: 0.5rem;
+    cursor: pointer; border-radius: 6px; font-weight: bold;
+    transition: background 0.3s ease;
   }
-  #statusProgress {
-    width: 90px;
-    height: 12px;
-    background: #222;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 0 5px #0ff;
-    margin-left: 6px;
-    vertical-align: middle;
-    display: inline-block;
-  }
-  #statusProgressInner {
-    height: 100%;
-    background: #0ff;
-    width: 0%;
-    transition: width 0.7s ease-in-out;
+  #profileMenu button:hover {
+    background: #06c;
+    color: white;
   }
   main {
-    flex: 1;
     padding: 3rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    width: 100%;
+    max-width: 900px;
+    margin: auto;
   }
   section {
-    display: none;
-    animation: fadeIn 0.6s ease forwards;
+    margin-bottom: 3rem;
+    animation: fadeIn 1s ease forwards;
   }
-  section.active {
-    display: block;
-  }
-  h1, h2 {
-    color: #0ff;
+  h1, h2, h3 {
     margin-bottom: 1rem;
-  }
-  p {
-    line-height: 1.4;
-    color: #bbb;
-  }
-  .btn-primary {
-    background: #0ff;
-    border: none;
-    color: #000;
-    font-weight: 700;
-    padding: 0.7rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+    color: #0ff;
     user-select: none;
   }
-  .btn-primary:hover:not(:disabled) {
-    background: #00cccc;
+  h1 {
+    font-size: 3rem;
   }
-  /* Навигация */
-  .nav-links {
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #aaa;
+  }
+  .cta-buttons {
+    margin-bottom: 2rem;
+  }
+  .cta-buttons button {
+    background: #0ff; border: none; color: black; padding: 0.8rem 1.6rem;
+    margin-right: 1rem; cursor: pointer; font-weight: bold; border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+  .cta-buttons button:hover {
+    background: #06c;
+    color: white;
+  }
+  .stats {
+    display: flex; justify-content: space-around; margin-bottom: 2rem;
+    color: #0ff;
+    font-weight: bold;
+  }
+  .stats div {
+    text-align: center;
+    user-select: none;
+  }
+  #why-us {
+    background: #111; padding: 1rem; border-radius: 10px;
+    box-shadow: 0 0 20px #0ff3;
+  }
+  #why-us table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+  }
+  #why-us th, #why-us td {
+    border: 1px solid #0ff3;
+    padding: 0.8rem 1rem;
+    text-align: left;
+  }
+  #why-us th {
+    background: #0ff3;
+    color: black;
+  }
+  #why-us tr:nth-child(even) {
+    background: #222;
+  }
+  #tariff-buttons {
+    margin-top: 1rem; margin-bottom: 1rem;
+    text-align: center;
+  }
+  #tariff-buttons button {
+    background: #333;
+    color: #0ff;
+    border: 1px solid #0ff;
+    margin: 0 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #tariff-buttons button:hover {
+    background: #0ff;
+    color: #000;
+  }
+  #tariffs {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-  }
-
-  /* Таблица в Почему выбирают нас */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    color: #0ff;
-  }
-  th, td {
-    border: 1px solid #0ff3;
-    padding: 0.8rem 1rem;
-    text-align: center;
-  }
-  th {
-    background: #0ff1;
-  }
-  /* Тарифы */
-  #tariffs-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
     justify-content: center;
   }
   .tariff-card {
     background: #111;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #0ff4;
-    width: 320px;
-    padding: 1.8rem 1.5rem;
-    color: #0ff;
+    border: 1px solid #0ff;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    width: 280px;
+    box-shadow: 0 0 10px #0ff3;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
+    justify-content: space-between;
   }
-  .tariff-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px #0ff;
+  .tariff-card h3 {
+    margin-top: 0;
+    color: #0ff;
   }
-  .tariff-title {
-    font-size: 1.5rem;
-    font-weight: 900;
-    margin-bottom: 0.2rem;
-  }
-  .tariff-type {
-    font-style: italic;
-    margin-bottom: 1rem;
-    color: #0cc;
-  }
-  .tariff-prices {
-    margin-bottom: 1rem;
-  }
-  .tariff-price-old {
-    text-decoration: line-through;
-    color: #055;
-    margin-right: 10px;
-    font-weight: 700;
+  .tariff-specs {
+    margin: 0.5rem 0;
+    color: #aaa;
+    font-size: 0.9rem;
   }
   .tariff-price {
-    font-weight: 900;
-    font-size: 1.7rem;
-  }
-  .tariff-spec {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #0ff;
+    font-size: 1.4rem;
   }
   .tariff-buy-btn {
-    margin-top: auto;
-    padding: 0.7rem;
-    font-weight: 900;
     background: #0ff;
     border: none;
-    border-radius: 8px;
+    padding: 0.6rem 0;
+    border-radius: 10px;
+    margin-top: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    color: #000;
-    user-select: none;
+    color: black;
     transition: background 0.3s ease;
   }
-  .tariff-buy-btn:disabled {
-    background: #055;
-    cursor: not-allowed;
+  .tariff-buy-btn:hover {
+    background: #06c;
+    color: white;
   }
-  .tariff-buy-btn:hover:not(:disabled) {
-    background: #00cccc;
+  #statusTable {
+    margin-top: 1rem;
   }
-  /* Форма */
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  input, textarea {
-    width: 100%;
-    background: #111;
-    border: 1px solid #0ff;
-    border-radius: 6px;
-    padding: 0.7rem 1rem;
-    color: #ddd;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-family: inherit;
-    user-select: text;
-  }
-  input::placeholder, textarea::placeholder {
-    color: #666;
-  }
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  /* Профиль */
-  #profile-area {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    cursor: pointer;
-  }
-  #profile-circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #0ff;
-    color: black;
-    font-weight: 900;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
-  #profile-name {
-    font-weight: 700;
-    color: #0ff;
-  }
-  #profile-menu {
-    position: absolute;
-    top: 46px;
-    right: 0;
+  .status-node {
     background: #111;
     border: 1px solid #0ff;
     border-radius: 10px;
+    margin-bottom: 1rem;
     padding: 1rem;
-    display: none;
-    flex-direction: column;
-    gap: 0.6rem;
-    width: 200px;
-    z-index: 1500;
+    box-shadow: 0 0 10px #0ff3;
   }
-  #profile-menu button {
+  .node-header {
+    display: flex;
+    justify-content: space-between;
+    color: #0ff;
+    font-weight: bold;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #0ff;
+    width: 0%;
+    transition: width 1.5s ease;
+  }
+  .hidden {
+    display: none !important;
+  }
+  form input, form textarea {
+    width: 100%;
+    max-width: 400px;
+    margin: 0.5rem auto;
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #111;
+    color: white;
+    font-size: 1rem;
+  }
+  form button {
+    margin-top: 1rem;
     background: #0ff;
     border: none;
-    font-weight: 700;
-    color: black;
-    padding: 0.6rem;
-    border-radius: 6px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
-    user-select: none;
+    color: black;
     transition: background 0.3s ease;
   }
-  #profile-menu button:hover {
-    background: #00cccc;
+  form button:hover {
+    background: #06c;
+    color: white;
   }
-  /* Сообщение */
-  #msg-box {
+  #messageBox {
     position: fixed;
-    top: 1rem;
-    right: 1rem;
-    background: #0ff;
-    color: black;
+    top: 20px; right: 20px;
+    background: #222;
     padding: 1rem 1.5rem;
     border-radius: 10px;
-    font-weight: 700;
-    box-shadow: 0 0 10px #0ff;
+    box-shadow: 0 0 15px #0ff;
     display: none;
+    color: white;
+    font-weight: bold;
     user-select: none;
-    z-index: 9999;
+    z-index: 2000;
   }
-  /* Анимация */
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo" title="Главная" tabindex="0">ExciteMine</div>
+  <div class="logo">ExciteMine</div>
   <nav>
-    <button id="nav-home" title="Главная">Главная</button>
-    <button id="nav-status" title="Статус узлов">
-      Статус узлов
-      <span id="statusProgress" aria-label="Прогресс статуса">
-        <span id="statusProgressInner"></span>
-      </span>
-    </button>
-    <button id="nav-support" title="Техподдержка">Техподдержка</button>
-    <button id="nav-panel" title="Панель управления" style="display:none;">Панель управления</button>
-    <button id="nav-login" title="Войти">Вход</button>
-    <button id="nav-register" title="Регистрация">Регистрация</button>
+    <button id="nav-home">Главная</button>
+    <button id="nav-status">Статус узлов</button>
+    <button id="nav-support">Техподдержка</button>
+    <button id="nav-panel">Панель управления</button>
+    <button id="nav-login">Вход</button>
+    <button id="nav-register">Регистрация</button>
   </nav>
-
-  <div id="profile-area" style="display:none;" tabindex="0" aria-label="Меню пользователя">
-    <div id="profile-circle" title="Меню профиля">U</div>
-    <div id="profile-name"></div>
-    <div id="profile-menu" role="menu" aria-hidden="true">
-      <button id="btn-profile" role="menuitem">Профиль</button>
-      <button id="btn-balance" role="menuitem">Баланс</button>
-      <button id="btn-change-pass" role="menuitem">Изменить пароль</button>
-      <button id="btn-logout" role="menuitem">Выйти</button>
+  <div id="profile" class="hidden" title="Профиль">
+    <div id="avatarCircle">U</div>
+    <div id="profileMenu" class="hidden">
+      <p id="profileName">👤 Никнейм</p>
+      <button onclick="viewProfile()">Профиль</button>
+      <button onclick="viewBalance()">Баланс аккаунта</button>
+      <button onclick="changePassword()">Изменить пароль</button>
+      <button onclick="logout()">Выйти</button>
     </div>
   </div>
 </header>
 
 <main>
-  <!-- Главная -->
-  <section id="section-home" class="active">
-    <h1>Добро пожаловать в ExciteMine</h1>
-    <p>Мощная инфраструктура Ryzen, DDoS-защита StormWall и техподдержка 24/7</p>
+  <!-- Главная страница -->
+  <section id="home" class="section">
+    <h1>ExciteMine</h1>
+    <p class="subtitle">Открой для себя новую эру хостинга и VDS — мощная инфраструктура Ryzen, защита DDoS и поддержка 24/7.</p>
+    <div class="cta-buttons">
+      <button onclick="showLogin()">Начать</button>
+      <button onclick="scrollToSection('tariffs')">Посмотреть тарифы</button>
+    </div>
 
-    <!-- Почему выбирают нас (в главной) -->
-    <article style="margin-top:2rem; max-width: 800px; margin-left:auto; margin-right:auto; text-align:left; color:#ccc;">
+    <div id="stats" class="stats">
+      <div><h2 id="usersCount">20321</h2><p>Пользователей</p></div>
+      <div><h2 id="serversCount">14861</h2><p>Серверов создано</p></div>
+      <div><h2 id="daysCount">597</h2><p>Дней успешной работы</p></div>
+    </div>
+
+    <div id="why-us" class="section">
       <h2>Почему выбирают ExciteMine</h2>
-      <p><b>Лучшее оборудование</b>: только компоненты от AMD, Samsung, Gigabyte и других топовых брендов.</p>
-      <p><b>Защита от DDoS-атак</b>: надежная защита StormWall до нескольких Тбит/с.</p>
-      <p><b>Поддержка 24/7</b>: всегда готовы помочь решить любые проблемы.</p>
-      <p><b>Минимальный пинг</b>: узлы в России и Германии, средний пинг ~25 мс для игроков из России.</p>
-      <p><b>Низкие цены</b>: лучшее качество при выгодной цене.</p>
-      <p><b>Гарантия работы</b>: uptime 99.9% благодаря лучшим датацентрам.</p>
-
       <table>
         <thead>
-          <tr>
-            <th>Характеристика</th>
-            <th>Россия, Москва</th>
-            <th>Германия, Франкфурт</th>
-          </tr>
+          <tr><th>Преимущество</th><th>Описание</th></tr>
         </thead>
         <tbody>
-          <tr><td>Процессор</td><td>AMD Ryzen 9 7950X (-20%)</td><td>Intel Xeon E5-2690v4</td></tr>
-          <tr><td>Оперативная память</td><td>64 ГБ DDR5</td><td>128 ГБ DDR4</td></tr>
-          <tr><td>SSD</td><td>4 ТБ NVMe SSD</td><td>2 ТБ SATA SSD</td></tr>
-          <tr><td>Ping</td><td>~25 мс</td><td>~40 мс</td></tr>
-          <tr><td>DDoS-защита</td><td>StormWall</td><td>StormWall</td></tr>
+          <tr><td>Лучшее оборудование</td><td>Комплектующие только от проверенных брендов: AMD, AData, Gigabyte и другие.</td></tr>
+          <tr><td>Защита от DDoS-атак</td><td>Установлена StormWall, способная отбивать атаки до нескольких Тбит/с.</td></tr>
+          <tr><td>Поддержка 24/7</td><td>Всегда готовы помочь решить любые проблемы, связанные с сервером.</td></tr>
+          <tr><td>Минимальный пинг</td><td>Узлы в России и Франции, средний пинг ~30 мс для игроков из России.</td></tr>
+          <tr><td>Низкие цены</td><td>Лучшее качество по самой низкой цене среди конкурентов.</td></tr>
+          <tr><td>Гарантия работы</td><td>Узлы в лучших датацентрах, uptime не менее 99.9%.</td></tr>
         </tbody>
       </table>
-    </article>
+    </div>
 
-    <!-- Тарифы (в главной) -->
-    <article style="margin-top:3rem; max-width: 900px; margin-left:auto; margin-right:auto;">
-      <h2>Тарифы ExciteMine</h2>
-      <div id="tariffs-list" style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center;"></div>
-    </article>
+    <div id="tariff-buttons">
+      <button onclick="showTariffs('hosting')">Хостинг</button>
+      <button onclick="showTariffs('vds')">VDS</button>
+      <button onclick="showTariffs('web')">Web Hosting</button>
+    </div>
+    <div id="tariffs"></div>
   </section>
 
   <!-- Статус узлов -->
-  <section id="section-status">
+  <section id="status" class="section hidden">
     <h2>Статус узлов</h2>
-    <p>Узел Москва: <b style="color:#0ff;">Онлайн</b></p>
-    <p>Узел Германия: <b style="color:#0ff;">Онлайн</b></p>
-    <p>Uptime: 99.9%</p>
+    <div id="statusTable"></div>
   </section>
 
   <!-- Техподдержка -->
-  <section id="section-support">
+  <section id="support" class="section hidden">
     <h2>Техподдержка</h2>
-    <form id="support-form">
-      <input type="text" id="support-nick" placeholder="Ваш никнейм" required />
-      <input type="email" id="support-email" placeholder="Email" required />
-      <textarea id="support-message" placeholder="Сообщение" required></textarea>
-      <button type="submit" class="btn-primary">Отправить тикет</button>
+    <form id="supportForm">
+      <input type="text" placeholder="Ваш никнейм" id="supportName" required />
+      <input type="email" placeholder="Email" id="supportEmail" required />
+      <textarea placeholder="Сообщение" id="supportMessage" required></textarea>
+      <button type="submit">Отправить тикет</button>
     </form>
+    <div id="ticketStatus"></div>
   </section>
 
   <!-- Панель управления -->
-  <section id="section-panel" style="display:none;">
+  <section id="panel" class="section hidden">
     <h2>Панель управления</h2>
-    <p>Добро пожаловать в панель управления ExciteMine. Здесь будет информация и управление вашими серверами.</p>
+    <p>Здесь будет ваша панель управления (пример)</p>
   </section>
 
   <!-- Вход -->
-  <section id="section-login" style="display:none;">
-    <h2>Вход в аккаунт</h2>
-    <form id="login-form" style="max-width: 400px; margin:auto;">
-      <input type="text" id="login-nick" placeholder="Никнейм" required />
-      <input type="password" id="login-pass" placeholder="Пароль" required />
-      <button type="submit" class="btn-primary">Войти</button>
+  <section id="login" class="section hidden">
+    <h2>Вход</h2>
+    <form id="loginForm">
+      <input type="text" placeholder="Никнейм" id="loginNick" required />
+      <input type="password" placeholder="Пароль" id="loginPass" required />
+      <button type="submit">Войти</button>
     </form>
   </section>
 
   <!-- Регистрация -->
-  <section id="section-register" style="display:none;">
-    <h2>Регистрация аккаунта</h2>
-    <form id="register-form" style="max-width: 400px; margin:auto;">
-      <input type="text" id="reg-nick" placeholder="Никнейм" required />
-      <input type="password" id="reg-pass" placeholder="Пароль" required />
-      <button type="submit" class="btn-primary">Зарегистрироваться</button>
-    </form>
-  </section>
-
-  <!-- Профиль -->
-  <section id="section-profile" style="display:none;">
-    <h2>Профиль пользователя</h2>
-    <p><b>Никнейм:</b> <span id="profile-nick"></span></p>
-    <p><b>Баланс:</b> <span id="profile-balance"></span> ₽</p>
-  </section>
-
-  <!-- Баланс -->
-  <section id="section-balance" style="display:none;">
-    <h2>Пополнение баланса</h2>
-    <form id="balance-form" style="max-width: 400px; margin:auto;">
-      <input type="number" id="balance-amount" placeholder="Сумма для пополнения (₽)" min="10" required />
-      <button type="submit" class="btn-primary">Пополнить</button>
-    </form>
-  </section>
-
-  <!-- Изменение пароля -->
-  <section id="section-change-pass" style="display:none;">
-    <h2>Изменение пароля</h2>
-    <form id="change-pass-form" style="max-width: 400px; margin:auto;">
-      <input type="password" id="old-pass" placeholder="Старый пароль" required />
-      <input type="password" id="new-pass" placeholder="Новый пароль" required />
-      <button type="submit" class="btn-primary">Изменить пароль</button>
+  <section id="register" class="section hidden">
+    <h2>Регистрация</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="Никнейм" id="regNick" required />
+      <input type="email" placeholder="Email" id="regEmail" required />
+      <input type="password" placeholder="Пароль" id="regPass" required />
+      <input type="password" placeholder="Повторите пароль" id="regPassConfirm" required />
+      <button type="submit">Зарегистрироваться</button>
     </form>
   </section>
 </main>
 
-<div id="msg-box" role="alert" aria-live="assertive"></div>
+<footer>
+  <p>© 2025 ExciteMine LTD — Все права защищены.</p>
+</footer>
+
+<div id="messageBox"></div>
 
 <script>
-  // Данные тестовых тарифов
-  const tariffs = [
-    {
-      id: 'basic',
-      title: 'Базовый',
-      type: 'VDS',
-      priceOld: 199,
-      priceNew: 149,
-      cpu: '1 ядро AMD Ryzen 7',
-      ram: '2 ГБ DDR4',
-      disk: '30 ГБ SSD NVMe',
-      ddos: 'StormWall',
-      buyText: 'Купить',
-    },
-    {
-      id: 'gaming',
-      title: 'Игровой',
-      type: 'VDS',
-      priceOld: 399,
-      priceNew: 299,
-      cpu: '4 ядра AMD Ryzen 9',
-      ram: '8 ГБ DDR5',
-      disk: '100 ГБ SSD NVMe',
-      ddos: 'StormWall',
-      buyText: 'Купить',
-    },
-    {
-      id: 'pro',
-      title: 'Профессиональный',
-      type: 'VDS',
-      priceOld: 699,
-      priceNew: 599,
-      cpu: '8 ядер AMD Ryzen Threadripper',
-      ram: '16 ГБ DDR5',
-      disk: '200 ГБ SSD NVMe',
-      ddos: 'StormWall',
-      buyText: 'Купить',
-    }
-  ];
-
-  // Элементы
-  const sections = {
-    home: document.getElementById('section-home'),
-    status: document.getElementById('section-status'),
-    support: document.getElementById('section-support'),
-    panel: document.getElementById('section-panel'),
-    login: document.getElementById('section-login'),
-    register: document.getElementById('section-register'),
-    profile: document.getElementById('section-profile'),
-    balance: document.getElementById('section-balance'),
-    changePass: document.getElementById('section-change-pass'),
-  };
-
-  const nav = {
-    home: document.getElementById('nav-home'),
-    status: document.getElementById('nav-status'),
-    support: document.getElementById('nav-support'),
-    panel: document.getElementById('nav-panel'),
-    login: document.getElementById('nav-login'),
-    register: document.getElementById('nav-register'),
-  };
-
-  const profileArea = document.getElementById('profile-area');
-  const profileCircle = document.getElementById('profile-circle');
-  const profileName = document.getElementById('profile-name');
-  const profileMenu = document.getElementById('profile-menu');
-
-  const msgBox = document.getElementById('msg-box');
-
-  // Для отображения прогресса статуса
-  const statusProgressInner = document.getElementById('statusProgressInner');
-
-  // Текущий пользователь (в localStorage)
-  let currentUser = null;
-
-  // Загрузка пользователей из localStorage
-  function loadUsers() {
-    let usersStr = localStorage.getItem('excitemine-users');
-    return usersStr ? JSON.parse(usersStr) : {};
+  const sections = ['home', 'status', 'support', 'panel', 'login', 'register'];
+  function showSection(id) {
+    sections.forEach(sec => {
+      document.getElementById(sec).classList.toggle('hidden', sec !== id);
+    });
+    // Скрыть профиль и меню при переключении страниц
+    closeProfileMenu();
   }
-
-  // Сохранение пользователей
-  function saveUsers(users) {
-    localStorage.setItem('excitemine-users', JSON.stringify(users));
-  }
-
-  // Показать сообщение
-  function showMessage(text, duration=3000) {
-    msgBox.textContent = text;
-    msgBox.style.display = 'block';
-    setTimeout(() => {
-      msgBox.style.display = 'none';
-    }, duration);
-  }
-
-  // Показать выбранный раздел, скрыть остальные
-  function showSection(name) {
-    Object.values(sections).forEach(s => s.classList.remove('active'));
-    if(sections[name]) {
-      sections[name].classList.add('active');
-    }
-  }
-
-  // Обновить навигацию и профиль в зависимости от входа
-  function updateUI() {
-    if(currentUser) {
-      nav.login.style.display = 'none';
-      nav.register.style.display = 'none';
-      nav.panel.style.display = 'inline-block';
-      profileArea.style.display = 'flex';
-      profileName.textContent = currentUser.nick;
-      profileCircle.textContent = currentUser.nick.charAt(0).toUpperCase();
-
-      // Скрыть nav panel если нет (можно добавить проверку ролей)
-    } else {
-      nav.login.style.display = 'inline-block';
-      nav.register.style.display = 'inline-block';
-      nav.panel.style.display = 'none';
-      profileArea.style.display = 'none';
-      profileMenu.style.display = 'none';
-    }
-  }
-
-  // Регистрация нового пользователя
-  document.getElementById('register-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const nick = document.getElementById('reg-nick').value.trim();
-    const pass = document.getElementById('reg-pass').value;
-
-    if(!nick || !pass) {
-      showMessage('Заполните все поля регистрации');
-      return;
-    }
-
-    let users = loadUsers();
-    if(users[nick]) {
-      showMessage('Пользователь с таким ником уже существует');
-      return;
-    }
-
-    users[nick] = {nick, pass, balance: 0};
-    saveUsers(users);
-    showMessage('Регистрация успешна! Войдите в аккаунт');
-    showSection('login');
-  });
-
-  // Вход пользователя
-  document.getElementById('login-form').addEventListener('submit', e => {
-    e.preventDefault();
-    const nick = document.getElementById('login-nick').value.trim();
-    const pass = document.getElementById('login-pass').value;
-
-    let users = loadUsers();
-    if(!users[nick] || users[nick].pass !== pass) {
-      showMessage('Неверный ник или пароль');
-      return;
-    }
-
-    currentUser = users[nick];
-    localStorage.setItem('excitemine-currentUser', nick);
-    updateUI();
-    showSection('home');
-    showMessage(`Добро пожаловать, ${currentUser.nick}!`);
-  });
-
-  // Выход
-  document.getElementById('btn-logout').addEventListener('click', () => {
-    currentUser = null;
-    localStorage.removeItem('excitemine-currentUser');
-    updateUI();
-    showSection('home');
-    showMessage('Вы вышли из аккаунта');
-  });
-
-  // Клик по профилю — открыть меню
-  profileArea.addEventListener('click', () => {
-    profileMenu.style.display = profileMenu.style.display === 'flex' ? 'none' : 'flex';
-  });
-
-  // Меню профиля кнопки
-  document.getElementById('btn-profile').addEventListener('click', () => {
-    profileMenu.style.display = 'none';
-    showProfile();
-  });
-  document.getElementById('btn-balance').addEventListener('click', () => {
-    profileMenu.style.display = 'none';
-    showBalance();
-  });
-  document.getElementById('btn-change-pass').addEventListener('click', () => {
-    profileMenu.style.display = 'none';
-    showChangePass();
-  });
-
-  // Показать профиль
-  function showProfile() {
-    if(!currentUser) return;
-    showSection('profile');
-    document.getElementById('profile-nick').textContent = currentUser.nick;
-    document.getElementById('profile-balance').textContent = currentUser.balance.toFixed(2);
-  }
-
-  // Показать баланс
-  function showBalance() {
-    if(!currentUser) return;
-    showSection('balance');
-    document.getElementById('balance-amount').value = '';
-  }
-
-  // Показать изменение пароля
-  function showChangePass() {
-    if(!currentUser) return;
-    showSection('changePass');
-    document.getElementById('old-pass').value = '';
-    document.getElementById('new-pass').value = '';
-  }
-
-  // Пополнение баланса (имитация)
-  document.getElementById('balance-form').addEventListener('submit', e => {
-    e.preventDefault();
-    if(!currentUser) return;
-
-    const amount = parseFloat(document.getElementById('balance-amount').value);
-    if(isNaN(amount) || amount < 10) {
-      showMessage('Минимальная сумма пополнения 10 ₽');
-      return;
-    }
-
-    // Обновляем баланс в users
-    let users = loadUsers();
-    users[currentUser.nick].balance += amount;
-    saveUsers(users);
-    currentUser.balance = users[currentUser.nick].balance;
-    localStorage.setItem('excitemine-currentUser', currentUser.nick);
-    showMessage(`Баланс пополнен на ${amount} ₽`);
-    showProfile();
-  });
-
-  // Изменение пароля
-  document.getElementById('change-pass-form').addEventListener('submit', e => {
-    e.preventDefault();
-    if(!currentUser) return;
-
-    const oldPass = document.getElementById('old-pass').value;
-    const newPass = document.getElementById('new-pass').value;
-
-    if(oldPass !== currentUser.pass) {
-      showMessage('Старый пароль введён неверно');
-      return;
-    }
-    if(newPass.length < 4) {
-      showMessage('Новый пароль должен быть минимум 4 символа');
-      return;
-    }
-
-    let users = loadUsers();
-    users[currentUser.nick].pass = newPass;
-    saveUsers(users);
-    currentUser.pass = newPass;
-    showMessage('Пароль успешно изменён');
-    showSection('profile');
-  });
 
   // Навигация
-  nav.home.addEventListener('click', () => showSection('home'));
-  nav.status.addEventListener('click', () => showSection('status'));
-  nav.support.addEventListener('click', () => showSection('support'));
-  nav.panel.addEventListener('click', () => showSection('panel'));
-  nav.login.addEventListener('click', () => showSection('login'));
-  nav.register.addEventListener('click', () => showSection('register'));
+  document.getElementById('nav-home').onclick = () => showSection('home');
+  document.getElementById('nav-status').onclick = () => showSection('status');
+  document.getElementById('nav-support').onclick = () => showSection('support');
+  document.getElementById('nav-panel').onclick = () => {
+    if (isLoggedIn()) {
+      showSection('panel');
+    } else {
+      showMessage('Для доступа к панели управления нужно войти.');
+      showSection('login');
+    }
+  };
+  document.getElementById('nav-login').onclick = () => {
+    showSection('login');
+    hideProfile();
+  };
+  document.getElementById('nav-register').onclick = () => {
+    showSection('register');
+    hideProfile();
+  };
 
-  // Логика вывода тарифов в главной
-  const tariffsList = document.getElementById('tariffs-list');
-  function renderTariffs() {
-    tariffsList.innerHTML = '';
-    tariffs.forEach(t => {
+  // Профиль
+  const profileDiv = document.getElementById('profile');
+  const avatarCircle = document.getElementById('avatarCircle');
+  const profileMenu = document.getElementById('profileMenu');
+
+  avatarCircle.onclick = () => {
+    if (profileMenu.classList.contains('hidden')) {
+      profileMenu.classList.remove('hidden');
+    } else {
+      profileMenu.classList.add('hidden');
+    }
+  };
+
+  document.addEventListener('click', (e) => {
+    if (!profileDiv.contains(e.target)) {
+      closeProfileMenu();
+    }
+  });
+
+  function closeProfileMenu() {
+    profileMenu.classList.add('hidden');
+  }
+
+  // Локальное хранилище для демо-логина
+  function isLoggedIn() {
+    return localStorage.getItem('excitemineUser') !== null;
+  }
+
+  function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('excitemineUser'));
+  }
+
+  function showProfile() {
+    const user = getCurrentUser();
+    if (user) {
+      document.getElementById('profileName').textContent = `👤 ${user.nick}`;
+      avatarCircle.textContent = user.nick[0].toUpperCase();
+      profileDiv.classList.remove('hidden');
+      document.getElementById('nav-login').classList.add('hidden');
+      document.getElementById('nav-register').classList.add('hidden');
+    }
+  }
+
+  function hideProfile() {
+    profileDiv.classList.add('hidden');
+    document.getElementById('nav-login').classList.remove('hidden');
+    document.getElementById('nav-register').classList.remove('hidden');
+  }
+
+  // Вход
+  document.getElementById('loginForm').onsubmit = e => {
+    e.preventDefault();
+    const nick = document.getElementById('loginNick').value.trim();
+    const pass = document.getElementById('loginPass').value;
+    if (nick === '' || pass === '') {
+      showMessage('Введите ник и пароль');
+      return;
+    }
+    // Демоверсия: просто сохраним в localStorage
+    localStorage.setItem('excitemineUser', JSON.stringify({ nick }));
+    showMessage(`Добро пожаловать, ${nick}!`);
+    showProfile();
+    showSection('home');
+    document.getElementById('loginForm').reset();
+  };
+
+  // Регистрация
+  document.getElementById('registerForm').onsubmit = e => {
+    e.preventDefault();
+    const nick = document.getElementById('regNick').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pass = document.getElementById('regPass').value;
+    const passConfirm = document.getElementById('regPassConfirm').value;
+    if (!nick || !email || !pass || !passConfirm) {
+      showMessage('Заполните все поля');
+      return;
+    }
+    if (pass !== passConfirm) {
+      showMessage('Пароли не совпадают');
+      return;
+    }
+    // Просто сохраняем в localStorage для демо
+    localStorage.setItem('excitemineUser', JSON.stringify({ nick, email }));
+    showMessage(`Пользователь ${nick} зарегистрирован!`);
+    showProfile();
+    showSection('home');
+    document.getElementById('registerForm').reset();
+  };
+
+  // Выход
+  function logout() {
+    localStorage.removeItem('excitemineUser');
+    hideProfile();
+    showMessage('Вы вышли из аккаунта');
+    showSection('home');
+  }
+
+  // Показать форму входа из кнопки Главная
+  function showLogin() {
+    showSection('login');
+    hideProfile();
+  }
+
+  // Заглушки для кнопок профиля
+  function viewProfile() {
+    alert('Здесь будет профиль пользователя');
+  }
+  function viewBalance() {
+    alert('Здесь будет баланс аккаунта');
+  }
+  function changePassword() {
+    alert('Здесь будет смена пароля');
+  }
+
+  // Сообщения
+  const messageBox = document.getElementById('messageBox');
+  function showMessage(text) {
+    messageBox.textContent = text;
+    messageBox.style.display = 'block';
+    setTimeout(() => { messageBox.style.display = 'none'; }, 3500);
+  }
+
+  // Статус узлов — данные и анимация прогресса
+  const nodes = [
+    { name: "Node #1 (Moscow)", cpu: 35, ram: 50, disk: 20, status: "Online" },
+    { name: "Node #2 (France)", cpu: 40, ram: 60, disk: 10, status: "Online" },
+    { name: "Node #3 (New York)", cpu: 55, ram: 70, disk: 30, status: "Online" },
+    { name: "Node #4 (Germany)", cpu: 15, ram: 30, disk: 5, status: "Online" },
+    { name: "Node #5 (Russia)", cpu: 80, ram: 90, disk: 60, status: "Online" }
+  ];
+
+  function renderStatus() {
+    const statusTable = document.getElementById('statusTable');
+    statusTable.innerHTML = '';
+    nodes.forEach(node => {
+      const nodeDiv = document.createElement('div');
+      nodeDiv.className = 'status-node';
+
+      nodeDiv.innerHTML = `
+        <div class="node-header">${node.name} — ${node.status}</div>
+        <div>CPU: ${node.cpu}% 
+          <div class="progress-bar"><div class="progress-bar-fill" style="width:0%"></div></div>
+        </div>
+        <div>RAM: ${node.ram}% 
+          <div class="progress-bar"><div class="progress-bar-fill" style="width:0%"></div></div>
+        </div>
+        <div>Disk: ${node.disk}% 
+          <div class="progress-bar"><div class="progress-bar-fill" style="width:0%"></div></div>
+        </div>
+      `;
+
+      statusTable.appendChild(nodeDiv);
+
+      // Анимация прогрессов
+      const fills = nodeDiv.querySelectorAll('.progress-bar-fill');
+      fills[0].style.width = node.cpu + '%';
+      fills[1].style.width = node.ram + '%';
+      fills[2].style.width = node.disk + '%';
+    });
+  }
+
+  // Показать тарифы
+  const tariffsData = {
+    hosting: [
+      {name: 'Хостинг 1', cpu: 'Ryzen 5', ram: '8GB', disk: '200GB SSD', price: '350 ₽/мес'},
+      {name: 'Хостинг 2', cpu: 'Ryzen 7', ram: '16GB', disk: '400GB SSD', price: '650 ₽/мес'},
+      {name: 'Хостинг 3', cpu: 'Ryzen 9', ram: '32GB', disk: '1TB SSD', price: '1200 ₽/мес'},
+    ],
+    vds: [
+      {name: 'VDS 1', cpu: 'Ryzen 7', ram: '16GB', disk: '250GB NVMe', price: '900 ₽/мес'},
+      {name: 'VDS 2', cpu: 'Ryzen 9', ram: '32GB', disk: '500GB NVMe', price: '1500 ₽/мес'},
+      {name: 'VDS 3', cpu: 'EPYC', ram: '64GB', disk: '1TB NVMe', price: '2700 ₽/мес'},
+    ],
+    web: [
+      {name: 'Web Starter', cpu: 'Shared', ram: '2GB', disk: '50GB SSD', price: '150 ₽/мес'},
+      {name: 'Web Pro', cpu: 'Shared', ram: '8GB', disk: '150GB SSD', price: '400 ₽/мес'},
+      {name: 'Web Ultra', cpu: 'Shared', ram: '16GB', disk: '300GB SSD', price: '700 ₽/мес'},
+    ],
+  };
+
+  function showTariffs(type) {
+    const container = document.getElementById('tariffs');
+    container.innerHTML = '';
+    const list = tariffsData[type];
+    list.forEach(tariff => {
       const card = document.createElement('div');
       card.className = 'tariff-card';
       card.innerHTML = `
-        <div class="tariff-title">${t.title}</div>
-        <div class="tariff-type">${t.type}</div>
-        <div class="tariff-prices">
-          <span class="tariff-price-old">${t.priceOld} ₽</span>
-          <span class="tariff-price">${t.priceNew} ₽/мес</span>
-        </div>
-        <div class="tariff-spec">CPU: ${t.cpu}</div>
-        <div class="tariff-spec">RAM: ${t.ram}</div>
-        <div class="tariff-spec">Диск: ${t.disk}</div>
-        <div class="tariff-spec">DDoS: ${t.ddos}</div>
-        <button class="tariff-buy-btn" ${currentUser && currentUser.balance >= t.priceNew ? '' : 'disabled'} data-id="${t.id}">${t.buyText}</button>
+        <h3>${tariff.name}</h3>
+        <p class="tariff-specs">CPU: ${tariff.cpu}</p>
+        <p class="tariff-specs">RAM: ${tariff.ram}</p>
+        <p class="tariff-specs">Диск: ${tariff.disk}</p>
+        <p class="tariff-price">${tariff.price}</p>
+        <button class="tariff-buy-btn">Купить</button>
       `;
-      tariffsList.appendChild(card);
+      container.appendChild(card);
     });
-
-    // Обработчик кнопок покупки
-    document.querySelectorAll('.tariff-buy-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if(!currentUser) {
-          showMessage('Пожалуйста, войдите чтобы купить тариф');
-          showSection('login');
-          return;
-        }
-        const id = btn.dataset.id;
-        const tariff = tariffs.find(x => x.id === id);
-        if(currentUser.balance < tariff.priceNew) {
-          showMessage('Недостаточно средств на балансе');
-          return;
-        }
-        // Снимаем деньги
-        let users = loadUsers();
-        users[currentUser.nick].balance -= tariff.priceNew;
-        saveUsers(users);
-        currentUser.balance = users[currentUser.nick].balance;
-        showMessage(`Вы успешно приобрели тариф "${tariff.title}" за ${tariff.priceNew} ₽`);
-        showProfile();
-        renderTariffs();
-      });
-    });
+    scrollToSection('tariffs');
   }
 
-  // При загрузке
-  window.addEventListener('load', () => {
-    // Прогресс статуса
-    let progress = 0;
-    function increaseProgress() {
-      progress += 20;
-      if(progress > 100) progress = 100;
-      statusProgressInner.style.width = progress + '%';
+  // Прокрутка до раздела
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-    increaseProgress();
-    setInterval(increaseProgress, 1500);
+  }
 
-    // Загрузка текущего пользователя
-    const nick = localStorage.getItem('excitemine-currentUser');
-    if(nick) {
-      let users = loadUsers();
-      if(users[nick]) currentUser = users[nick];
+  // Техподдержка (форма)
+  document.getElementById('supportForm').onsubmit = e => {
+    e.preventDefault();
+    const nick = document.getElementById('supportName').value.trim();
+    const email = document.getElementById('supportEmail').value.trim();
+    const msg = document.getElementById('supportMessage').value.trim();
+    if (!nick || !email || !msg) {
+      showMessage('Заполните все поля поддержки');
+      return;
     }
-    updateUI();
-    renderTariffs();
-  });
+    // Заглушка: отправка не реализована
+    document.getElementById('ticketStatus').textContent = 'Тикет успешно отправлен! Спасибо за обращение.';
+    e.target.reset();
+  };
 
-  // Клик по логотипу - главная
-  document.querySelector('.logo').addEventListener('click', () => showSection('home'));
-  document.querySelector('.logo').addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      showSection('home');
+  // Инициализация при загрузке страницы
+  window.onload = () => {
+    if (isLoggedIn()) {
+      showProfile();
+    } else {
+      hideProfile();
     }
-  });
-
+    showSection('home');
+    renderStatus();
+  };
 </script>
-</body>
-</html>
 
 </body>
 </html>
