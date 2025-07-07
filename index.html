@@ -1,124 +1,114 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Битва Разумов</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      text-align: center;
-    }
-
-    .game-container {
-      max-width: 600px;
-      margin: 100px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    #show-answer-btn {
-      background-color: #f44336;
-    }
-
-    #show-answer-btn:hover {
-      background-color: #e0352d;
-    }
-
-    #result-container {
-      margin-top: 20px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExciteMine — Хостинг & VDS</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <div class="game-container">
-    <h1>Битва Разумов</h1>
-    
-    <!-- Вопрос -->
-    <div id="question-container">
-      <p id="question-text">Какой блок используется для создания портала в Нижний мир?</p>
+  <header>
+    <div class="logo">ExciteMine</div>
+    <nav>
+      <button id="nav-home">Главная</button>
+      <button id="nav-status">Статус сервера</button>
+      <button id="nav-support">Техподдержка</button>
+      <button id="nav-login">Вход</button>
+      <button id="nav-register">Регистрация</button>
+    </nav>
+    <div id="profile" class="hidden">
+      <div class="avatar" id="avatarCircle">U</div>
+      <div id="profileMenu" class="hidden">
+        <p id="profileName">👤 Никнейм</p>
+        <button onclick="viewProfile()">Профиль</button>
+        <button onclick="viewBalance()">Баланс аккаунта</button>
+        <button onclick="changePassword()">Изменить пароль</button>
+        <button onclick="logout()">Выйти</button>
+      </div>
     </div>
+  </header>
 
-    <!-- Варианты ответов -->
-    <div id="answers-container">
-      <button class="answer-btn" onclick="checkAnswer('a')">Земля</button>
-      <button class="answer-btn" onclick="checkAnswer('b')">Обсидиан</button>
-      <button class="answer-btn" onclick="checkAnswer('c')">Дерево</button>
-      <button class="answer-btn" onclick="checkAnswer('d')">Песок</button>
-    </div>
+  <main>
+    <section id="home" class="section">
+      <h1>ExciteMine</h1>
+      <p class="subtitle">Открой для себя новую эру хостинга и VDS — мощная инфраструктура Ryzen, защита DDoS и поддержка 24/7.</p>
+      <div class="cta-buttons">
+        <button onclick="showLogin()">Начать</button>
+        <button onclick="scrollToTariffs()">Посмотреть тарифы</button>
+      </div>
 
-    <!-- Кнопка "Показать ответ" -->
-    <div id="show-answer-container">
-      <button onclick="showAnswer()" id="show-answer-btn">Показать ответ</button>
-    </div>
+      <div id="stats" class="stats">
+        <div><h2 id="usersCount">0</h2><p>Пользователей</p></div>
+        <div><h2 id="serversCount">0</h2><p>Серверов создано</p></div>
+        <div><h2 id="daysCount">0</h2><p>Дней успешной работы</p></div>
+      </div>
 
-    <!-- Ответ и баллы -->
-    <div id="result-container" style="display:none;">
-      <p id="answer-text">Правильный ответ: Обсидиан</p>
-      <p id="score">Баллы: 0</p>
-    </div>
-  </div>
+      <div id="why-us">
+        <div class="card">
+          <h3>Современные сервера</h3>
+          <p>Только мощные Ryzen и NVMe</p>
+        </div>
+        <div class="card">
+          <h3>Безопасность</h3>
+          <p>DDoS-защита на всех узлах</p>
+        </div>
+        <div class="card">
+          <h3>Техподдержка 24/7</h3>
+          <p>Всегда готовы помочь</p>
+        </div>
+      </div>
 
-  <script>
-    let score = 0;  // Начальный счет
+      <div id="tariff-buttons">
+        <button onclick="showTariffs('hosting')">Хостинг</button>
+        <button onclick="showTariffs('vds')">VDS</button>
+        <button onclick="showTariffs('web')">Web Hosting</button>
+      </div>
+      <div id="tariffs"></div>
+    </section>
 
-    // Функция для проверки ответа
-    function checkAnswer(selected) {
-      const correctAnswer = 'b';  // Правильный ответ — "Обсидиан"
-      const buttons = document.querySelectorAll('.answer-btn');
-      
-      // Отключаем все кнопки после выбора
-      buttons.forEach(button => button.disabled = true);
-      
-      if (selected === correctAnswer) {
-        score += 1;  // Увеличиваем счет за правильный ответ
-        document.getElementById('answer-text').textContent = "Правильный ответ: Обсидиан";
-      } else {
-        document.getElementById('answer-text').textContent = "Неверный ответ. Правильный ответ: Обсидиан";
-      }
+    <section id="status" class="section hidden">
+      <h2>Статус серверов</h2>
+      <div id="statusTable"></div>
+    </section>
 
-      // Показываем результат
-      document.getElementById('result-container').style.display = "block";
-      document.getElementById('score').textContent = `Баллы: ${score}`;
-    }
+    <section id="support" class="section hidden">
+      <h2>Техподдержка</h2>
+      <form id="supportForm">
+        <input type="text" placeholder="Ваш никнейм" id="supportName" required />
+        <input type="email" placeholder="Email" id="supportEmail" required />
+        <textarea placeholder="Сообщение" id="supportMessage" required></textarea>
+        <button type="submit">Отправить тикет</button>
+      </form>
+      <div id="ticketStatus"></div>
+    </section>
 
-    // Функция для отображения правильного ответа
-    function showAnswer() {
-      document.getElementById('answer-text').textContent = "Правильный ответ: Обсидиан";
-      document.getElementById('result-container').style.display = "block";
-    }
-  </script>
+    <section id="login" class="section hidden">
+      <h2>Вход</h2>
+      <form id="loginForm">
+        <input type="text" placeholder="Никнейм" id="loginNick" required />
+        <input type="password" placeholder="Пароль" id="loginPass" required />
+        <button type="submit">Войти</button>
+      </form>
+    </section>
 
+    <section id="register" class="section hidden">
+      <h2>Регистрация</h2>
+      <form id="registerForm">
+        <input type="text" placeholder="Никнейм" id="regNick" required />
+        <input type="email" placeholder="Email" id="regEmail" required />
+        <input type="password" placeholder="Пароль" id="regPass" required />
+        <input type="password" placeholder="Повторите пароль" id="regPassConfirm" required />
+        <button type="submit">Зарегистрироваться</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 ExciteMine LTD — Все права защищены.</p>
+  </footer>
+
+  <div id="messageBox"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
