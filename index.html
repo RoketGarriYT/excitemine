@@ -305,22 +305,6 @@
     transition: width 1s ease-in-out;
   }
 
-  /* Техподдержка текст */
-  #supportText {
-    max-width: 800px;
-    margin: 1rem auto;
-    color: #ccc;
-    line-height: 1.5;
-  }
-
-  /* Панель управления - заглушка */
-  #controlPanel {
-    color: #0ff;
-    max-width: 700px;
-    margin: 2rem auto;
-    text-align: center;
-  }
-
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -421,7 +405,17 @@
           <td>Intel Xeon E5-2690v4</td>
         </tr>
         <tr>
-          <td>Пинг</td>
+          <td>Оперативная память</td>
+          <td>64 ГБ DDR5</td>
+          <td>128 ГБ DDR4</td>
+        </tr>
+        <tr>
+          <td>SSD</td>
+          <td>4 ТБ NVMe SSD</td>
+          <td>2 ТБ SATA SSD</td>
+        </tr>
+        <tr>
+          <td>Ping</td>
           <td>~25 мс</td>
           <td>~40 мс</td>
         </tr>
@@ -456,6 +450,11 @@
     </form>
   </section>
 
+  <section id="controlPanel" class="section hidden">
+    <h2>Панель управления</h2>
+    <p>Здесь будет ваша панель управления сервером.</p>
+  </section>
+
   <section id="login" class="section hidden">
     <h2>Вход</h2>
     <form id="loginForm">
@@ -475,12 +474,6 @@
       <button type="submit">Зарегистрироваться</button>
     </form>
   </section>
-
-  <section id="controlPanel" class="section hidden">
-    <h2>Панель управления</h2>
-    <p>Здесь будет ваша панель управления сервером.</p>
-  </section>
-
 </main>
 
 <footer>
@@ -490,24 +483,22 @@
 <div id="messageBox"></div>
 
 <script>
-  // Помощь по отображению секций
+  // Показ секции и скрытие остальных
   function showSection(id) {
-    document.querySelectorAll('main > section').forEach(sec => {
-      sec.classList.add('hidden');
-    });
+    document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
+    // При смене секции закрываем меню профиля
+    profileMenu.classList.add('hidden');
   }
 
-  // Пользователь - localStorage
+  // localStorage для пользователей
   function saveUser(user) {
     localStorage.setItem('excitemine_user_' + user.nick.toLowerCase(), JSON.stringify(user));
   }
-
   function loadUser(nick) {
     const data = localStorage.getItem('excitemine_user_' + nick.toLowerCase());
     return data ? JSON.parse(data) : null;
   }
-
   function setCurrentUser(user) {
     if (user) {
       localStorage.setItem('excitemine_currentUser', JSON.stringify(user));
@@ -515,47 +506,48 @@
       localStorage.removeItem('excitemine_currentUser');
     }
   }
-
   function getCurrentUser() {
     const data = localStorage.getItem('excitemine_currentUser');
     return data ? JSON.parse(data) : null;
   }
 
-  // Сообщение
+  // Показ сообщения
   function showMessage(msg, duration=3000) {
     const box = document.getElementById('messageBox');
     box.textContent = msg;
     box.style.display = 'block';
-    setTimeout(() => {
-      box.style.display = 'none';
-    }, duration);
+    setTimeout(() => box.style.display = 'none', duration);
   }
 
-  // Навигация и UI
+  // Навигация
   const profile = document.getElementById('profile');
   const avatar = document.getElementById('avatarCircle');
   const profileMenu = document.getElementById('profileMenu');
 
-  // Переключение секций из меню
+  // Обработчики меню навбара
   document.getElementById('nav-home').onclick = () => showSection('home');
   document.getElementById('nav-whyus').onclick = () => showSection('whyus');
-  document.getElementById('nav-tariffs').onclick = () => showSection('tariffs');
+  document.getElementById('nav-tariffs').onclick = () => {
+    renderTariffs();
+    showSection('tariffs');
+  };
   document.getElementById('nav-status').onclick = () => showSection('status');
   document.getElementById('nav-support').onclick = () => showSection('support');
   document.getElementById('nav-controlPanel').onclick = () => showSection('controlPanel');
   document.getElementById('nav-login').onclick = () => showSection('login');
   document.getElementById('nav-register').onclick = () => showSection('register');
 
-  // Показ/скрытие меню профиля по клику на аватар
-  avatar.onclick = () => {
-    profileMenu.classList.toggle('hidden');
-  };
-  // Скрывать меню при потере фокуса
-  profile.onblur = () => {
-    profileMenu.classList.add('hidden');
-  };
+  // Показ/скрытие меню профиля при клике на аватар
+  avatar.onclick = () => profileMenu.classList.toggle('hidden');
 
-  // Функции обновления UI после входа
+  // Скрываем меню профиля при клике вне
+  document.addEventListener('click', e => {
+    if (!profile.contains(e.target)) {
+      profileMenu.classList.add('hidden');
+    }
+  });
+
+  // Обновление UI после входа
   function updateUIAfterLogin() {
     const user = getCurrentUser();
     if (!user) return;
@@ -584,7 +576,7 @@
     };
 
     document.getElementById('btnChangePass').onclick = () => {
-      let newPass = prompt('Введите новый пароль:');
+      let newPass = prompt('Введите новый пароль (мин. 4 символа):');
       if (newPass && newPass.length >= 4) {
         user.pass = newPass;
         saveUser(user);
@@ -600,17 +592,16 @@
     };
   }
 
-  // Проверяем при загрузке страницы
+  // При загрузке проверяем залогинен ли пользователь
   window.onload = () => {
     if (getCurrentUser()) {
       updateUIAfterLogin();
-      showSection('home');
-    } else {
-      showSection('home');
     }
+    showSection('home');
+    startStatusProgress();
   };
 
-  // Обработка регистрации
+  // Регистрация
   document.getElementById('registerForm').onsubmit = e => {
     e.preventDefault();
     const nick = document.getElementById('regNick').value.trim();
@@ -629,9 +620,10 @@
     saveUser(newUser);
     showMessage('Регистрация прошла успешно! Войдите в аккаунт.');
     showSection('login');
+    document.getElementById('registerForm').reset();
   };
 
-  // Обработка входа
+  // Вход
   document.getElementById('loginForm').onsubmit = e => {
     e.preventDefault();
     const nick = document.getElementById('loginNick').value.trim();
@@ -645,16 +637,17 @@
     updateUIAfterLogin();
     showMessage(`Добро пожаловать, ${user.nick}!`);
     showSection('home');
+    document.getElementById('loginForm').reset();
   };
 
-  // Обработка формы техподдержки
+  // Техподдержка
   document.getElementById('supportForm').onsubmit = e => {
     e.preventDefault();
     showMessage('Тикет отправлен! Мы свяжемся с вами в ближайшее время.');
-    document.getElementById('supportForm').reset();
+    e.target.reset();
   };
 
-  // Тарифы
+  // Тарифы - данные и рендер
   const tariffsData = [
     {
       id: 'EM-BOT-1',
@@ -771,13 +764,13 @@
         </div>
         <div class="tariff-type">${t.type}</div>
         <div class="specs">
-          <div><strong>ЦПУ:</strong> ${t.specs.CPU}</div>
-          <div><strong>ОЗУ:</strong> ${t.specs.RAM}</div>
-          <div><strong>SSD:</strong> ${t.specs.SSD}</div>
-          <div><strong>Бэкапов:</strong> ${t.specs.Backup}</div>
-          <div><strong>Портов:</strong> ${t.specs.Ports}</div>
-          <div><strong>Баз данных:</strong> ${t.specs.DB}</div>
-          <div><strong>DDoS-защита:</strong> ${t.specs.DDoS}</div>
+          <div>CPU: ${t.specs.CPU}</div>
+          <div>RAM: ${t.specs.RAM}</div>
+          <div>SSD: ${t.specs.SSD}</div>
+          <div>Backup: ${t.specs.Backup}</div>
+          <div>Порты: ${t.specs.Ports}</div>
+          <div>Базы данных: ${t.specs.DB}</div>
+          <div>DDoS-защита: ${t.specs.DDoS}</div>
         </div>
         <button class="buy-btn" onclick="buyTariff('${t.id}')">Купить</button>
       `;
@@ -785,28 +778,30 @@
     });
   }
 
-  function buyTariff(tariffId) {
+  // Функция покупки (просто пример)
+  function buyTariff(id) {
     const user = getCurrentUser();
     if (!user) {
-      showMessage('Пожалуйста, войдите в аккаунт, чтобы купить тариф.');
+      showMessage('Сначала войдите в аккаунт!');
       showSection('login');
       return;
     }
-    alert(`Вы выбрали тариф ${tariffId} для покупки. Реализуйте оплату самостоятельно.`);
+    alert(`Вы выбрали тариф ${id}. Ваша заявка будет обработана.`);
   }
 
-  // Инициализация
-  renderTariffs();
-
-  // Обновление прогресса статуса узлов (пример)
-  let progress = 0;
-  function updateStatusProgress() {
-    progress += 10;
-    if (progress > 100) progress = 0;
-    document.getElementById('statusProgressInner').style.width = progress + '%';
+  // Анимация прогресса в статусе узлов (пример)
+  function startStatusProgress() {
+    const progress = document.getElementById('statusProgressInner');
+    let width = 0;
+    function animate() {
+      width += 1;
+      if (width > 100) width = 0;
+      progress.style.width = width + '%';
+      setTimeout(animate, 50);
+    }
+    animate();
   }
-  setInterval(updateStatusProgress, 1000);
-
 </script>
+
 </body>
 </html>
