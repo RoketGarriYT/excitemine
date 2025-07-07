@@ -3,103 +3,183 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QwertyX — Тарифы и преимущества</title>
+<title>ExciteMine — Хостинг & VDS</title>
 <style>
   body {
     margin: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: radial-gradient(circle at top, #0f0f0f, #000);
     color: #fff;
-    padding: 2rem;
+    overflow-x: hidden;
   }
-  h2 {
+  header {
+    background: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 20px #0ff2;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav button, nav .nav-link {
+    background: transparent;
+    color: #ccc;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  nav button:hover, nav .nav-link:hover {
+    color: #0ff;
+    background: #222;
+    transform: scale(1.1);
+  }
+  .section {
+    padding: 4rem 2rem;
     text-align: center;
+    animation: fadeIn 1s ease;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  h1, h2, h3 {
+    color: white;
+  }
+  .subtitle {
+    font-size: 1.2rem;
     margin-bottom: 2rem;
+    color: #aaa;
   }
-  .advantages {
+  .cta-buttons button {
+    background: #0ff;
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .cta-buttons button:hover {
+    background: #00caca;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #0ff;
+    flex-wrap: wrap;
+  }
+  .stats div p {
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+  #whyus {
+    margin-top: 4rem;
+    text-align: left;
+  }
+  #whyus table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    color: #0ff;
+  }
+  #whyus table th, #whyus table td {
+    border: 1px solid #0ff;
+    padding: 0.7rem 1rem;
+    text-align: center;
+  }
+  #whyus table th {
+    background: #0ff1;
+  }
+  .advantages-list {
     max-width: 900px;
-    margin: 0 auto 3rem;
+    margin-bottom: 2rem;
+    color: #ccc;
   }
-  .advantages p {
+  .advantages-list p {
     margin: 0.6rem 0;
     line-height: 1.4;
   }
-  .tariffs {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .location {
-    font-weight: bold;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    color: #0ff;
-  }
-  .processors {
+  #tariffs {
+    margin-top: 3rem;
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
     justify-content: center;
-    margin-bottom: 2rem;
-  }
-  .processor {
-    background: #111;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 12px #0ff3;
-    font-weight: bold;
-    cursor: default;
-  }
-  .processor.discount {
-    color: #0f0;
   }
   .tariff-card {
     background: #111;
     border-radius: 12px;
     box-shadow: 0 0 15px #0ff3;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1rem;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 1.5rem;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    color: #0ff;
+    transition: transform 0.3s ease;
+  }
+  .tariff-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px #0ff;
   }
   .tariff-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    margin-bottom: 1rem;
   }
   .tariff-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
   }
   .tariff-price-old {
     text-decoration: line-through;
-    color: #999;
+    color: #444;
+    font-size: 0.9rem;
     margin-right: 0.5rem;
   }
   .tariff-price {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.6rem;
+    font-weight: 900;
     color: #0ff;
   }
   .tariff-type {
-    margin: 0.2rem 0 0.8rem;
+    margin-bottom: 1rem;
     font-style: italic;
     color: #0ff;
   }
   .specs {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.4rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    text-align: left;
   }
   .specs div {
-    background: #222;
-    padding: 0.4rem 0.8rem;
-    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
   }
   .buy-btn {
-    display: block;
-    width: 100%;
+    margin-top: auto;
     padding: 0.8rem;
     background: #0ff;
     color: #000;
@@ -108,174 +188,625 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
-    text-align: center;
+    width: 100%;
   }
   .buy-btn:hover {
     background: #00caca;
+  }
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: #111;
+    border-top: 1px solid #222;
+    color: #999;
+    margin-top: 4rem;
+  }
+  .hidden {
+    display: none;
+  }
+  #profile {
+    position: relative;
+  }
+  #avatarCircle {
+    width: 40px;
+    height: 40px;
+    background: #0ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    user-select: none;
+  }
+  #profileMenu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #222;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 999;
+    min-width: 180px;
+  }
+  #profileMenu button {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+  }
+  #profileMenu button:hover {
+    background: #0ff;
+    color: black;
+  }
+  form input,
+  form textarea {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0.5rem auto;
+    padding: 0.8rem;
+    border: 1px solid #444;
+    background: #111;
+    color: white;
+    border-radius: 5px;
+  }
+  form button {
+    background: #0ff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  form button:hover {
+    background: #00caca;
+    color: black;
+  }
+  #messageBox {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #222;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+    display: none;
+    animation: slideIn 0.5s ease forwards;
+    z-index: 2000;
+  }
+
+  /* Прогрессбар для статуса узлов */
+  #statusProgress {
+    width: 100px;
+    height: 12px;
+    border-radius: 6px;
+    background: #333;
+    overflow: hidden;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+    box-shadow: 0 0 5px #0ff;
+  }
+  #statusProgressInner {
+    height: 100%;
+    background: #0ff;
+    width: 0%;
+    transition: width 1s ease-in-out;
+  }
+
+  /* Техподдержка текст */
+  #supportText {
+    max-width: 800px;
+    margin: 1rem auto;
+    color: #ccc;
+    line-height: 1.5;
+  }
+
+  /* Панель управления - заглушка */
+  #controlPanel {
+    color: #0ff;
+    max-width: 700px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>
 </head>
 <body>
 
-<h2>Почему выбирают QwertyX</h2>
+<header>
+  <div class="logo" onclick="showSection('home')">ExciteMine</div>
+  <nav id="navBar">
+    <button id="nav-home">Главная</button>
+    <button id="nav-whyus">Почему выбирают нас</button>
+    <button id="nav-tariffs">Тарифы</button>
 
-<div class="advantages">
-  <p><strong>Лучшее оборудование</strong><br />
-  Комплектующие только от проверенных брендов. Не экономим на качестве, используя компоненты от таких производителей, как AMD, Samsung, MSI и другие.</p>
+    <button id="nav-status" title="Статус узлов">
+      Статус узлов
+      <span id="statusProgress" aria-label="Прогресс статуса">
+        <span id="statusProgressInner"></span>
+      </span>
+    </button>
 
-  <p><strong>Защита от DDoS-атак</strong><br />
-  На всех наших серверах установлена надежная защита StormWall, способная отбивать атаки до нескольких Тбит/с.</p>
+    <button id="nav-support">Техподдержка</button>
 
-  <p><strong>Поддержка</strong><br />
-  Каждый наш пользователь может рассчитывать на высококачественную техническую поддержку, которая всегда готова помочь решить любые проблемы, связанные с сервером.</p>
+    <!-- Панель управления появится, если залогинен -->
+    <button id="nav-controlPanel" class="hidden">Панель управления</button>
 
-  <p><strong>Минимальный пинг</strong><br />
-  Расположение узлов в России и Германии обеспечивают минимальный пинг. В среднем 25мс для игрока из России.</p>
+    <!-- Вход/Регистрация -->
+    <button id="nav-login">Вход</button>
+    <button id="nav-register">Регистрация</button>
+  </nav>
 
-  <p><strong>Низкие цены</strong><br />
-  Обеспечиваем самую низкую цену среди конкурентов, при этом держим лучшее качество.</p>
-
-  <p><strong>Гарантия работы</strong><br />
-  Наши узлы установлены в лучших датацентрах. Гарантируем круглосуточную работу вашего сервера и uptime не менее 99.9%.</p>
-</div>
-
-<div class="tariffs">
-
-  <div class="location">Локация</div>
-  <div class="processors">
-    <div class="processor discount">AMD Ryzen 9 7950X (-20%)</div>
-    <div class="processor">AMD Ryzen 7 5800X</div>
-    <div class="processor">Intel Xeon E5-2690v4</div>
+  <div id="profile" class="hidden" tabindex="0">
+    <div class="avatar" id="avatarCircle" title="Меню профиля">U</div>
+    <div id="profileMenu" class="hidden">
+      <p id="profileName">👤 Никнейм</p>
+      <button id="btnProfile">Профиль</button>
+      <button id="btnBalance">Баланс аккаунта</button>
+      <button id="btnChangePass">Изменить пароль</button>
+      <button id="btnLogout">Выйти</button>
+    </div>
   </div>
+</header>
 
-  <!-- Тарифы -->
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">BOT-CPU-01</div>
-      <div>
-        <span class="tariff-price-old">29₽ / мес</span>
-        <span class="tariff-price">23₽ / мес</span>
-      </div>
+<main>
+  <section id="home" class="section">
+    <h1>Добро пожаловать в ExciteMine</h1>
+    <p class="subtitle">Мощная инфраструктура Ryzen, DDoS-защита и техподдержка 24/7.</p>
+    <div class="cta-buttons">
+      <button onclick="showSection('login')">Войти</button>
+      <button onclick="showSection('register')">Зарегистрироваться</button>
     </div>
-    <div class="tariff-type">Только для ботов</div>
-    <div class="specs">
-      <div>ЦПУ: 0.5 ядра</div>
-      <div>ОЗУ: 0.25 ГБ DDR4</div>
-      <div>Диск: 5 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
+    <div class="stats">
+      <div><h2 id="usersCount">1234</h2><p>Пользователей</p></div>
+      <div><h2 id="serversCount">567</h2><p>Серверов создано</p></div>
+      <div><h2 id="daysCount">999</h2><p>Дней успешной работы</p></div>
     </div>
-    <button class="buy-btn" onclick="buyTariff('BOT-CPU-01')">Купить</button>
-  </div>
+  </section>
 
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">BOT-CPU-02</div>
-      <div>
-        <span class="tariff-price-old">59₽ / мес</span>
-        <span class="tariff-price">47₽ / мес</span>
-      </div>
+  <section id="whyus" class="section hidden">
+    <h2>Почему выбирают ExciteMine</h2>
+    <div class="advantages-list">
+      <p><strong>Лучшее оборудование</strong> — только компоненты от AMD, Samsung, Gigabyte и других топовых брендов.</p>
+      <p><strong>Защита от DDoS-атак</strong> — надежная защита StormWall до нескольких Тбит/с.</p>
+      <p><strong>Поддержка 24/7</strong> — всегда готовы помочь решить любые проблемы.</p>
+      <p><strong>Минимальный пинг</strong> — узлы в России и Германии, средний пинг ~25 мс для игроков из России.</p>
+      <p><strong>Низкие цены</strong> — лучшее качество при выгодной цене.</p>
+      <p><strong>Гарантия работы</strong> — uptime 99.9% благодаря лучшим датацентрам.</p>
     </div>
-    <div class="tariff-type">Только для ботов</div>
-    <div class="specs">
-      <div>ЦПУ: 0.75 ядра</div>
-      <div>ОЗУ: 0.5 ГБ DDR4</div>
-      <div>Диск: 10 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
-    </div>
-    <button class="buy-btn" onclick="buyTariff('BOT-CPU-02')">Купить</button>
-  </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Локация</th>
+          <th>Россия, Москва</th>
+          <th>Германия, Франкфурт</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Процессор</td>
+          <td>AMD Ryzen 9 7950X (-20%)</td>
+          <td>Intel Xeon E5-2690v4</td>
+        </tr>
+        <tr>
+          <td>Пинг</td>
+          <td>~25 мс</td>
+          <td>~40 мс</td>
+        </tr>
+        <tr>
+          <td>DDoS-защита</td>
+          <td>StormWall</td>
+          <td>StormWall</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">GAMER-01</div>
-      <div>
-        <span class="tariff-price-old">119₽ / мес</span>
-        <span class="tariff-price">95₽ / мес</span>
-      </div>
-    </div>
-    <div class="tariff-type">Игровой тариф</div>
-    <div class="specs">
-      <div>ЦПУ: 2 ядра</div>
-      <div>ОЗУ: 2 ГБ DDR4</div>
-      <div>Диск: 20 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
-    </div>
-    <button class="buy-btn" onclick="buyTariff('GAMER-01')">Купить</button>
-  </div>
+  <section id="tariffs" class="section hidden">
+    <h2>Тарифы ExciteMine</h2>
+    <div id="tariff-list"></div>
+  </section>
 
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">GAMER-02</div>
-      <div>
-        <span class="tariff-price-old">239₽ / мес</span>
-        <span class="tariff-price">199₽ / мес</span>
-      </div>
-    </div>
-    <div class="tariff-type">Игровой тариф</div>
-    <div class="specs">
-      <div>ЦПУ: 3 ядра</div>
-      <div>ОЗУ: 4 ГБ DDR4</div>
-      <div>Диск: 40 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
-    </div>
-    <button class="buy-btn" onclick="buyTariff('GAMER-02')">Купить</button>
-  </div>
+  <section id="status" class="section hidden">
+    <h2>Статус узлов</h2>
+    <p>Узел Москва: <strong style="color:#0ff">Онлайн</strong></p>
+    <p>Узел Германия: <strong style="color:#0ff">Онлайн</strong></p>
+    <p>Uptime: 99.9%</p>
+  </section>
 
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">GAMER-03</div>
-      <div>
-        <span class="tariff-price-old">359₽ / мес</span>
-        <span class="tariff-price">299₽ / мес</span>
-      </div>
-    </div>
-    <div class="tariff-type">Игровой тариф</div>
-    <div class="specs">
-      <div>ЦПУ: 3.5 ядра</div>
-      <div>ОЗУ: 6 ГБ DDR4</div>
-      <div>Диск: 60 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
-    </div>
-    <button class="buy-btn" onclick="buyTariff('GAMER-03')">Купить</button>
-  </div>
+  <section id="support" class="section hidden">
+    <h2>Техподдержка</h2>
+    <form id="supportForm">
+      <input type="text" id="supportName" placeholder="Ваш никнейм" required />
+      <input type="email" id="supportEmail" placeholder="Email" required />
+      <textarea id="supportMessage" placeholder="Сообщение" rows="5" required></textarea>
+      <button type="submit">Отправить тикет</button>
+    </form>
+  </section>
 
-  <div class="tariff-card">
-    <div class="tariff-header">
-      <div class="tariff-title">GAMER-04</div>
-      <div>
-        <span class="tariff-price-old">479₽ / мес</span>
-        <span class="tariff-price">399₽ / мес</span>
-      </div>
-    </div>
-    <div class="tariff-type">Игровой тариф</div>
-    <div class="specs">
-      <div>ЦПУ: 4 ядра</div>
-      <div>ОЗУ: 8 ГБ DDR4</div>
-      <div>Диск: 80 ГБ NVMe</div>
-      <div>Бэкапов: 3 шт.</div>
-      <div>Портов: 10 шт.</div>
-      <div>Баз данных: 10 шт.</div>
-    </div>
-    <button class="buy-btn" onclick="buyTariff('GAMER-04')">Купить</button>
-  </div>
+  <section id="login" class="section hidden">
+    <h2>Вход</h2>
+    <form id="loginForm">
+      <input type="text" id="loginNick" placeholder="Никнейм" required />
+      <input type="password" id="loginPass" placeholder="Пароль" required />
+      <button type="submit">Войти</button>
+    </form>
+  </section>
 
-</div>
+  <section id="register" class="section hidden">
+    <h2>Регистрация</h2>
+    <form id="registerForm">
+      <input type="text" id="regNick" placeholder="Никнейм" required />
+      <input type="email" id="regEmail" placeholder="Email" required />
+      <input type="password" id="regPass" placeholder="Пароль" required />
+      <input type="password" id="regPassConfirm" placeholder="Повторите пароль" required />
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </section>
+
+  <section id="controlPanel" class="section hidden">
+    <h2>Панель управления</h2>
+    <p>Здесь будет ваша панель управления сервером.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 ExciteMine LTD — Все права защищены.</p>
+</footer>
+
+<div id="messageBox"></div>
 
 <script>
-  function buyTariff(tariffName) {
-    alert('Вы выбрали тариф: ' + tariffName + '\nСкоро будет добавлен функционал покупки!');
+  // Помощь по отображению секций
+  function showSection(id) {
+    document.querySelectorAll('main > section').forEach(sec => {
+      sec.classList.add('hidden');
+    });
+    document.getElementById(id).classList.remove('hidden');
   }
-</script>
 
+  // Пользователь - localStorage
+  function saveUser(user) {
+    localStorage.setItem('excitemine_user_' + user.nick.toLowerCase(), JSON.stringify(user));
+  }
+
+  function loadUser(nick) {
+    const data = localStorage.getItem('excitemine_user_' + nick.toLowerCase());
+    return data ? JSON.parse(data) : null;
+  }
+
+  function setCurrentUser(user) {
+    if (user) {
+      localStorage.setItem('excitemine_currentUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('excitemine_currentUser');
+    }
+  }
+
+  function getCurrentUser() {
+    const data = localStorage.getItem('excitemine_currentUser');
+    return data ? JSON.parse(data) : null;
+  }
+
+  // Сообщение
+  function showMessage(msg, duration=3000) {
+    const box = document.getElementById('messageBox');
+    box.textContent = msg;
+    box.style.display = 'block';
+    setTimeout(() => {
+      box.style.display = 'none';
+    }, duration);
+  }
+
+  // Навигация и UI
+  const profile = document.getElementById('profile');
+  const avatar = document.getElementById('avatarCircle');
+  const profileMenu = document.getElementById('profileMenu');
+
+  // Переключение секций из меню
+  document.getElementById('nav-home').onclick = () => showSection('home');
+  document.getElementById('nav-whyus').onclick = () => showSection('whyus');
+  document.getElementById('nav-tariffs').onclick = () => showSection('tariffs');
+  document.getElementById('nav-status').onclick = () => showSection('status');
+  document.getElementById('nav-support').onclick = () => showSection('support');
+  document.getElementById('nav-controlPanel').onclick = () => showSection('controlPanel');
+  document.getElementById('nav-login').onclick = () => showSection('login');
+  document.getElementById('nav-register').onclick = () => showSection('register');
+
+  // Показ/скрытие меню профиля по клику на аватар
+  avatar.onclick = () => {
+    profileMenu.classList.toggle('hidden');
+  };
+  // Скрывать меню при потере фокуса
+  profile.onblur = () => {
+    profileMenu.classList.add('hidden');
+  };
+
+  // Функции обновления UI после входа
+  function updateUIAfterLogin() {
+    const user = getCurrentUser();
+    if (!user) return;
+
+    document.getElementById('nav-login').style.display = 'none';
+    document.getElementById('nav-register').style.display = 'none';
+    document.getElementById('nav-controlPanel').classList.remove('hidden');
+
+    profile.classList.remove('hidden');
+    document.getElementById('profileName').textContent = `👤 ${user.nick}`;
+    avatar.textContent = user.nick[0].toUpperCase();
+
+    // Кнопки меню профиля
+    document.getElementById('btnLogout').onclick = () => {
+      setCurrentUser(null);
+      profile.classList.add('hidden');
+      document.getElementById('nav-login').style.display = 'inline-block';
+      document.getElementById('nav-register').style.display = 'inline-block';
+      document.getElementById('nav-controlPanel').classList.add('hidden');
+      showSection('home');
+      showMessage('Вы вышли из аккаунта');
+    };
+
+    document.getElementById('btnBalance').onclick = () => {
+      alert(`Ваш баланс: ${user.balance ?? 0}₽`);
+    };
+
+    document.getElementById('btnChangePass').onclick = () => {
+      let newPass = prompt('Введите новый пароль:');
+      if (newPass && newPass.length >= 4) {
+        user.pass = newPass;
+        saveUser(user);
+        setCurrentUser(user);
+        showMessage('Пароль успешно изменён!');
+      } else {
+        showMessage('Пароль должен быть минимум 4 символа!');
+      }
+    };
+
+    document.getElementById('btnProfile').onclick = () => {
+      alert(`Профиль пользователя:\n\nНикнейм: ${user.nick}\nEmail: ${user.email}`);
+    };
+  }
+
+  // Проверяем при загрузке страницы
+  window.onload = () => {
+    if (getCurrentUser()) {
+      updateUIAfterLogin();
+      showSection('home');
+    } else {
+      showSection('home');
+    }
+  };
+
+  // Обработка регистрации
+  document.getElementById('registerForm').onsubmit = e => {
+    e.preventDefault();
+    const nick = document.getElementById('regNick').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pass = document.getElementById('regPass').value;
+    const passConfirm = document.getElementById('regPassConfirm').value;
+    if (pass !== passConfirm) {
+      showMessage('Пароли не совпадают!');
+      return;
+    }
+    if (loadUser(nick)) {
+      showMessage('Пользователь с таким ником уже существует!');
+      return;
+    }
+    const newUser = { nick, email, pass, balance: 0 };
+    saveUser(newUser);
+    showMessage('Регистрация прошла успешно! Войдите в аккаунт.');
+    showSection('login');
+  };
+
+  // Обработка входа
+  document.getElementById('loginForm').onsubmit = e => {
+    e.preventDefault();
+    const nick = document.getElementById('loginNick').value.trim();
+    const pass = document.getElementById('loginPass').value;
+    const user = loadUser(nick);
+    if (!user || user.pass !== pass) {
+      showMessage('Неверный никнейм или пароль!');
+      return;
+    }
+    setCurrentUser(user);
+    updateUIAfterLogin();
+    showMessage(`Добро пожаловать, ${user.nick}!`);
+    showSection('home');
+  };
+
+  // Обработка формы техподдержки
+  document.getElementById('supportForm').onsubmit = e => {
+    e.preventDefault();
+    showMessage('Тикет отправлен! Мы свяжемся с вами в ближайшее время.');
+    document.getElementById('supportForm').reset();
+  };
+
+  // Тарифы
+  const tariffsData = [
+    {
+      id: 'EM-BOT-1',
+      title: 'BOT-CPU-01',
+      oldPrice: '29₽ / мес',
+      price: '23₽ / мес',
+      type: 'Только для ботов',
+      specs: {
+        CPU: '0.5 ядра',
+        RAM: '0.25 ГБ DDR4',
+        SSD: '5 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+    {
+      id: 'EM-BOT-2',
+      title: 'BOT-CPU-02',
+      oldPrice: '59₽ / мес',
+      price: '47₽ / мес',
+      type: 'Только для ботов',
+      specs: {
+        CPU: '0.75 ядра',
+        RAM: '0.5 ГБ DDR4',
+        SSD: '10 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+    {
+      id: 'EM-GAMER-1',
+      title: 'GAMER-01',
+      oldPrice: '119₽ / мес',
+      price: '95₽ / мес',
+      type: 'Игровой тариф',
+      specs: {
+        CPU: '2 ядра',
+        RAM: '2 ГБ DDR4',
+        SSD: '20 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+    {
+      id: 'EM-GAMER-2',
+      title: 'GAMER-02',
+      oldPrice: '239₽ / мес',
+      price: '199₽ / мес',
+      type: 'Игровой тариф',
+      specs: {
+        CPU: '3 ядра',
+        RAM: '4 ГБ DDR4',
+        SSD: '40 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+    {
+      id: 'EM-GAMER-3',
+      title: 'GAMER-03',
+      oldPrice: '359₽ / мес',
+      price: '299₽ / мес',
+      type: 'Игровой тариф',
+      specs: {
+        CPU: '3.5 ядра',
+        RAM: '6 ГБ DDR4',
+        SSD: '60 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+    {
+      id: 'EM-GAMER-4',
+      title: 'GAMER-04',
+      oldPrice: '479₽ / мес',
+      price: '399₽ / мес',
+      type: 'Игровой тариф',
+      specs: {
+        CPU: '4 ядра',
+        RAM: '8 ГБ DDR4',
+        SSD: '80 ГБ NVMe',
+        Backup: '3 шт.',
+        Ports: '10 шт.',
+        DB: '10 шт.',
+        DDoS: 'StormWall',
+      },
+    },
+  ];
+
+  const tariffListElem = document.getElementById('tariff-list');
+
+  function renderTariffs() {
+    tariffListElem.innerHTML = '';
+    tariffsData.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'tariff-card';
+      card.innerHTML = `
+        <div class="tariff-header">
+          <div class="tariff-title">${t.title}</div>
+          <div>
+            <span class="tariff-price-old">${t.oldPrice}</span>
+            <span class="tariff-price">${t.price}</span>
+          </div>
+        </div>
+        <div class="tariff-type">${t.type}</div>
+        <div class="specs">
+          <div><strong>ЦПУ:</strong> ${t.specs.CPU}</div>
+          <div><strong>ОЗУ:</strong> ${t.specs.RAM}</div>
+          <div><strong>SSD:</strong> ${t.specs.SSD}</div>
+          <div><strong>Бэкапов:</strong> ${t.specs.Backup}</div>
+          <div><strong>Портов:</strong> ${t.specs.Ports}</div>
+          <div><strong>Баз данных:</strong> ${t.specs.DB}</div>
+          <div><strong>DDoS-защита:</strong> ${t.specs.DDoS}</div>
+        </div>
+        <button class="buy-btn" onclick="buyTariff('${t.id}')">Купить</button>
+      `;
+      tariffListElem.appendChild(card);
+    });
+  }
+
+  function buyTariff(tariffId) {
+    const user = getCurrentUser();
+    if (!user) {
+      showMessage('Пожалуйста, войдите в аккаунт, чтобы купить тариф.');
+      showSection('login');
+      return;
+    }
+    alert(`Вы выбрали тариф ${tariffId} для покупки. Реализуйте оплату самостоятельно.`);
+  }
+
+  // Инициализация
+  renderTariffs();
+
+  // Обновление прогресса статуса узлов (пример)
+  let progress = 0;
+  function updateStatusProgress() {
+    progress += 10;
+    if (progress > 100) progress = 0;
+    document.getElementById('statusProgressInner').style.width = progress + '%';
+  }
+  setInterval(updateStatusProgress, 1000);
+
+</script>
 </body>
 </html>
