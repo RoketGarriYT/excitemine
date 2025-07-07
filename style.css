@@ -1,165 +1,251 @@
+/* Базовые стили */
 body {
-    font-family: sans-serif;
-    margin: 0;
-    background-image: url('background.jpg'); /* Замени на путь к твоему изображению */
-    background-size: cover;
-    background-position: center;
-    color: #333;
-    overflow: hidden; /* Чтобы скрыть нижние разделы вначале */
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #0f0f0f, #000);
+  color: #fff;
+  overflow-x: hidden;
 }
 
-.header {
-    background-color: rgba(255, 255, 255, 0.8); /* Прозрачный белый фон для шапки */
-    padding: 20px;
-    display: flex;
-    justify-content: space-between; /* Размещаем логотип слева, навигацию справа */
-    align-items: center;
-    position: fixed; /* Фиксированная шапка сверху */
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box; /* Чтобы padding не влиял на общую ширину */
-    z-index: 100; /* Чтобы шапка была над всем контентом */
+header {
+  background: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 0 20px #0ff2;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff4500; /* Оранжевый цвет логотипа */
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-.nav-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center; /* Выравнивание элементов навигации по вертикали */
+nav button {
+  background: transparent;
+  color: #ccc;
+  border: none;
+  margin-left: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.nav-menu li {
-    margin: 0 15px;
+nav button:hover {
+  color: #fff;
+  transform: scale(1.1);
 }
 
-.nav-menu li:last-child {
-    margin-right: 0; /* Убираем отступ у последнего элемента */
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease;
 }
 
-.nav-menu a {
-    text-decoration: none;
-    color: #ff8c00; /* Оранжевый цвет ссылок */
-    font-weight: bold;
-    transition: color 0.3s ease-in-out;
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: white;
 }
 
-.nav-menu a:hover {
-    color: #d9534f; /* Красный цвет ссылок при наведении */
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #aaa;
 }
 
-.ip-address-nav {
-    display: flex;
-    align-items: center;
+.cta-buttons button {
+  background: #fff;
+  color: #111;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.ip-address-nav span {
-    font-size: 16px;
-    color: #d9534f; /* Красный цвет IP-адреса */
-    margin-right: 5px;
+.cta-buttons button:hover {
+  background: #f00;
+  color: white;
 }
 
-.copy-button-nav {
-    background-color: #5cb85c; /* Зеленый цвет кнопки */
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
-    transition: background-color 0.3s ease-in-out;
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  color: #0ff;
+  flex-wrap: wrap;
 }
 
-.copy-button-nav:hover {
-    background-color: #4cae4c;
+#why-us {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 3rem 0;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Занимает всю высоту экрана */
-    padding-top: 60px; /* Отступ сверху под фиксированную шапку */
-    box-sizing: border-box; /* Чтобы padding не увеличивал высоту */
+#why-us .card {
+  background: #111;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 300px;
+  box-shadow: 0 0 15px #0ff3;
+  transition: transform 0.3s ease;
 }
 
-.hero-section {
-    text-align: center;
+#why-us .card:hover {
+  transform: translateY(-10px);
 }
 
-.start-button {
-    background-color: #ff8c00; /* Оранжевый цвет кнопки */
-    color: white;
-    font-size: 24px;
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Плавная анимация */
+#tariff-buttons {
+  margin-top: 2rem;
 }
 
-.start-button:hover {
-    transform: scale(1.1); /* Небольшое увеличение при наведении */
+#tariff-buttons button {
+  background: #333;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem;
+  border: 1px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.bottom-sections {
-    display: flex;
-    justify-content: space-around;
-    position: absolute; /* Абсолютное позиционирование внизу */
-    bottom: 20px;
-    left: 0;
-    width: 100%;
-    opacity: 0; /* Изначально скрыты */
-    transform: translateY(50px); /* Сдвинуты вниз */
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Плавное появление */
-    padding: 20px;
-    box-sizing: border-box;
+#tariff-buttons button:hover {
+  background: #0ff2;
+  color: #000;
 }
 
-.bottom-sections.visible {
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #111;
+  border-top: 1px solid #222;
+  color: #999;
+  margin-top: 3rem;
+}
+
+.hidden {
+  display: none;
+}
+
+#profile {
+  position: relative;
+}
+
+#avatarCircle {
+  width: 40px;
+  height: 40px;
+  background: #0ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#profileMenu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #222;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 999;
+}
+
+#profileMenu button {
+  background: #333;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+#profileMenu button:hover {
+  background: #0ff;
+  color: black;
+}
+
+form input,
+form textarea {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem auto;
+  padding: 0.8rem;
+  border: 1px solid #444;
+  background: #111;
+  color: white;
+  border-radius: 5px;
+}
+
+form button {
+  background: #0ff;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+form button:hover {
+  background: #00f0ff;
+  color: black;
+}
+
+#messageBox {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #222;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  display: none;
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
 }
 
-.section-card {
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 180px; /* Немного уменьшим ширину */
-}
-
-.section-card h3 {
-    color: #ff4500;
-    margin-top: 0;
-}
-
-.section-card p {
-    margin-bottom: 10px;
-}
-
-.section-card a {
-    text-decoration: none;
-    color: #5cb85c; /* Зеленый цвет ссылки */
-    font-weight: bold;
-}
-
-.footer {
-    background-color: rgba(0, 0, 0, 0.7); /* Прозрачный черный фон для подвала */
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 100;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
