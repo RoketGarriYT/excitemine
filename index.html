@@ -1,849 +1,277 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ExciteMine — Хостинг & VDS</title>
-<style>
-  /* --- Reset и базовые стили --- */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin:0; padding:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(circle at top, #0f0f0f, #000);
-    color: #eee;
-    overflow-x: hidden;
-  }
-  a {
-    color: #0ff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* --- Хедер --- */
-  header {
-    background: #111;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    box-shadow: 0 0 20px #0ff2;
-    position: sticky;
-    top: 0;
-    z-index: 10000;
-  }
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    letter-spacing: 3px;
-    color: #0ff;
-    cursor: default;
-  }
-  nav {
-    display: flex;
-    gap: 1rem;
-  }
-  nav button {
-    background: transparent;
-    border: 2px solid #0ff;
-    color: #0ff;
-    padding: 0.4rem 1rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-  }
-  nav button:hover {
-    background: #0ff;
-    color: #111;
-  }
-
-  /* --- Профиль и аватарка --- */
-  #profile {
-    position: relative;
-    user-select: none;
-  }
-  #avatarCircle {
-    width: 42px;
-    height: 42px;
-    background: #0ff;
-    border-radius: 50%;
-    color: #111;
-    font-weight: 900;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 2px solid #0ff;
-  }
-  #profileMenu {
-    position: absolute;
-    top: 52px;
-    right: 0;
-    background: #222;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #0ff6;
-    padding: 1rem 1.3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 180px;
-    user-select: none;
-  }
-  #profileMenu button {
-    background: #0ff;
-    border: none;
-    border-radius: 6px;
-    color: #111;
-    padding: 0.4rem 0;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  #profileMenu button:hover {
-    background: #08c2c2;
-  }
-  #profileMenu p {
-    margin: 0 0 0.5rem 0;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #0ff;
-  }
-
-  /* --- Основной контейнер и секции --- */
-  main {
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 0 1rem 3rem;
-  }
-  section {
-    margin-bottom: 3rem;
-    animation: fadeIn 0.8s ease;
-  }
-  h1,h2,h3 {
-    margin-bottom: 0.6rem;
-    color: #0ff;
-    font-weight: 800;
-  }
-  p {
-    color: #aaa;
-    font-size: 1.05rem;
-    line-height: 1.4;
-  }
-
-  /* --- Кнопки в секциях --- */
-  .cta-buttons {
-    margin: 1.8rem 0;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-  .cta-buttons button {
-    padding: 0.8rem 2rem;
-    font-weight: 700;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background: #0ff;
-    color: #111;
-    font-size: 1.1rem;
-    box-shadow: 0 0 15px #0ff9;
-    transition: background 0.3s ease;
-  }
-  .cta-buttons button:hover {
-    background: #08c2c2;
-  }
-
-  /* --- Статистика --- */
-  #stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 3rem;
-    font-size: 1.7rem;
-    font-weight: 800;
-  }
-  #stats div {
-    text-align: center;
-    color: #0ff;
-  }
-  #stats div p {
-    color: #aaa;
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-top: 0.2rem;
-  }
-
-  /* --- Почему выбирают нас --- */
-  #why-us {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.6rem;
-    margin-top: 3rem;
-  }
-  #why-us .card {
-    background: #111;
-    padding: 1.8rem 1.4rem;
-    border-radius: 15px;
-    box-shadow: 0 0 25px #0ff5;
-    user-select: none;
-    transition: transform 0.3s ease;
-  }
-  #why-us .card:hover {
-    transform: translateY(-8px);
-  }
-  #why-us .card h3 {
-    margin-bottom: 0.6rem;
-    font-weight: 900;
-  }
-  #why-us .card p {
-    font-size: 1.05rem;
-    color: #ddd;
-  }
-
-  /* --- Таблица статус узлов --- */
-  #statusTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: #eee;
-  }
-  #statusTable th, #statusTable td {
-    border: 1px solid #0ff4;
-    padding: 0.7rem 1rem;
-    text-align: center;
-  }
-  #statusTable th {
-    background: #0ff8;
-    color: #000;
-    font-weight: 700;
-  }
-  #statusTable td.progressCell {
-    width: 160px;
-  }
-
-  /* --- Прогресс бар в таблице --- */
-  .progressBar {
-    background: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    height: 18px;
-    width: 100%;
-  }
-  .progressBarFill {
-    background: #0ff;
-    height: 100%;
-    width: 0%;
-    transition: width 1.5s ease;
-  }
-
-  /* --- Тарифы --- */
-  #tariff-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  #tariff-buttons button {
-    background: #111;
-    border: 2px solid #0ff;
-    color: #0ff;
-    padding: 0.6rem 1.3rem;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  #tariff-buttons button:hover {
-    background: #0ff;
-    color: #111;
-  }
-  #tariffs {
-    margin-top: 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.6rem;
-  }
-  .tariff-card {
-    background: #111;
-    border-radius: 12px;
-    box-shadow: 0 0 18px #0ff7;
-    padding: 1.3rem 1.5rem 2rem;
-    color: #ddd;
-    display: flex;
-    flex-direction: column;
-    user-select: none;
-  }
-  .tariff-card h3 {
-    margin: 0 0 0.6rem 0;
-    color: #0ff;
-    font-weight: 900;
-  }
-  .tariff-card .price {
-    font-weight: 900;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #0ff;
-  }
-  .tariff-card .specs {
-    flex-grow: 1;
-    font-size: 1rem;
-    line-height: 1.3;
-  }
-  .tariff-card .specs p {
-    margin: 0.3rem 0;
-  }
-  .tariff-card button.buy-btn {
-    background: #0ff;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem 0;
-    font-weight: 900;
-    color: #111;
-    cursor: pointer;
-    margin-top: 1.2rem;
-    transition: background 0.3s ease;
-  }
-  .tariff-card button.buy-btn:hover {
-    background: #08c2c2;
-  }
-
-  /* --- Формы --- */
-  form {
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  form input, form textarea {
-    width: 100%;
-    margin: 0.5rem 0 1rem 0;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #0ff;
-    background: #111;
-    color: #eee;
-    font-size: 1rem;
-    font-weight: 600;
-  }
-  form textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  form button {
-    width: 100%;
-    padding: 0.7rem;
-    background: #0ff;
-    border: none;
-    border-radius: 10px;
-    font-weight: 900;
-    font-size: 1.1rem;
-    color: #111;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  form button:hover {
-    background: #08c2c2;
-  }
-
-  /* --- Сообщение --- */
-  #messageBox {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #222;
-    color: #0ff;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 0 15px #0ff9;
-    display: none;
-    font-weight: 700;
-    user-select: none;
-    z-index: 99999;
-  }
-
-  /* --- Скрытый класс --- */
-  .hidden {
-    display: none !important;
-  }
-
-  /* --- Анимации --- */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ExciteMine — Космический хостинг</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#0b0f1a;
+      color:#eee;
+      overflow-x:hidden;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    canvas{position:fixed;top:0;left:0;z-index:-1;}
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 50px;
     }
-  }
-</style>
+    header h1{
+      color:#00ffea;
+      font-size:2rem;
+    }
+    nav a{
+      color:#aaa;
+      margin-left:25px;
+      text-decoration:none;
+      position:relative;
+    }
+    nav a:after{
+      content:'';
+      position:absolute;
+      left:0;bottom:-4px;
+      width:0;height:2px;
+      background:#00ffea;
+      transition:width .3s;
+    }
+    nav a:hover:after{width:100%;}
+    section{padding:100px 50px;}
+    .hero{
+      text-align:center;
+      max-width:800px;margin:0 auto 50px;
+      opacity:0;transform:translateY(40px);
+      animation:fadeIn 1s forwards;
+    }
+    .hero h2{font-size:2.5rem;color:#00ffea;margin-bottom:20px;}
+    .hero p{font-size:1.1rem;line-height:1.5;}
+    .btn{
+      display:inline-block;
+      margin-top:30px;padding:14px 28px;
+      background:#00ffea;
+      color:#000;
+      border-radius:8px;
+      font-weight:600;
+      text-decoration:none;
+      transition:background .3s;
+    }
+    .btn:hover{background:#00e0c6;}
+    .section-title{
+      text-align:center;
+      font-size:2rem;
+      margin-bottom:40px;
+      color:#00ffea;
+    }
+    .plans{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:30px;
+    }
+    .plan{
+      background:rgba(255,255,255,0.05);
+      border:1px solid #00ffea44;
+      padding:30px;
+      border-radius:12px;
+      width:280px;
+      opacity:0;
+      transform:scale(0.9);
+      animation:popIn 0.5s forwards;
+    }
+    .plan:nth-child(1){animation-delay:0.2s;}
+    .plan:nth-child(2){animation-delay:0.4s;}
+    .plan:nth-child(3){animation-delay:0.6s;}
+    .plan h3{color:#00ffea;margin-bottom:15px;}
+    .plan ul{list-style:none;margin:15px 0;}
+    .plan ul li{margin:8px 0;}
+    .plan .price{
+      font-size:1.4rem;
+      color:#00ffea;
+      margin-bottom:15px;
+    }
+    .features{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:40px;
+    }
+    .feature{
+      width:220px;
+      text-align:center;
+      opacity:0;
+      transform:translateY(20px);
+      animation:fadeIn 0.6s forwards;
+    }
+    .feature:nth-child(1){animation-delay:0.3s;}
+    .feature:nth-child(2){animation-delay:0.6s;}
+    .feature:nth-child(3){animation-delay:0.9s;}
+    .feature i{
+      font-size:2.5rem;
+      color:#00ffea;
+      margin-bottom:15px;
+    }
+    .feature p{font-size:1rem;line-height:1.4;}
+    #contact p{opacity:0;animation:fadeIn 0.8s forwards;}
+    #contact a{opacity:0;animation:fadeIn 1s forwards;}
+    footer{
+      text-align:center;
+      padding:40px;
+      color:#777;
+      border-top:1px solid #222;
+    }
+    @keyframes fadeIn{
+      to{opacity:1;transform:translateY(0);}
+    }
+    @keyframes popIn{
+      to{opacity:1;transform:scale(1);}
+    }
+    @media (max-width:768px){
+      header{flex-direction:column;}
+      nav{margin-top:15px;}
+      .features{flex-direction:column;align-items:center;}
+    }
+  </style>
 </head>
 <body>
 
+<canvas id="stars"></canvas>
+
 <header>
-  <div class="logo">ExciteMine</div>
+  <h1>ExciteMine</h1>
   <nav>
-    <button id="btn-home">Главная</button>
-    <button id="btn-status">Статус узлов</button>
-    <button id="btn-support">Техподдержка</button>
-    <button id="btn-panel" class="hidden">Панель управления</button>
-    <button id="btn-login">Вход</button>
-    <button id="btn-register">Регистрация</button>
+    <a href="#minecraft">Minecraft</a>
+    <a href="#vds">VDS</a>
+    <a href="#features">Преимущества</a>
+    <a href="#contact">Контакты</a>
   </nav>
-  <div id="profile" class="hidden">
-    <div id="avatarCircle" title="Профиль пользователя"></div>
-    <div id="profileMenu" class="hidden">
-      <p id="profileName">👤 Никнейм</p>
-      <button id="btn-profile">Профиль</button>
-      <button id="btn-balance">Баланс аккаунта</button>
-      <button id="btn-change-pass">Изменить пароль</button>
-      <button id="btn-logout">Выйти</button>
-    </div>
-  </div>
 </header>
 
-<main>
-  <!-- Главная -->
-  <section id="home" class="section">
-    <h1>Добро пожаловать на ExciteMine</h1>
-    <p>Мощный хостинг и VDS на базе Ryzen с DDoS защитой и круглосуточной поддержкой.</p>
-    <div class="cta-buttons">
-      <button id="home-login-btn">Войти</button>
-      <button id="home-register-btn">Регистрация</button>
+<section class="hero">
+  <h2>Мощный хостинг в космосе</h2>
+  <p>ExciteMine — галактический Minecraft и VDS хостинг с DDoS-защитой, мгновенной установкой и 24/7 поддержкой.</p>
+  <a href="#minecraft" class="btn">К выбору тарифа</a>
+</section>
+
+<section id="minecraft">
+  <h2 class="section-title">Тарифы Minecraft</h2>
+  <div class="plans">
+    <div class="plan">
+      <h3>Nova</h3>
+      <div class="price">99₽/мес</div>
+      <ul>
+        <li>2 GB RAM</li>
+        <li>NVMe SSD</li>
+        <li>DDoS защита</li>
+        <li>Панель управления</li>
+      </ul>
+      <a href="#" class="btn">Заказать</a>
     </div>
-
-    <div id="stats">
-      <div><h2 id="usersCount">1200</h2><p>Пользователей</p></div>
-      <div><h2 id="serversCount">350</h2><p>Активных серверов</p></div>
-      <div><h2 id="daysCount">452</h2><p>Дней стабильной работы</p></div>
+    <div class="plan">
+      <h3>Galaxy</h3>
+      <div class="price">199₽/мес</div>
+      <ul>
+        <li>4 GB RAM</li>
+        <li>Поддержка 24/7</li>
+        <li>FTP / плагины</li>
+        <li>Бэкапы</li>
+      </ul>
+      <a href="#" class="btn">Заказать</a>
     </div>
-
-    <div id="why-us">
-      <div class="card">
-        <h3>Лучшее оборудование</h3>
-        <p>Используем только проверенные комплектующие от AMD, Gigabyte, AData и др.</p>
-      </div>
-      <div class="card">
-        <h3>Защита от DDoS</h3>
-        <p>Надёжная StormWall защита до нескольких Тбит/с на каждом сервере.</p>
-      </div>
-      <div class="card">
-        <h3>Поддержка 24/7</h3>
-        <p>Всегда готовы помочь и решить любые проблемы с сервером.</p>
-      </div>
-      <div class="card">
-        <h3>Минимальный пинг</h3>
-        <p>Узлы в России и Европе для стабильного и быстрого соединения.</p>
-      </div>
-      <div class="card">
-        <h3>Низкие цены</h3>
-        <p>Оптимальное соотношение цены и качества на рынке хостинга.</p>
-      </div>
-      <div class="card">
-        <h3>Гарантия работы</h3>
-        <p>Uptime более 99.9% благодаря лучшим датацентрам.</p>
-      </div>
+    <div class="plan">
+      <h3>Universe</h3>
+      <div class="price">299₽/мес</div>
+      <ul>
+        <li>8 GB RAM</li>
+        <li>Неограниченные слоты</li>
+        <li>Полный доступ</li>
+        <li>Бэкапы + FTP</li>
+      </ul>
+      <a href="#" class="btn">Заказать</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Статус -->
-  <section id="status" class="section hidden">
-    <h2>Статус узлов</h2>
-    <table id="statusTable">
-      <thead>
-        <tr>
-          <th>Узел</th>
-          <th>Локация</th>
-          <th>Статус</th>
-          <th>Загрузка CPU</th>
-          <th>Uptime</th>
-        </tr>
-      </thead>
-      <tbody id="statusTableBody">
-      <!-- Здесь будут строки статуса -->
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Техподдержка -->
-  <section id="support" class="section hidden">
-    <h2>Техподдержка</h2>
-    <form id="supportForm">
-      <input type="text" id="supportName" placeholder="Ваш никнейм" required />
-      <input type="email" id="supportEmail" placeholder="Email" required />
-      <textarea id="supportMessage" placeholder="Ваше сообщение" required></textarea>
-      <button type="submit">Отправить тикет</button>
-    </form>
-    <div id="ticketStatus" style="text-align:center; margin-top:10px;"></div>
-  </section>
-
-  <!-- Вход -->
-  <section id="login" class="section hidden">
-    <h2>Вход</h2>
-    <form id="loginForm">
-      <input type="text" id="loginNick" placeholder="Никнейм" required />
-      <input type="password" id="loginPass" placeholder="Пароль" required />
-      <button type="submit">Войти</button>
-    </form>
-    <div id="loginStatus" style="text-align:center; margin-top:10px;"></div>
-  </section>
-
-  <!-- Регистрация -->
-  <section id="register" class="section hidden">
-    <h2>Регистрация</h2>
-    <form id="registerForm">
-      <input type="text" id="regNick" placeholder="Никнейм" required />
-      <input type="email" id="regEmail" placeholder="Email" required />
-      <input type="password" id="regPass" placeholder="Пароль" required />
-      <input type="password" id="regPassConfirm" placeholder="Повторите пароль" required />
-      <button type="submit">Зарегистрироваться</button>
-    </form>
-    <div id="registerStatus" style="text-align:center; margin-top:10px;"></div>
-  </section>
-
-  <!-- Панель управления (просто заглушка) -->
-  <section id="panel" class="section hidden">
-    <h2>Панель управления</h2>
-    <p>Здесь будет управление вашими серверами и услугами.</p>
-  </section>
-
-  <!-- Тарифы -->
-  <section id="tariffs" class="section hidden">
-    <h2>Наши тарифы</h2>
-    <div id="tariff-buttons">
-      <button data-type="hosting">Хостинг</button>
-      <button data-type="vds">VDS</button>
-      <button data-type="web">Web Hosting</button>
+<section id="vds">
+  <h2 class="section-title">Тарифы VDS</h2>
+  <div class="plans">
+    <div class="plan">
+      <h3>Astro</h3>
+      <div class="price">149₽/мес</div>
+      <ul>
+        <li>1 vCPU</li>
+        <li>2 GB RAM</li>
+        <li>IPv4 / IPv6</li>
+      </ul>
+      <a href="#" class="btn">Заказать</a>
     </div>
-    <div id="tariffsContainer"></div>
-  </section>
+    <div class="plan">
+      <h3>Stellar</h3>
+      <div class="price">249₽/мес</div>
+      <ul>
+        <li>2 vCPU</li>
+        <li>4 GB RAM</li>
+        <li>SSD + Бэкапы</li>
+      </ul>
+      <a href="#" class="btn">Заказать</a>
+    </div>
+  </div>
+</section>
 
-</main>
+<section id="features">
+  <h2 class="section-title">Почему ExciteMine?</h2>
+  <div class="features">
+    <div class="feature">
+      <i>🛡️</i>
+      <p>Анти-DDoS защита уровня провайдера</p>
+    </div>
+    <div class="feature">
+      <i>⚡</i>
+      <p>Мгновенная установка серверов</p>
+    </div>
+    <div class="feature">
+      <i>🌐</i>
+      <p>24/7 техподдержка и прозрачная тарификация</p>
+    </div>
+  </div>
+</section>
 
-<div id="messageBox"></div>
+<section id="contact">
+  <h2 class="section-title">Связаться с нами</h2>
+  <p>Есть вопрос или предложение? Поддержка на связи!</p>
+  <a href="mailto:support@excitemine.ru" class="btn">Написать на email</a>
+</section>
+
+<footer>
+  <p>© 2025 ExciteMine — Galactic Hosting. Все права защищены.</p>
+</footer>
 
 <script>
-(() => {
-  // Элементы
-  const sections = {
-    home: document.getElementById('home'),
-    status: document.getElementById('status'),
-    support: document.getElementById('support'),
-    login: document.getElementById('login'),
-    register: document.getElementById('register'),
-    panel: document.getElementById('panel'),
-    tariffs: document.getElementById('tariffs'),
-  };
-  const navButtons = {
-    home: document.getElementById('btn-home'),
-    status: document.getElementById('btn-status'),
-    support: document.getElementById('btn-support'),
-    panel: document.getElementById('btn-panel'),
-    login: document.getElementById('btn-login'),
-    register: document.getElementById('btn-register'),
-  };
-  const profileDiv = document.getElementById('profile');
-  const avatarCircle = document.getElementById('avatarCircle');
-  const profileMenu = document.getElementById('profileMenu');
-  const profileNameP = document.getElementById('profileName');
-  const messageBox = document.getElementById('messageBox');
-  const loginStatus = document.getElementById('loginStatus');
-  const registerStatus = document.getElementById('registerStatus');
-  const ticketStatus = document.getElementById('ticketStatus');
-
-  // Состояние
-  let currentUser = null;
-
-  // Фейковые данные тарифов
-  const tariffsData = {
-    hosting: [
-      { id: 'H1', name: 'Хостинг Базовый', price: '59₽/мес', cpu: '0.5 ядра', ram: '0.25 ГБ DDR4', ssd: '5 ГБ NVMe', ddos: 'StormWall', backup: '3 бэкапа', ports: '10 портов', db: '10 баз данных' },
-      { id: 'H2', name: 'Хостинг Продвинутый', price: '119₽/мес', cpu: '1 ядро', ram: '1 ГБ DDR4', ssd: '15 ГБ NVMe', ddos: 'StormWall', backup: '5 бэкапов', ports: '20 портов', db: '20 баз данных' },
-      { id: 'H3', name: 'Хостинг Профи', price: '239₽/мес', cpu: '2 ядра', ram: '4 ГБ DDR4', ssd: '40 ГБ NVMe', ddos: 'StormWall', backup: '7 бэкапов', ports: '30 портов', db: '30 баз данных' },
-    ],
-    vds: [
-      { id: 'V1', name: 'VDS Мини', price: '299₽/мес', cpu: '2 ядра', ram: '4 ГБ DDR4', ssd: '50 ГБ NVMe', ddos: 'StormWall', backup: '7 бэкапов', ports: '30 портов', db: '30 баз данных' },
-      { id: 'V2', name: 'VDS Стандарт', price: '479₽/мес', cpu: '4 ядра', ram: '8 ГБ DDR4', ssd: '100 ГБ NVMe', ddos: 'StormWall', backup: '10 бэкапов', ports: '50 портов', db: '50 баз данных' },
-      { id: 'V3', name: 'VDS Максимум', price: '899₽/мес', cpu: '8 ядер', ram: '16 ГБ DDR4', ssd: '250 ГБ NVMe', ddos: 'StormWall', backup: '15 бэкапов', ports: '100 портов', db: '100 баз данных' },
-    ],
-    web: [
-      { id: 'W1', name: 'Web Hosting Start', price: '49₽/мес', cpu: '0.5 ядра', ram: '0.5 ГБ DDR4', ssd: '10 ГБ NVMe', ddos: 'StormWall', backup: '3 бэкапа', ports: '10 портов', db: '5 баз данных' },
-      { id: 'W2', name: 'Web Hosting Pro', price: '99₽/мес', cpu: '1 ядро', ram: '1.5 ГБ DDR4', ssd: '25 ГБ NVMe', ddos: 'StormWall', backup: '5 бэкапов', ports: '20 портов', db: '20 баз данных' },
-      { id: 'W3', name: 'Web Hosting Ultra', price: '199₽/мес', cpu: '2 ядра', ram: '4 ГБ DDR4', ssd: '50 ГБ NVMe', ddos: 'StormWall', backup: '7 бэкапов', ports: '30 портов', db: '50 баз данных' },
-    ]
-  };
-
-  // Фейковый статус узлов
-  const nodesStatus = [
-    { name: 'Node-1', location: 'Москва, Россия', status: 'Онлайн', cpuLoad: 45, uptime: 98.7 },
-    { name: 'Node-2', location: 'Франкфурт, Германия', status: 'Онлайн', cpuLoad: 23, uptime: 99.2 },
-    { name: 'Node-3', location: 'Санкт-Петербург, Россия', status: 'Оффлайн', cpuLoad: 0, uptime: 95.1 },
-  ];
-
-  // Хелпер для показа сообщений
-  function showMessage(msg, duration = 3000) {
-    messageBox.textContent = msg;
-    messageBox.style.display = 'block';
-    setTimeout(() => { messageBox.style.display = 'none'; }, duration);
-  }
-
-  // Показываем выбранный раздел
-  function showSection(name) {
-    for (const sec in sections) {
-      if (sec === name) {
-        sections[sec].classList.remove('hidden');
-      } else {
-        sections[sec].classList.add('hidden');
-      }
-    }
-    // Скрываем или показываем кнопки панели и профиля
-    if (currentUser) {
-      navButtons.panel.classList.remove('hidden');
-      navButtons.login.classList.add('hidden');
-      navButtons.register.classList.add('hidden');
-      profileDiv.classList.remove('hidden');
-      updateProfileUI();
-    } else {
-      navButtons.panel.classList.add('hidden');
-      navButtons.login.classList.remove('hidden');
-      navButtons.register.classList.remove('hidden');
-      profileDiv.classList.add('hidden');
-    }
-  }
-
-  // Обновить UI профиля
-  function updateProfileUI() {
-    if (!currentUser) return;
-    profileNameP.textContent = '👤 ' + currentUser.nick;
-    avatarCircle.textContent = currentUser.nick[0].toUpperCase();
-  }
-
-  // Навигация по меню
-  navButtons.home.onclick = () => showSection('home');
-  navButtons.status.onclick = () => { showSection('status'); renderStatusTable(); };
-  navButtons.support.onclick = () => showSection('support');
-  navButtons.login.onclick = () => showSection('login');
-  navButtons.register.onclick = () => showSection('register');
-  navButtons.panel.onclick = () => showSection('panel');
-
-  // Кнопки из главной секции
-  document.getElementById('home-login-btn').onclick = () => showSection('login');
-  document.getElementById('home-register-btn').onclick = () => showSection('register');
-
-  // Показ/скрытие меню профиля
-  avatarCircle.onclick = () => {
-    profileMenu.classList.toggle('hidden');
-  };
-  // Закрыть меню при клике вне
-  document.addEventListener('click', e => {
-    if (!profileDiv.contains(e.target)) {
-      profileMenu.classList.add('hidden');
-    }
-  });
-
-  // Функция регистрации (с проверкой и "записью" в localStorage)
-  document.getElementById('registerForm').onsubmit = e => {
-    e.preventDefault();
-    registerStatus.textContent = '';
-    const nick = document.getElementById('regNick').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const pass = document.getElementById('regPass').value;
-    const passConfirm = document.getElementById('regPassConfirm').value;
-    if (pass !== passConfirm) {
-      registerStatus.textContent = 'Пароли не совпадают!';
-      return;
-    }
-    if(localStorage.getItem(`user_${nick}`)) {
-      registerStatus.textContent = 'Такой никнейм уже зарегистрирован!';
-      return;
-    }
-    // Сохраняем пользователя (очень простой способ)
-    const userData = { nick, email, pass, balance: 0 };
-    localStorage.setItem(`user_${nick}`, JSON.stringify(userData));
-    registerStatus.style.color = '#0ff';
-    registerStatus.textContent = 'Регистрация прошла успешно! Теперь войдите.';
-    e.target.reset();
-  };
-
-  // Функция входа
-  document.getElementById('loginForm').onsubmit = e => {
-    e.preventDefault();
-    loginStatus.textContent = '';
-    const nick = document.getElementById('loginNick').value.trim();
-    const pass = document.getElementById('loginPass').value;
-    const userStr = localStorage.getItem(`user_${nick}`);
-    if(!userStr) {
-      loginStatus.textContent = 'Пользователь не найден!';
-      return;
-    }
-    const userData = JSON.parse(userStr);
-    if(userData.pass !== pass) {
-      loginStatus.textContent = 'Неверный пароль!';
-      return;
-    }
-    currentUser = userData;
-    showSection('home');
-    updateProfileUI();
-    showMessage('Вы успешно вошли!');
-    e.target.reset();
-  };
-
-  // Выход
-  document.getElementById('btn-logout').onclick = () => {
-    currentUser = null;
-    showSection('home');
-    showMessage('Вы вышли из аккаунта.');
-  };
-
-  // Показ баланса и профиль
-  document.getElementById('btn-balance').onclick = () => {
-    alert(`Баланс пользователя ${currentUser.nick}: ${currentUser.balance} ₽`);
-  };
-  document.getElementById('btn-profile').onclick = () => {
-    alert(`Профиль:\nНик: ${currentUser.nick}\nEmail: ${currentUser.email}`);
-  };
-
-  // Изменить пароль
-  document.getElementById('btn-change-pass').onclick = () => {
-    const newPass = prompt('Введите новый пароль:');
-    if(newPass && newPass.trim().length >= 4) {
-      currentUser.pass = newPass.trim();
-      localStorage.setItem(`user_${currentUser.nick}`, JSON.stringify(currentUser));
-      showMessage('Пароль успешно изменён!');
-    } else {
-      alert('Пароль должен быть минимум 4 символа.');
-    }
-  };
-
-  // Форма техподдержки (только имитация отправки)
-  document.getElementById('supportForm').onsubmit = e => {
-    e.preventDefault();
-    ticketStatus.style.color = '#0ff';
-    ticketStatus.textContent = 'Отправка тикета...';
-    setTimeout(() => {
-      ticketStatus.textContent = 'Тикет успешно отправлен. Мы свяжемся с вами в ближайшее время.';
-      e.target.reset();
-    }, 1500);
-  };
-
-  // Заполнение таблицы статуса узлов
-  function renderStatusTable() {
-    const tbody = document.getElementById('statusTableBody');
-    tbody.innerHTML = '';
-    nodesStatus.forEach(node => {
-      const tr = document.createElement('tr');
-
-      const statusColor = node.status === 'Онлайн' ? '#0f0' : '#f00';
-      tr.innerHTML = `
-        <td>${node.name}</td>
-        <td>${node.location}</td>
-        <td style="color: ${statusColor}; font-weight: 700;">${node.status}</td>
-        <td class="progressCell">
-          <div class="progressBar"><div class="progressBarFill" style="width:0%; background:#0ff;"></div></div>
-        </td>
-        <td>${node.uptime.toFixed(1)}%</td>
-      `;
-      tbody.appendChild(tr);
-
-      // Анимация прогресс-бара CPU загрузки
-      const fill = tr.querySelector('.progressBarFill');
-      setTimeout(() => fill.style.width = node.cpuLoad + '%', 100);
+  // Анимация звёзд на фоне
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize(){c.width = innerWidth; c.height = innerHeight;
+    stars = Array(350).fill().map(()=>{
+      return {x:Math.random()*c.width, y:Math.random()*c.height, r:Math.random()*1.2, d:Math.random()*0.7+0.2};
     });
   }
-
-  // Тарифы
-  const tariffButtons = document.querySelectorAll('#tariff-buttons button');
-  const tariffsContainer = document.getElementById('tariffsContainer');
-
-  tariffButtons.forEach(btn => {
-    btn.onclick = () => {
-      tariffButtons.forEach(b => b.style.background = '#111' || b.style.color = '#0ff');
-      btn.style.background = '#0ff';
-      btn.style.color = '#111';
-      renderTariffs(btn.dataset.type);
-    };
-  });
-
-  function renderTariffs(type) {
-    tariffsContainer.innerHTML = '';
-    const tariffs = tariffsData[type];
-    if (!tariffs) {
-      tariffsContainer.textContent = 'Тарифы не найдены.';
-      return;
-    }
-    tariffs.forEach(tariff => {
-      const card = document.createElement('div');
-      card.className = 'tariff-card';
-      card.innerHTML = `
-        <h3>${tariff.name}</h3>
-        <div class="price">${tariff.price}</div>
-        <div class="specs">
-          <p><strong>CPU:</strong> ${tariff.cpu}</p>
-          <p><strong>RAM:</strong> ${tariff.ram}</p>
-          <p><strong>SSD:</strong> ${tariff.ssd}</p>
-          <p><strong>DDoS-защита:</strong> ${tariff.ddos}</p>
-          <p><strong>Бэкапы:</strong> ${tariff.backup}</p>
-          <p><strong>Порты:</strong> ${tariff.ports}</p>
-          <p><strong>Базы данных:</strong> ${tariff.db}</p>
-        </div>
-        <button class="buy-btn" data-id="${tariff.id}">Купить</button>
-      `;
-      tariffsContainer.appendChild(card);
+  function anim(){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle="#fff";
+    stars.forEach(s=>{
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
+      ctx.fill();
+      s.y+=s.d;
+      if(s.y>c.height)s.y=0;
     });
-    // Вешаем событие на кнопки Купить
-    document.querySelectorAll('.buy-btn').forEach(btn => {
-      btn.onclick = () => {
-        if(!currentUser) {
-          showMessage('Для покупки необходимо войти в аккаунт');
-          showSection('login');
-          return;
-        }
-        const tariffId = btn.dataset.id;
-        buyTariff(tariffId, type);
-      };
-    });
+    requestAnimationFrame(anim);
   }
-
-  // Функция покупки тарифа
-  function buyTariff(id, type) {
-    // Находим тариф
-    const tariff = tariffsData[type].find(t => t.id === id);
-    if (!tariff) {
-      showMessage('Тариф не найден!');
-      return;
-    }
-    // Преобразуем цену в число
-    let priceStr = tariff.price.replace(/[₽\/мес\s]/g, '');
-    const price = parseInt(priceStr);
-    if (isNaN(price)) {
-      showMessage('Ошибка с ценой тарифа.');
-      return;
-    }
-    if (currentUser.balance < price) {
-      showMessage(`Недостаточно средств. Ваш баланс: ${currentUser.balance} ₽`);
-      return;
-    }
-    currentUser.balance -= price;
-    localStorage.setItem(`user_${currentUser.nick}`, JSON.stringify(currentUser));
-    showMessage(`Вы успешно купили тариф "${tariff.name}" за ${price} ₽`);
-  }
-
-  // Начальное состояние
-  showSection('home');
-  renderStatusTable();
-
-  // Инициализация тарифов - по умолчанию "hosting"
-  document.querySelector('#tariff-buttons button[data-type="hosting"]').click();
-
-})();
+  window.onresize = resize;
+  resize(); anim();
 </script>
 </body>
 </html>
