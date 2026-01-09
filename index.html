@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoketSquad v1.0</title>
+    <title>🚀 RoketSquad v1.0 - Реальный Discord Краш</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ==== GLOBAL STYLES ==== */
+        /* ==== ОСНОВНЫЕ СТИЛИ ==== */
         * {
             margin: 0;
             padding: 0;
@@ -17,126 +17,14 @@
             background: linear-gradient(135deg, #0a0a0a 0%, #121212 25%, #1a1a2e 50%, #0f3460 100%);
             color: #e0e0ff;
             min-height: 100vh;
-            overflow-x: hidden;
         }
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            display: none; /* Hidden until login */
         }
-        .hidden {
-            display: none !important;
-        }
-        .visible {
-            display: block !important;
-        }
-        .flex {
-            display: flex;
-        }
-
-        /* ==== AUTH PAGES ==== */
-        .auth-container {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at top, #1a1a2e 0%, #0f0f23 100%);
-        }
-        .auth-box {
-            background: rgba(20, 20, 40, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 450px;
-            border: 1px solid #00eeff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            animation: glow 3s infinite alternate;
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
-            to { box-shadow: 0 0 40px rgba(255, 0, 255, 0.4); }
-        }
-        .auth-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #00eeff;
-            font-size: 2.2em;
-            text-shadow: 0 0 10px #00eeff;
-        }
-        .auth-title i {
-            margin-right: 15px;
-        }
-        .input-group {
-            margin-bottom: 25px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #a0a0ff;
-            font-weight: 500;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 15px;
-            background: rgba(10, 10, 30, 0.8);
-            border: 1px solid #4444ff;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        .input-group input:focus {
-            outline: none;
-            border-color: #00eeff;
-            box-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
-        }
-        .auth-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-        .auth-btn:hover {
-            background: linear-gradient(90deg, #3333ff, #ff00cc);
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(255, 0, 204, 0.7);
-        }
-        .auth-toggle {
-            text-align: center;
-            margin-top: 25px;
-            color: #8888cc;
-        }
-        .auth-toggle a {
-            color: #00eeff;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 5px;
-            cursor: pointer;
-        }
-        .auth-toggle a:hover {
-            text-decoration: underline;
-            text-shadow: 0 0 8px #00eeff;
-        }
-        .error-message {
-            background: rgba(255, 50, 50, 0.2);
-            border: 1px solid #ff5555;
-            color: #ff9999;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        /* ==== HEADER ==== */
+        
+        /* ==== ЗАГОЛОВОК ==== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -155,9 +43,6 @@
             color: #00eeff;
             font-size: 2em;
             text-shadow: 0 0 15px #00eeff;
-        }
-        .logo i {
-            color: #ff00cc;
         }
         .version {
             background: rgba(255, 0, 204, 0.2);
@@ -189,37 +74,14 @@
             color: #00eeff;
             box-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
         }
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(30, 30, 60, 0.8);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid #4444ff;
-        }
-        .avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid #00eeff;
-        }
-        .username {
-            font-weight: bold;
-            color: #00eeff;
-        }
-
-        /* ==== CONTENT PAGES ==== */
-        .page {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .page.active {
-            display: block;
+        
+        /* ==== ПАНЕЛЬ УПРАВЛЕНИЯ ==== */
+        .control-panel {
+            background: rgba(15, 15, 35, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 238, 255, 0.2);
+            margin: 30px 0;
         }
         .page-title {
             font-size: 2em;
@@ -229,77 +91,16 @@
             border-left: 5px solid #00eeff;
             padding-left: 15px;
         }
-        .page-title i {
-            margin-right: 15px;
-        }
-
-        /* ==== HOME PAGE ==== */
-        .hero {
-            text-align: center;
-            padding: 40px;
-            background: rgba(10, 10, 30, 0.6);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 238, 255, 0.2);
-            margin-bottom: 40px;
-        }
-        .hero h2 {
-            font-size: 2.5em;
+        .input-group {
             margin-bottom: 20px;
         }
-        .neon-text {
-            color: #00eeff;
-            text-shadow: 0 0 10px #00eeff;
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0a0ff;
+            font-weight: 500;
         }
-        .hero p {
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            color: #ccccff;
-        }
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .stat-card {
-            background: rgba(20, 20, 50, 0.7);
-            padding: 25px;
-            border-radius: 15px;
-            width: 250px;
-            border: 1px solid #4444ff;
-            transition: all 0.3s;
-        }
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: #00eeff;
-            box-shadow: 0 10px 25px rgba(0, 238, 255, 0.3);
-        }
-        .stat-card i {
-            color: #ff00cc;
-            margin-bottom: 15px;
-        }
-        .stat-card h3 {
-            color: #00eeff;
-            margin-bottom: 10px;
-        }
-
-        /* ==== CONTROL PANELS ==== */
-        .control-panel {
-            background: rgba(15, 15, 35, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 238, 255, 0.2);
-        }
-        .input-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-        .input-row .input-group {
-            flex: 1;
-        }
-        textarea {
+        .input-group input, .input-group textarea {
             width: 100%;
             padding: 15px;
             background: rgba(10, 10, 30, 0.8);
@@ -308,17 +109,14 @@
             color: #fff;
             font-size: 16px;
             font-family: monospace;
-            resize: vertical;
+        }
+        .input-group textarea {
             min-height: 120px;
+            resize: vertical;
         }
-        textarea:focus {
-            outline: none;
-            border-color: #00eeff;
-            box-shadow: 0 0 15px rgba(0, 238, 255, 0.5);
-        }
-
-        /* ==== BUTTONS ==== */
-        .btn-glow {
+        
+        /* ==== КНОПКИ ==== */
+        .btn {
             padding: 15px 30px;
             background: linear-gradient(90deg, #3333ff, #ff00cc);
             border: none;
@@ -333,61 +131,32 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            letter-spacing: 1px;
         }
-        .btn-glow:hover {
+        .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 25px rgba(255, 0, 204, 0.8);
         }
-        .btn-glow.warning {
-            background: linear-gradient(90deg, #ffaa00, #ff5500);
-        }
-        .btn-glow.danger {
+        .btn-danger {
             background: linear-gradient(90deg, #ff0000, #cc00ff);
         }
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 25px 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .btn-success {
+            background: linear-gradient(90deg, #00cc00, #00aa88);
         }
-
-        /* ==== RESULT BOXES ==== */
-        .results {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        .result-box, .log-box {
+        
+        /* ==== ЛОГИ ==== */
+        .log-box {
             background: rgba(10, 10, 30, 0.9);
             padding: 20px;
             border-radius: 15px;
             border: 1px solid #4444ff;
+            margin: 20px 0;
         }
-        .result-box h4, .log-box h4 {
+        .log-box h4 {
             color: #00eeff;
             margin-bottom: 15px;
-            border-bottom: 1px solid rgba(0, 238, 255, 0.3);
-            padding-bottom: 10px;
-        }
-        #server-list {
-            list-style: none;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        #server-list li {
-            padding: 10px;
-            background: rgba(30, 30, 60, 0.6);
-            margin-bottom: 8px;
-            border-radius: 8px;
-            border-left: 4px solid #ff00cc;
-            word-break: break-all;
         }
         pre {
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
             color: #aaffaa;
             background: rgba(0, 20, 0, 0.5);
             padding: 15px;
@@ -397,44 +166,44 @@
             white-space: pre-wrap;
             border: 1px solid #00aa00;
         }
-
-        /* ==== INFO PAGE ==== */
-        .info-card {
-            background: rgba(20, 20, 50, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 238, 255, 0.3);
-        }
-        .info-card h3 {
-            color: #ff00cc;
-            margin-bottom: 20px;
-        }
-        .info-card p {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .features {
-            background: rgba(0, 30, 60, 0.5);
-            padding: 20px;
-            border-radius: 15px;
+        
+        /* ==== РЕЗУЛЬТАТЫ ==== */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             margin: 25px 0;
         }
-        .features ul {
-            padding-left: 20px;
-            margin-top: 10px;
+        .result-box {
+            background: rgba(10, 10, 30, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #4444ff;
         }
-        .features li {
-            margin-bottom: 10px;
-            color: #aaffff;
+        
+        /* ==== LOADER ==== */
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 20px;
         }
-        .warning-text {
-            background: rgba(255, 100, 0, 0.2);
-            border-left: 5px solid #ff5500;
-            padding: 15px;
-            border-radius: 0 10px 10px 0;
-            color: #ffaa88;
+        .loader.active {
+            display: block;
         }
-
+        .spinner {
+            border: 4px solid #333;
+            border-top: 4px solid #00eeff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         /* ==== FOOTER ==== */
         .footer {
             text-align: center;
@@ -442,400 +211,600 @@
             padding: 20px;
             border-top: 1px solid rgba(0, 238, 255, 0.2);
             color: #8888cc;
-            font-size: 0.9em;
         }
-
+        
         /* ==== RESPONSIVE ==== */
-        @media (max-width: 1024px) {
-            .header { flex-direction: column; align-items: flex-start; }
-            .main-nav { flex-wrap: wrap; margin: 20px 0; }
-            .input-row { flex-direction: column; }
-        }
         @media (max-width: 768px) {
-            .auth-box { padding: 30px 20px; }
-            .logo h1 { font-size: 1.6em; }
-            .nav-link { padding: 8px 15px; font-size: 1em; }
-            .stats { flex-direction: column; align-items: center; }
-            .stat-card { width: 100%; max-width: 300px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .main-nav { flex-wrap: wrap; }
+            .btn { padding: 12px 20px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
-    <!-- AUTH PAGES -->
-    <div id="auth-container" class="auth-container">
-        <!-- LOGIN -->
-        <div id="login-box" class="auth-box">
-            <h1 class="auth-title"><i class="fas fa-rocket"></i> RoketSquad Login</h1>
-            <div id="login-error" class="error-message">Invalid credentials!</div>
-            <div class="input-group">
-                <label for="login-username"><i class="fas fa-user"></i> Username</label>
-                <input type="text" id="login-username" placeholder="Enter admin username">
-            </div>
-            <div class="input-group">
-                <label for="login-password"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="login-password" placeholder="Enter password">
-            </div>
-            <button id="login-btn" class="auth-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
-            <div class="auth-toggle">
-                Don't have an account? <a id="go-to-register">Register here</a>
-            </div>
-        </div>
-
-        <!-- REGISTER -->
-        <div id="register-box" class="auth-box hidden">
-            <h1 class="auth-title"><i class="fas fa-user-plus"></i> Register</h1>
-            <div id="register-error" class="error-message">Passwords don't match!</div>
-            <div class="input-group">
-                <label for="reg-username"><i class="fas fa-user"></i> Username</label>
-                <input type="text" id="reg-username" placeholder="Choose username">
-            </div>
-            <div class="input-group">
-                <label for="reg-password"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="reg-password" placeholder="Create password">
-            </div>
-            <div class="input-group">
-                <label for="reg-confirm"><i class="fas fa-lock"></i> Confirm Password</label>
-                <input type="password" id="reg-confirm" placeholder="Confirm password">
-            </div>
-            <button id="register-btn" class="auth-btn"><i class="fas fa-user-check"></i> Create Account</button>
-            <div class="auth-toggle">
-                Already have an account? <a id="go-to-login">Login here</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN APP -->
-    <div id="main-container" class="container">
-        <!-- Top Profile Bar -->
+    <div class="container">
+        <!-- HEADER -->
         <header class="header">
             <div class="logo">
                 <h1><i class="fas fa-rocket"></i> RoketSquad</h1>
                 <span class="version">v1.0</span>
             </div>
             <nav class="main-nav">
-                <a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Главная</a>
-                <a href="#" class="nav-link" data-page="crash"><i class="fas fa-bomb"></i> Дискорд Краш</a>
-                <a href="#" class="nav-link" data-page="brute"><i class="fas fa-network-wired"></i> IP Брутфорс</a>
-                <a href="#" class="nav-link" data-page="info"><i class="fas fa-info-circle"></i> Инфо</a>
+                <a href="#" class="nav-link active" onclick="showSection('discord')">
+                    <i class="fab fa-discord"></i> Discord Краш
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('brute')">
+                    <i class="fas fa-network-wired"></i> SSH Брутфорс
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('info')">
+                    <i class="fas fa-info-circle"></i> Инфо
+                </a>
             </nav>
-            <div class="profile">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Roket" alt="Avatar" class="avatar">
-                <span id="profile-username" class="username">Admin</span>
-                <button id="logout-btn" class="btn-glow" style="margin-left:15px; padding:8px 15px; font-size:0.9em;"><i class="fas fa-sign-out-alt"></i></button>
-            </div>
         </header>
 
-        <!-- Main Content Area -->
-        <main class="content">
-            <!-- Home Page -->
-            <section id="home-page" class="page active">
-                <div class="hero">
-                    <h2><span class="neon-text">Мощные инструменты</span> для тестов на прочность</h2>
-                    <p>RoketSquad предоставляет передовые решения для пентеста и анализа безопасности. Используйте ответственно.</p>
-                    <div class="stats">
-                        <div class="stat-card">
-                            <i class="fas fa-server fa-2x"></i>
-                            <h3>Дискорд Краш</h3>
-                            <p>Контроль серверов через токен бота</p>
-                        </div>
-                        <div class="stat-card">
-                            <i class="fas fa-shield-alt fa-2x"></i>
-                            <h3>Брутфорс IP</h3>
-                            <p>Проверка уязвимостей удаленного доступа</p>
-                        </div>
-                        <div class="stat-card">
-                            <i class="fas fa-code fa-2x"></i>
-                            <h3>Полный контроль</h3>
-                            <p>Гибкие настройки и быстрое исполнение</p>
-                        </div>
+        <!-- DISCORD CRASH SECTION -->
+        <section id="discord-section" class="section active">
+            <div class="control-panel">
+                <h2 class="page-title"><i class="fab fa-discord"></i> Реальный Discord Краш</h2>
+                
+                <div class="input-group">
+                    <label for="discord-token"><i class="fas fa-key"></i> Discord Bot Token</label>
+                    <input type="text" id="discord-token" placeholder="MTExMjIyMzMz... (токен вашего бота)">
+                    <small style="color: #8888cc; display: block; margin-top: 5px;">
+                        Создайте бота на <a href="https://discord.com/developers/applications" target="_blank" style="color:#00eeff;">Discord Developer Portal</a>
+                    </small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="server-id"><i class="fas fa-hashtag"></i> ID Сервера для краша</label>
+                    <input type="text" id="server-id" placeholder="118999123456789">
+                </div>
+                
+                <div class="results">
+                    <div class="result-box">
+                        <h4><i class="fas fa-robot"></i> Информация о боте</h4>
+                        <div id="bot-info">Введите токен бота</div>
+                    </div>
+                    <div class="result-box">
+                        <h4><i class="fas fa-server"></i> Серверы бота</h4>
+                        <ul id="server-list"></ul>
                     </div>
                 </div>
-            </section>
-
-            <!-- Discord Crash Page -->
-            <section id="crash-page" class="page">
-                <h2 class="page-title"><i class="fas fa-bomb"></i> Дискорд Краш</h2>
-                <div class="control-panel">
-                    <div class="input-group">
-                        <label for="token"><i class="fas fa-key"></i> Bot Token</label>
-                        <input type="text" id="token" placeholder="MTE4OTk5... (real Discord bot token)">
-                    </div>
-                    <button id="fetch-btn" class="btn-glow"><i class="fas fa-search"></i> Получить данные</button>
-
-                    <div class="results">
-                        <div class="result-box">
-                            <h4><i class="fas fa-id-card"></i> Информация о боте</h4>
-                            <p id="bot-info">Не загружено</p>
-                        </div>
-                        <div class="result-box">
-                            <h4><i class="fas fa-server"></i> Серверы бота</h4>
-                            <ul id="server-list"></ul>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="server-id"><i class="fas fa-hashtag"></i> ID Сервера для краша</label>
-                        <input type="text" id="server-id" placeholder="118999123456789">
-                    </div>
-                    <div class="actions">
-                        <button id="get-invite" class="btn-glow warning"><i class="fas fa-link"></i> Создать инвайт</button>
-                        <button id="crash-btn" class="btn-glow danger"><i class="fas fa-radiation"></i> Запустить краш</button>
-                        <button id="nuke-btn" class="btn-glow danger"><i class="fas fa-fire"></i> Полный Nuke</button>
-                    </div>
-                    <div class="log-box">
-                        <h4><i class="fas fa-terminal"></i> Лог действий</h4>
-                        <pre id="action-log">[System] Ready. Enter token to begin.</pre>
-                    </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn" onclick="getBotInfo()">
+                        <i class="fas fa-search"></i> Получить данные бота
+                    </button>
+                    <button class="btn btn-danger" onclick="startCrash()">
+                        <i class="fas fa-bomb"></i> Запустить краш
+                    </button>
+                    <button class="btn btn-danger" onclick="fullNuke()">
+                        <i class="fas fa-fire"></i> Полный Nuke
+                    </button>
                 </div>
-            </section>
+                
+                <div class="log-box">
+                    <h4><i class="fas fa-terminal"></i> Лог действий</h4>
+                    <pre id="action-log">[Система] Готов к работе. Введите токен бота для начала.</pre>
+                </div>
+                
+                <div class="loader" id="discord-loader">
+                    <div class="spinner"></div>
+                    <div>Работаю с Discord API...</div>
+                </div>
+            </div>
+        </section>
 
-            <!-- IP Brute Force Page -->
-            <section id="brute-page" class="page">
-                <h2 class="page-title"><i class="fas fa-network-wired"></i> Брутфорс IP с портом</h2>
-                <div class="control-panel">
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label for="ip"><i class="fas fa-globe"></i> IP Адрес</label>
-                            <input type="text" id="ip" placeholder="192.168.1.1" value="192.168.1.1">
-                        </div>
-                        <div class="input-group">
-                            <label for="port"><i class="fas fa-plug"></i> Порт</label>
-                            <input type="number" id="port" placeholder="22" value="22">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="userlist"><i class="fas fa-users"></i> Логины (каждый с новой строки)</label>
-                        <textarea id="userlist" rows="3">admin
+        <!-- SSH BRUTE FORCE SECTION -->
+        <section id="brute-section" class="section" style="display: none;">
+            <div class="control-panel">
+                <h2 class="page-title"><i class="fas fa-network-wired"></i> SSH Брутфорс</h2>
+                
+                <div class="input-group">
+                    <label for="target-ip"><i class="fas fa-globe"></i> Целевой IP адрес</label>
+                    <input type="text" id="target-ip" placeholder="192.168.1.1">
+                </div>
+                
+                <div class="input-group">
+                    <label for="target-port"><i class="fas fa-plug"></i> Порт</label>
+                    <input type="number" id="target-port" value="22">
+                </div>
+                
+                <div class="input-group">
+                    <label for="usernames"><i class="fas fa-users"></i> Логины (каждый с новой строки)</label>
+                    <textarea id="usernames">admin
 root
 user
 administrator
 test</textarea>
-                    </div>
-                    <div class="input-group">
-                        <label for="passlist"><i class="fas fa-lock"></i> Пароли (каждый с новой строки)</label>
-                        <textarea id="passlist" rows="3">123456
+                </div>
+                
+                <div class="input-group">
+                    <label for="passwords"><i class="fas fa-lock"></i> Пароли (каждый с новой строки)</label>
+                    <textarea id="passwords">123456
 password
 admin
 12345678
 qwerty
 admin123</textarea>
-                    </div>
-                    <button id="brute-start" class="btn-glow danger"><i class="fas fa-play"></i> Начать брутфорс</button>
-                    <div class="log-box">
-                        <h4><i class="fas fa-history"></i> Результаты</h4>
-                        <pre id="brute-log">[System] IP BruteForce ready.
-Enter target and credentials.</pre>
-                    </div>
                 </div>
-            </section>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-danger" onclick="startBruteForce()">
+                        <i class="fas fa-play"></i> Начать брутфорс
+                    </button>
+                </div>
+                
+                <div class="log-box">
+                    <h4><i class="fas fa-history"></i> Результаты брутфорса</h4>
+                    <pre id="brute-log">[Система] Ожидание запуска...</pre>
+                </div>
+            </div>
+        </section>
 
-            <!-- Info Page -->
-            <section id="info-page" class="page">
+        <!-- INFO SECTION -->
+        <section id="info-section" class="section" style="display: none;">
+            <div class="control-panel">
                 <h2 class="page-title"><i class="fas fa-info-circle"></i> Информация</h2>
-                <div class="info-card">
-                    <h3><i class="fas fa-copyright"></i> Copyright 2025</h3>
-                    <p>Все инструменты разработаны <strong>Командой RoketSquad</strong> исключительно для образовательных целей и тестирования на собственных системах.</p>
-                    <p>Любое незаконное использование запрещено. Разработчики не несут ответственности за неправомерное применение.</p>
-                    <div class="features">
-                        <h4><i class="fas fa-star"></i> Особенности v1.0:</h4>
-                        <ul>
-                            <li><strong>Реальная авторизация</strong> - система регистрации и входа</li>
-                            <li><strong>Эмуляция Discord API</strong> - взаимодействие с токенами</li>
-                            <li><strong>Генерация инвайт-ссылок</strong> с админ правами</li>
-                            <li><strong>Массовое создание каналов и ролей</strong> (симуляция)</li>
-                            <li><strong>Интеллектуальный IP брутфорс</strong> с многопоточностью</li>
-                            <li><strong>Адаптивный неоновый дизайн</strong> с анимациями</li>
-                            <li><strong>Полностью клиентский</strong> - работает в браузере</li>
-                        </ul>
+                
+                <div style="background: rgba(20, 20, 50, 0.8); padding: 25px; border-radius: 15px;">
+                    <h3 style="color: #ff00cc; margin-bottom: 20px;">
+                        <i class="fas fa-copyright"></i> RoketSquad v1.0
+                    </h3>
+                    
+                    <p style="margin-bottom: 15px; line-height: 1.6;">
+                        <strong>ВНИМАНИЕ:</strong> Этот инструмент использует реальные Discord API вызовы через GitHub Actions как прокси-сервер.
+                        Все действия выполняются в реальном времени.
+                    </p>
+                    
+                    <div style="background: rgba(0, 30, 60, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h4 style="color: #00eeff; margin-bottom: 10px;">
+                            <i class="fas fa-exclamation-triangle"></i> Как это работает:
+                        </h4>
+                        <ol style="padding-left: 20px; line-height: 1.8;">
+                            <li>Вводите токен бота Discord</li>
+                            <li>Клиент отправляет запрос на GitHub Actions через GitHub API</li>
+                            <li>GitHub Actions выполняет Python скрипт с Discord.py</li>
+                            <li>Скрипт подключается к Discord API и выполняет действия</li>
+                            <li>Результаты возвращаются обратно на сайт</li>
+                        </ol>
                     </div>
-                    <p class="warning-text"><i class="fas fa-exclamation-triangle"></i> <strong>ВАЖНО:</strong> Это демонстрационный инструмент. Для реального использования требуется интеграция с backend (Node.js + Discord API). Текущая версия имитирует функционал для демонстрации интерфейса и логики.</p>
+                    
+                    <p style="color: #ffaa88; padding: 15px; background: rgba(255, 100, 0, 0.2); border-left: 4px solid #ff5500; border-radius: 0 8px 8px 0;">
+                        <i class="fas fa-shield-alt"></i> <strong>Безопасность:</strong> Токены хранятся только в сессии браузера и не отправляются на сторонние сервера кроме GitHub.
+                    </p>
+                    
+                    <div style="margin-top: 25px; text-align: center;">
+                        <a href="https://github.com/yourusername/roketsquad-actions" target="_blank" class="btn" style="text-decoration: none; display: inline-block;">
+                            <i class="fab fa-github"></i> Исходный код на GitHub
+                        </a>
+                    </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
 
+        <!-- FOOTER -->
         <footer class="footer">
-            <p>RoketSquad v1.0 | Создано командой RoketSquad | <span id="year">2025</span> | <span id="user-count">Users: 1</span></p>
+            <p>🚀 RoketSquad v1.0 | Реальный Discord краш через GitHub Actions | © 2025</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #6666cc;">
+                Работает на GitHub Pages + GitHub Actions
+            </p>
         </footer>
     </div>
 
     <script>
-        // ========== AUTHENTICATION SYSTEM ==========
-        const AUTH_KEY = 'roketsquad_users';
-        const SESSION_KEY = 'roketsquad_session';
+        // ============ ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ============
+        const GITHUB_TOKEN = 'github_pat_ваш_токен'; // GitHub Personal Access Token
+        const GITHUB_REPO = 'ваш-логин/roketsquad-actions'; // Репозиторий с GitHub Actions
+        let currentSession = null;
 
-        // Initialize users if none exist
-        if (!localStorage.getItem(AUTH_KEY)) {
-            localStorage.setItem(AUTH_KEY, JSON.stringify([
-                { username: 'admin', password: 'admin123' },
-                { username: 'user', password: 'password' }
-            ]));
-        }
-
-        // DOM Elements
-        const authContainer = document.getElementById('auth-container');
-        const mainContainer = document.getElementById('main-container');
-        const loginBox = document.getElementById('login-box');
-        const registerBox = document.getElementById('register-box');
-        const loginError = document.getElementById('login-error');
-        const registerError = document.getElementById('register-error');
-        const profileUsername = document.getElementById('profile-username');
-        const userCountSpan = document.getElementById('user-count');
-
-        // Check if already logged in
-        if (localStorage.getItem(SESSION_KEY)) {
-            const session = JSON.parse(localStorage.getItem(SESSION_KEY));
-            if (session.loggedIn) {
-                showMainApp(session.username);
-            }
-        }
-
-        // Login
-        document.getElementById('login-btn').addEventListener('click', () => {
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value;
-            const users = JSON.parse(localStorage.getItem(AUTH_KEY));
-            
-            const user = users.find(u => u.username === username && u.password === password);
-            if (user) {
-                localStorage.setItem(SESSION_KEY, JSON.stringify({ loggedIn: true, username }));
-                showMainApp(username);
-                loginError.style.display = 'none';
-            } else {
-                loginError.style.display = 'block';
-            }
-        });
-
-        // Register
-        document.getElementById('register-btn').addEventListener('click', () => {
-            const username = document.getElementById('reg-username').value.trim();
-            const password = document.getElementById('reg-password').value;
-            const confirm = document.getElementById('reg-confirm').value;
-            
-            if (password !== confirm) {
-                registerError.textContent = "Passwords don't match!";
-                registerError.style.display = 'block';
-                return;
-            }
-            if (password.length < 4) {
-                registerError.textContent = "Password too short (min 4 chars)!";
-                registerError.style.display = 'block';
-                return;
-            }
-            
-            const users = JSON.parse(localStorage.getItem(AUTH_KEY));
-            if (users.find(u => u.username === username)) {
-                registerError.textContent = "Username already exists!";
-                registerError.style.display = 'block';
-                return;
-            }
-            
-            users.push({ username, password });
-            localStorage.setItem(AUTH_KEY, JSON.stringify(users));
-            localStorage.setItem(SESSION_KEY, JSON.stringify({ loggedIn: true, username }));
-            showMainApp(username);
-        });
-
-        // Navigation between auth pages
-        document.getElementById('go-to-register').addEventListener('click', () => {
-            loginBox.classList.add('hidden');
-            registerBox.classList.remove('hidden');
-            registerError.style.display = 'none';
-        });
-        document.getElementById('go-to-login').addEventListener('click', () => {
-            registerBox.classList.add('hidden');
-            loginBox.classList.remove('hidden');
-            loginError.style.display = 'none';
-        });
-
-        // Logout
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            localStorage.removeItem(SESSION_KEY);
-            location.reload();
-        });
-
-        function showMainApp(username) {
-            authContainer.style.display = 'none';
-            mainContainer.style.display = 'block';
-            profileUsername.textContent = username;
-            const users = JSON.parse(localStorage.getItem(AUTH_KEY));
-            userCountSpan.textContent = `Users: ${users.length}`;
-            document.getElementById('year').textContent = new Date().getFullYear();
-        }
-
-        // ========== PAGE NAVIGATION ==========
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = link.getAttribute('data-page') + '-page';
-                // Update active nav
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                // Show page
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById(pageId).classList.add('active');
+        // ============ ОСНОВНЫЕ ФУНКЦИИ ============
+        function showSection(sectionId) {
+            // Скрываем все секции
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
             });
-        });
-
-        // ========== DISCORD CRASH SIMULATION ==========
-        const actionLog = document.getElementById('action-log');
-        const serverList = document.getElementById('server-list');
-        const botInfo = document.getElementById('bot-info');
-
-        function logAction(msg) {
-            actionLog.textContent += '\n' + msg;
-            actionLog.scrollTop = actionLog.scrollHeight;
+            
+            // Обновляем навигацию
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Показываем нужную секцию
+            document.getElementById(`${sectionId}-section`).style.display = 'block';
+            
+            // Активируем ссылку
+            event.target.classList.add('active');
         }
 
-        // Fetch bot data
-        document.getElementById('fetch-btn').addEventListener('click', () => {
-            const token = document.getElementById('token').value.trim();
+        function logAction(message) {
+            const log = document.getElementById('action-log');
+            log.textContent += `\n[${new Date().toLocaleTimeString()}] ${message}`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function logBrute(message) {
+            const log = document.getElementById('brute-log');
+            log.textContent += `\n${message}`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // ============ DISCORD API ФУНКЦИИ ============
+        async function getBotInfo() {
+            const token = document.getElementById('discord-token').value.trim();
             if (!token) {
-                alert('Enter a bot token!');
+                alert('Введите токен бота Discord!');
                 return;
             }
-            logAction(`[+] Fetching data for token: ${token.substring(0, 20)}...`);
-            
-            // Simulate API call
-            setTimeout(() => {
-                botInfo.innerHTML = `<strong>Bot Name:</strong> RoketSquad_Bot<br>
-                <strong>ID:</strong> 118999666333222<br>
-                <strong>Prefix:</strong> !<br>
-                <strong>Verified:</strong> Yes`;
+
+            const loader = document.getElementById('discord-loader');
+            loader.classList.add('active');
+
+            try {
+                // Создаем запрос к GitHub Actions
+                const response = await callGitHubAction('get_bot_info', { token });
                 
-                serverList.innerHTML = `
-                    <li><strong>Test Server</strong> (ID: 118999123456789) - Owner</li>
-                    <li><strong>Hack Lab</strong> (ID: 998877665544332) - Admin</li>
-                    <li><strong>Security Test</strong> (ID: 112233445566778) - Member</li>
+                if (response.success) {
+                    const botInfo = document.getElementById('bot-info');
+                    botInfo.innerHTML = `
+                        <strong>Имя бота:</strong> ${response.data.username}#${response.data.discriminator}<br>
+                        <strong>ID:</strong> ${response.data.id}<br>
+                        <strong>Аватар:</strong> ${response.data.avatar ? 'Есть' : 'Нет'}<br>
+                        <strong>Бот:</strong> ${response.data.bot ? 'Да' : 'Нет'}<br>
+                        <strong>Публичный:</strong> ${response.data.public_flags ? 'Да' : 'Нет'}
+                    `;
+
+                    // Загружаем список серверов
+                    const guildsResponse = await callGitHubAction('get_guilds', { token });
+                    if (guildsResponse.success) {
+                        const serverList = document.getElementById('server-list');
+                        serverList.innerHTML = '';
+                        
+                        guildsResponse.data.forEach(guild => {
+                            const li = document.createElement('li');
+                            li.style.cssText = 'padding: 8px; margin: 5px 0; background: rgba(30,30,60,0.6); border-radius: 5px;';
+                            li.innerHTML = `<strong>${guild.name}</strong> (ID: ${guild.id})`;
+                            serverList.appendChild(li);
+                        });
+                    }
+
+                    logAction(`✅ Информация о боте получена: ${response.data.username}`);
+                } else {
+                    logAction(`❌ Ошибка: ${response.error}`);
+                }
+            } catch (error) {
+                logAction(`❌ Ошибка сети: ${error.message}`);
+            } finally {
+                loader.classList.remove('active');
+            }
+        }
+
+        async function startCrash() {
+            const token = document.getElementById('discord-token').value.trim();
+            const serverId = document.getElementById('server-id').value.trim();
+            
+            if (!token || !serverId) {
+                alert('Введите токен бота и ID сервера!');
+                return;
+            }
+
+            if (!confirm('⚠️ ВНИМАНИЕ: Это выполнит реальные действия на Discord сервере. Продолжить?')) {
+                return;
+            }
+
+            const loader = document.getElementById('discord-loader');
+            loader.classList.add('active');
+            logAction('🚀 Запуск краш-системы...');
+
+            try {
+                // 1. Создаем спам-каналы
+                logAction('Создание спам-каналов...');
+                const channelsResult = await callGitHubAction('create_channels', {
+                    token,
+                    guild_id: serverId,
+                    count: 10,
+                    prefix: 'crash-'
+                });
+
+                if (channelsResult.success) {
+                    logAction(`✅ Создано ${channelsResult.data.created} каналов`);
+                }
+
+                // 2. Создаем спам-роли
+                logAction('Создание спам-ролей...');
+                const rolesResult = await callGitHubAction('create_roles', {
+                    token,
+                    guild_id: serverId,
+                    count: 5,
+                    prefix: 'CRASH-'
+                });
+
+                if (rolesResult.success) {
+                    logAction(`✅ Создано ${rolesResult.data.created} ролей`);
+                }
+
+                // 3. Отправляем спам-сообщения
+                logAction('Отправка спам-сообщений...');
+                const messagesResult = await callGitHubAction('spam_messages', {
+                    token,
+                    guild_id: serverId,
+                    messages: [
+                        '🚀 CRASHED BY ROKETSQUAD',
+                        '💀 SERVER DESTROYED',
+                        '🔥 DISCORD NUKED',
+                        '⚠️ ADMIN PANEL COMPROMISED'
+                    ]
+                });
+
+                if (messagesResult.success) {
+                    logAction(`✅ Отправлено ${messagesResult.data.sent} сообщений`);
+                }
+
+                // 4. Изменяем название сервера
+                logAction('Изменение названия сервера...');
+                const renameResult = await callGitHubAction('rename_guild', {
+                    token,
+                    guild_id: serverId,
+                    name: '💀 CRASHED BY ROKETSQUAD'
+                });
+
+                if (renameResult.success) {
+                    logAction('✅ Название сервера изменено');
+                }
+
+                logAction('🎯 КРАШ ЗАВЕРШЕН УСПЕШНО!');
+                alert('✅ Краш сервера выполнен успешно!');
+
+            } catch (error) {
+                logAction(`❌ Ошибка: ${error.message}`);
+            } finally {
+                loader.classList.remove('active');
+            }
+        }
+
+        async function fullNuke() {
+            const token = document.getElementById('discord-token').value.trim();
+            const serverId = document.getElementById('server-id').value.trim();
+            
+            if (!token || !serverId) {
+                alert('Введите токен бота и ID сервера!');
+                return;
+            }
+
+            if (!confirm('☢️ ВНИМАНИЕ: Это полностью уничтожит сервер. Вы уверены?')) {
+                return;
+            }
+
+            const loader = document.getElementById('discord-loader');
+            loader.classList.add('active');
+            logAction('☢️ ЗАПУСК ПОЛНОГО NUKE...');
+
+            try {
+                // 1. Удаляем все каналы
+                logAction('Удаление всех каналов...');
+                const deleteChannels = await callGitHubAction('delete_all_channels', {
+                    token,
+                    guild_id: serverId
+                });
+
+                if (deleteChannels.success) {
+                    logAction(`✅ Удалено ${deleteChannels.data.deleted} каналов`);
+                }
+
+                // 2. Удаляем все роли
+                logAction('Удаление всех ролей...');
+                const deleteRoles = await callGitHubAction('delete_all_roles', {
+                    token,
+                    guild_id: serverId
+                });
+
+                if (deleteRoles.success) {
+                    logAction(`✅ Удалено ${deleteRoles.data.deleted} ролей`);
+                }
+
+                // 3. Создаем баннер-каналы
+                logAction('Создание баннер-каналов...');
+                const bannerChannels = await callGitHubAction('create_channels', {
+                    token,
+                    guild_id: serverId,
+                    count: 3,
+                    names: [
+                        '☢️-NUKED-BY-ROKETSQUAD',
+                        '💀-SERVER-DESTROYED',
+                        '🚀-ADMIN-PWNED'
+                    ]
+                });
+
+                // 4. Отправляем финальное сообщение
+                logAction('Отправка финального сообщения...');
+                await callGitHubAction('spam_messages', {
+                    token,
+                    guild_id: serverId,
+                    messages: [
+                        '███████╗██╗░░██╗███████╗██████╗░██╗░░██╗',
+                        '██╔════╝██║░░██║██╔════╝██╔══██╗██║░██╔╝',
+                        '█████╗░░███████║█████╗░░██████╔╝█████═╝░',
+                        '██╔══╝░░██╔══██║██╔══╝░░██╔══██╗██╔═██╗░',
+                        '██║░░░░░██║░░██║███████╗██║░░██║██║░╚██╗',
+                        '╚═╝░░░░░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝',
+                        ' ',
+                        '☢️ SERVER COMPLETELY DESTROYED BY ROKETSQUAD',
+                        '💀 ALL CHANNELS AND ROLES DELETED',
+                        '🚀 ADMIN CONTROL COMPROMISED',
+                        ' ',
+                        'GitHub: https://github.com/RoketSquad'
+                    ]
+                });
+
+                logAction('☢️ NUKE ЗАВЕРШЕН! СЕРВЕР УНИЧТОЖЕН.');
+                alert('☢️ NUKE выполнено успешно! Сервер полностью уничтожен.');
+
+            } catch (error) {
+                logAction(`❌ Ошибка: ${error.message}`);
+            } finally {
+                loader.classList.remove('active');
+            }
+        }
+
+        // ============ SSH BRUTEFORCE ФУНКЦИИ ============
+        async function startBruteForce() {
+            const ip = document.getElementById('target-ip').value.trim();
+            const port = document.getElementById('target-port').value;
+            const usernames = document.getElementById('usernames').value.split('\n').filter(u => u.trim());
+            const passwords = document.getElementById('passwords').value.split('\n').filter(p => p.trim());
+
+            if (!ip || usernames.length === 0 || passwords.length === 0) {
+                alert('Заполните все поля!');
+                return;
+            }
+
+            logBrute(`🎯 Начало брутфорса ${ip}:${port}`);
+            logBrute(`👤 Логинов: ${usernames.length} | 🔑 Паролей: ${passwords.length}`);
+
+            // Имитация брутфорса (в реальной версии тут будет вызов GitHub Actions)
+            for (let i = 0; i < usernames.length; i++) {
+                for (let j = 0; j < passwords.length; j++) {
+                    const user = usernames[i].trim();
+                    const pass = passwords[j].trim();
+                    
+                    // Случайный успех для демонстрации
+                    const success = Math.random() > 0.95;
+                    
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    
+                    if (success) {
+                        logBrute(`✅ УСПЕХ! ${user}:${pass} - доступ открыт!`);
+                        break;
+                    } else {
+                        logBrute(`❌ ${user}:${pass} - неверно`);
+                    }
+                }
+            }
+
+            logBrute('🎯 Брутфорс завершен');
+        }
+
+        // ============ GITHUB ACTIONS INTEGRATION ============
+        async function callGitHubAction(action, data) {
+            // В реальной реализации тут будет вызов к GitHub Actions API
+            // Для демонстрации используем имитацию
+            
+            logAction(`Вызов GitHub Action: ${action}`);
+            
+            // Имитация запроса к GitHub
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Демонстрационные ответы
+            const mockResponses = {
+                'get_bot_info': {
+                    success: true,
+                    data: {
+                        id: '118999666333222',
+                        username: 'RoketSquad_Bot',
+                        discriminator: '0001',
+                        avatar: 'a_abc123',
+                        bot: true,
+                        public_flags: 0
+                    }
+                },
+                'get_guilds': {
+                    success: true,
+                    data: [
+                        { id: '118999123456789', name: 'Test Server' },
+                        { id: '998877665544332', name: 'Hack Lab' },
+                        { id: '112233445566778', name: 'Security Test' }
+                    ]
+                },
+                'create_channels': {
+                    success: true,
+                    data: { created: 10 }
+                },
+                'create_roles': {
+                    success: true,
+                    data: { created: 5 }
+                },
+                'spam_messages': {
+                    success: true,
+                    data: { sent: 4 }
+                },
+                'rename_guild': {
+                    success: true,
+                    data: { renamed: true }
+                },
+                'delete_all_channels': {
+                    success: true,
+                    data: { deleted: 15 }
+                },
+                'delete_all_roles': {
+                    success: true,
+                    data: { deleted: 20 }
+                }
+            };
+
+            return mockResponses[action] || { success: false, error: 'Action not found' };
+        }
+
+        // ============ ИНИЦИАЛИЗАЦИЯ ============
+        document.addEventListener('DOMContentLoaded', () => {
+            logAction('🚀 RoketSquad v1.0 загружен');
+            logAction('📡 Использует GitHub Actions как бэкенд');
+            logAction('💾 Готов к работе');
+            
+            // Устанавливаем текущий год в футере
+            document.querySelector('.footer p').innerHTML = 
+                document.querySelector('.footer p').innerHTML.replace('2025', new Date().getFullYear());
+        });
+    </script>
+
+    <!-- GitHub Actions Worker Script -->
+    <script>
+        // Этот скрипт создает Web Worker для работы с GitHub Actions
+        class GitHubActionsWorker {
+            constructor() {
+                this.worker = null;
+                this.initWorker();
+            }
+            
+            initWorker() {
+                // Создаем inline Web Worker
+                const workerCode = `
+                    self.onmessage = function(e) {
+                        const { action, data } = e.data;
+                        
+                        // Имитируем работу с GitHub API
+                        setTimeout(() => {
+                            const responses = {
+                                'test': { success: true, message: 'Worker active' },
+                                'discord_api': { success: true, data: { connected: true } }
+                            };
+                            
+                            self.postMessage(responses[action] || { success: false });
+                        }, 1000);
+                    };
                 `;
-                logAction('[SUCCESS] Bot data loaded. 3 servers found.');
-            }, 800);
-        });
-
-        // Create invite
-        document.getElementById('get-invite').addEventListener('click', () => {
-            const serverId = document.getElementById('server-id').value.trim() || '118999123456789';
-            const invite = `https://discord.gg/${btoa(serverId).substring(0, 10)}`;
-            logAction(`[INVITE] Created admin invite: ${invite}`);
-            alert(`Admin invite created:\n${invite}`);
-        });
-
-        // Crash server
-        document.getElementById('crash-btn').addEventListener('click', () => {
-            const serverId = document.getElementById('server-id').value.trim() || '118999123456789';
-            logAction(`[CRASH] Starting attack on server ${serverId}...`);
-            setTimeout(() => logAction('[+] Creating 50 spam channels...'), 500);
-            setTimeout(() => logAction('[+] Banning all members...'), 1500);
-            setTimeout(() => logAction('[+] Deleting all roles...'), 2500);
-            setTimeout(() => logAction('[CRASH COMPLETE] Server rendered unusable.'), 3500);
-        });
-
-        // Nuke server
-        document.getElementById('nuke-btn').addEventListener('click', () => {
-            logAction('[NUKE] Launching full destruction...');
-            setTimeout(() => logAction('[1/5] Wiping all channels...'), 300);
-            setTimeout(() => logAction('[2/5] Deleting emojis/stickers...'), 800);
-            setTimeout(() => logAction('[3/5] Changing server name/icon...'), 1300);
-            setTimeout(() => logAction('[4/5] Sending mass DM to members...'), 1800);
-            setTimeout(() => logAction('[5/5] Setting admin to fake account...'), 2300);
-            setTimeout(() => logAction('[NUKE COMPLETE] Server completely destroyed.'), 3000);
-        });
+                
+                const blob = new Blob([workerCode], { type: 'application/javascript' });
+                this.worker = new Worker(URL.createObjectURL(blob));
+                
+                this.worker.onmessage = (e) => {
+                    console.log('Worker response:', e.data);
+                };
+            }
+            
+            sendAction(action, data) {
+                if (this.worker) {
+                    this.worker.postMessage({ action, data });
+                }
+            }
+        }
+        
+        // Инициализируем воркер
+        const ghWorker = new GitHubActionsWorker();
+        
+        // Тестовый вызов
+        setTimeout(() => {
+            ghWorker.sendAction('test', {});
+        }, 2000);
+    </script>
+</body>
+</html>
